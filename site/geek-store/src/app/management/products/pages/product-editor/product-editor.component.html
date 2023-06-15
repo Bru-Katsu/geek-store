@@ -1,0 +1,36 @@
+<ng-container *ngIf="form$ | async as form">
+  <main class="container">
+    <form [formGroup]="form" (ngSubmit)="save(form.value)">
+
+      <div class="field">
+        <label for="productName">
+          Nome
+        </label>
+        <input id="productName" formControlName="name"/>
+      </div>
+
+      <div class="field">
+        <label for="productCategory">
+          Categoria
+        </label>
+        <input id="productCategory" formControlName="category"/>
+      </div>
+
+      <div class="field">
+        <label for="productPrice">
+          Preço
+        </label>
+        <input id="productPrice" formControlName="price"/>
+      </div>
+
+      <div class="field full-width">
+        <label for="productDescription">
+          Descrição
+        </label>
+        <textarea id="productDescription" formControlName="description"></textarea>
+      </div>
+
+      <button type="submit" class="btn primary" [disabled]="!form.dirty || !form.valid">Salvar</button>
+    </form>
+  </main>
+</ng-container>

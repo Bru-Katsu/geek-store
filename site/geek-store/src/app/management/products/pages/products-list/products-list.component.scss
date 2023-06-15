@@ -1,0 +1,17 @@
+.actions {
+  display: flex;
+}
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+  padding: .75rem;
+
+  background-color: #f4f4f7;
+
+  border: 1px solid #dfdfdf;
+  border-bottom: unset;
+
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}

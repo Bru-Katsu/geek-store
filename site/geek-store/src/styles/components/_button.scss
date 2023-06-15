@@ -1,0 +1,48 @@
+@use 'typography' as typo;
+
+button {
+  all: unset;
+}
+
+button.btn {
+  font-family: typo.$main-font;
+
+  border: unset;
+  padding: .75rem 1.25rem;
+  border-radius: .5rem;
+
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: .3s;
+}
+
+button.btn.wide {
+  width: 100%;
+}
+
+button.btn.small {
+  padding: .25rem .65rem;
+  border-radius: .25rem;
+  font-size: 14px;
+}
+
+button.btn.primary {
+  background-color: #2e2e2e;
+  color: white;
+
+  &:hover {
+    background-color: #727272;
+  }
+
+  &:active {
+    background-color: #b6b6b6;
+  }
+
+  &:disabled {
+    background-color: #dfdfdf;
+  }
+}

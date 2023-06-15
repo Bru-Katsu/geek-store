@@ -1,0 +1,56 @@
+@use 'colors' as colors;
+@use 'typography' as typo;
+
+$line-color: #dfdfdf;
+$table-border-radius: 8px;
+$table-border-size: 1px;
+
+table {
+  font-family: typo.$main-font;
+  border-spacing: unset;
+  color: colors.$dark;
+  width: inherit;
+}
+
+tr:last-child td {
+  border-bottom: $table-border-size solid $line-color;
+}
+
+tr {
+
+  td:first-child,
+  th:first-child {
+    border-left: $table-border-size solid $line-color;
+  }
+
+  td:last-child,
+  th:last-child {
+    border-right: $table-border-size solid $line-color;
+  }
+
+  &:last-child {
+    td:first-child {
+      border-bottom-left-radius: $table-border-radius;
+    }
+
+    td:last-child {
+      border-bottom-right-radius: $table-border-radius;
+    }
+  }
+}
+
+th {
+  text-align: left;
+  background-color: #F4F4F7;
+  color: #9d9d9d;
+}
+
+td,
+th {
+  border-top: $table-border-size solid $line-color;
+  padding: .25rem .75rem;
+}
+
+#products-list {
+  width: 100%;
+}

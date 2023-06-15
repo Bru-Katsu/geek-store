@@ -1,0 +1,1 @@
+<button *ngFor="let page of pages" class="btn small" [ngClass]="{'primary': page == currentPage}" (click)="changePage(page)">{{ page }}</button>

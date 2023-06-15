@@ -1,0 +1,15 @@
+<div class="product-card card" (click)="openDetails()">
+  <div class="product-header">
+    <product-rating class="product-rating" [rate]="4"/>
+  </div>
+  <img class="product-image" src="https://m.media-amazon.com/images/I/41Q7Tt+mK2L._AC_SY450_.jpg" alt="product image" />
+  <div class="product-card-body">
+      <h5 class="product-name">{{product?.name}}</h5>
+      <div class="product-buy">
+        <span class="product-price">{{product?.price | currency: 'BRL'}}</span>
+        <button class="btn primary" (click)="addToCart()">
+          <i-feather name="shopping-cart" class="icon small"/>
+        </button>
+      </div>
+  </div>
+</div>

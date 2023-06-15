@@ -1,0 +1,18 @@
+//system design
+@use 'container';
+@use 'spacing';
+
+//css components
+@use 'card';
+@use 'button';
+@use 'table';
+@use 'icons';
+@use 'input';
+@use 'label';
+
+html, body {
+  background-color: #FBFBFB;
+  margin: unset;
+  min-height: 100%;
+  height: 100%;
+}

@@ -1,0 +1,8 @@
+@use 'spacing' as space;
+
+:host {
+  @extend .my-1;
+  display: flex;
+  justify-content: flex-end;
+  gap: calc(space.$default-spacing / 2);
+}

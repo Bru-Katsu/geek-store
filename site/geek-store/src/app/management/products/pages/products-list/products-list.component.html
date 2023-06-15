@@ -1,0 +1,38 @@
+<div class="container">
+  <section id="products-list" *ngIf="allProducts$ | async as page">
+    <section class="filters">
+      <input type="text" placeholder="Pesquisar" (keyup)="onSearch($event)">
+      <button class="btn primary small">
+        <i-feather name="plus" class="icon small pr-1"/>
+        Novo Produto
+      </button>
+    </section>
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">Preço</th>
+          <th scope="col">
+            <span class="sr-only">Ação</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let produto of page.items">
+          <td>{{ produto.name }}</td>
+          <td>{{ produto.price | currency:'BRL' }}</td>
+          <td class="actions">
+            <button class="btn">
+              <i-feather name="trash2" class="icon small"/>
+            </button>
+            <button class="btn" [routerLink]="[produto.id, 'edit']">
+              <i-feather name="edit" class="icon small"/>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <pagination [currentPage]="page.pageIndex" [pageSize]="page.pageSize" [totalItems]="page.totalItemCount" (pageChanged)="pageChange($event)"/>
+  </section>
+</div>
+

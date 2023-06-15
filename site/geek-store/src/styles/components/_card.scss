@@ -1,0 +1,51 @@
+@use 'typography' as typo;
+
+.card {
+  border-radius: 8px;
+
+  display: flex;
+  flex-direction: column;
+  font-family: typo.$main-font;
+
+  background-color: #fff;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);
+
+  img {
+    border-radius: 8px 8px 0px 0px;
+    border-bottom: 1px solid #e1e1e1;
+    object-fit: contain;
+
+    height: 16rem;
+  }
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card > .card-body {
+  padding: 1rem;
+  transition: .3s;
+
+  p, h3 {
+    margin: .5rem 0rem;
+  }
+
+  & > .card-title {
+    font-weight: bold;
+    color: #363636;
+    font-size: 14px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  & > .card-text {
+    color: #717171;
+  }
+
+  &:hover > .card-title {
+    white-space: normal;
+  }
+}

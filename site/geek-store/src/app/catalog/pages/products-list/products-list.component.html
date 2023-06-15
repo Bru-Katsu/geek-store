@@ -1,0 +1,4 @@
+<div class="products-grid container">
+  <div *ngIf="loading$ | async">Carregando</div>
+  <product-card *ngFor="let item of allProducts$ | async" [product]="item" />
+</div>

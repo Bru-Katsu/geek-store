@@ -1,0 +1,10 @@
+@use 'typography' as typo;
+
+label {
+  all: unset;
+}
+
+label {
+  display: block;
+  font-family: typo.$main-font;
+}

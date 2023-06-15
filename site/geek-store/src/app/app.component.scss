@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen&display=swap');
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: inherit;
+}
+
+router-outlet {
+  display: none
+}
+
+nav {
+  background-color: #000;
+  color: #fff;
+  width: 100%;
+
+  padding: 1rem 0rem;
+  margin-bottom: 2rem;
+
+  font-family: 'Silkscreen', cursive;
+}
+
+nav h1 {
+  margin: unset;
+}
+
+footer {
+  background-color: #000;
+  color: #fff;
+
+  margin-top: 2rem;
+
+  font-family: 'Silkscreen', cursive;
+}
+
+.content {
+  flex: 1;
+}

@@ -1,0 +1,20 @@
+<div class="container">
+  <div *ngIf="loading$ | async">Carregando</div>
+  <div *ngIf="product$ | async as product" class="details">
+    <div class="product-images mx-1">
+      <img class="product-image" src="https://m.media-amazon.com/images/I/41Q7Tt+mK2L._AC_SY450_.jpg" alt="product image" />
+    </div>
+    <div class="product-information mx-1">
+      <div>
+        <h2 class="product-name">{{ product.name }}</h2>
+        <product-rating [rate]="5"/>
+      </div>
+      <p class="product-price">{{product?.price | currency: 'BRL'}}</p>
+      <div class="actions">
+        <button class="btn primary wide">Adicionar ao carrinho</button>
+        <button class="btn primary wide">Lista de desejos</button>
+      </div>
+    </div>
+  </div>
+</div>
+

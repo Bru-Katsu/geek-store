@@ -1,0 +1,38 @@
+$gap-size: 1rem;
+$default-spacing: .5rem;
+
+@for $i from 1 through 12 {
+  $spacing: $i * $default-spacing;
+
+  .mx-#{$i} {
+    margin: 0 $spacing;
+  }
+
+  .my-#{$i} {
+    margin: $spacing 0;
+  }
+
+  .px-#{$i} {
+    padding: 0 $spacing;
+  }
+
+  .py-#{$i} {
+    padding: $spacing 0;
+  }
+
+  .pl-#{$i} {
+    padding-left: $spacing;
+  }
+
+  .pr-#{$i} {
+    padding-right: $spacing;
+  }
+}
+
+.full-w {
+  width: 100%;
+}
+
+.full-h {
+  height: 100%;
+}
