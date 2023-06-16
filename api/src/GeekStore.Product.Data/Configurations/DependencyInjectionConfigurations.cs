@@ -1,12 +1,12 @@
 ﻿using GeekStore.Core.Models;
-using GeekStore.Core.UoW;
 using GeekStore.Product.Application.Products.Queries;
 using GeekStore.Product.Application.Products.ViewModels;
+using GeekStore.Product.Data.Context;
 using GeekStore.Product.Data.QueryHandlers;
 using GeekStore.Product.Data.Repositories;
-using GeekStore.Product.Data.UoW;
 using GeekStore.Product.Domain.Products.Repositories;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GeekStore.Product.Data.Configurations
@@ -15,7 +15,7 @@ namespace GeekStore.Product.Data.Configurations
     {
         public static IServiceCollection AddDataServices(this IServiceCollection services)
         {
-            services.AddScoped<IUnitOfWork, ProductUnitOfWork>();
+            services.AddScoped<DbContext, ProductDataContext>(provider => provider.GetService<ProductDataContext>());
             services.AddScoped<IProductRepository, ProductRepository>();
 
             services.AddScoped<IRequestHandler<ProductQuery, ProductViewModel>, ProductQueryHandler>();

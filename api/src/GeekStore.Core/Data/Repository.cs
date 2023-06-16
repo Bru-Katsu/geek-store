@@ -33,6 +33,7 @@ namespace GeekStore.Core.Data
         {
             var editedEntity = _context.Set<TEntity>().FirstOrDefault(e => e.Id == entity.Id);
             editedEntity = entity;
+            _context.Set<TEntity>().Update(editedEntity);
         }
 
         public void Delete<TEntity>(TEntity entity) where TEntity : Entity

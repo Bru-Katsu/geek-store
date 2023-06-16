@@ -1,7 +1,7 @@
 ﻿using GeekStore.Core.Notifications;
-using GeekStore.Core.UoW;
 using GeekStore.Product.Domain.Products.Repositories;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace GeekStore.Product.Application.Products.Commands
 {
@@ -11,13 +11,13 @@ namespace GeekStore.Product.Application.Products.Commands
     {
         private readonly INotificationService _notificationService;
         private readonly IProductRepository _productRepository;
-        private readonly IUnitOfWork _uow;
+        private readonly DbContext _context;
 
-        public ProductCommandHandler(INotificationService notificationService, IProductRepository productRepository, IUnitOfWork uow)
+        public ProductCommandHandler(INotificationService notificationService, IProductRepository productRepository, DbContext context)
         {
             _notificationService = notificationService;
             _productRepository = productRepository;
-            _uow = uow;
+            _context = context;
         }
 
         public async Task Handle(AddProductCommand request, CancellationToken cancellationToken)
@@ -25,14 +25,19 @@ namespace GeekStore.Product.Application.Products.Commands
             cancellationToken.ThrowIfCancellationRequested();
 
             if (!request.IsValid())
+            {
                 _notificationService.AddNotifications(request.ValidationResult);
+                return;
+            }
 
             var entity = new Domain.Products.Product(request.Name, request.Price, request.Description, request.Category, request.ImageURL);
-
-            _uow.BeginTransaction();
+            
+            using var transaction = _context.Database.BeginTransaction();
 
             _productRepository.Insert(entity);
-            await _uow.CommitAsync();
+            _context.SaveChanges();
+
+            await transaction.CommitAsync();
         }
 
         public async Task Handle(UpdateProductCommand request, CancellationToken cancellationToken)
@@ -40,12 +45,14 @@ namespace GeekStore.Product.Application.Products.Commands
             cancellationToken.ThrowIfCancellationRequested();
 
             if (!request.IsValid())
+            {
                 _notificationService.AddNotifications(request.ValidationResult);
+                return;
+            }
 
             var entity = await _productRepository.GetById<Domain.Products.Product>(request.Id);
             if (entity == null)
             {
-                await _uow.RollbackAsync();
                 _notificationService.AddNotification(nameof(request.Id), "Produto não existe!");
                 return;
             }
@@ -56,9 +63,12 @@ namespace GeekStore.Product.Application.Products.Commands
             entity.ChangeCategory(request.Category);
             entity.ChangeImageUrl(request.ImageURL);
 
-            _uow.BeginTransaction();
+            using var transaction = _context.Database.BeginTransaction();
+
             _productRepository.Update(entity);
-            await _uow.CommitAsync(cancellationToken);
+            _context.SaveChanges();
+
+            await transaction.CommitAsync(cancellationToken);
         }
 
         public async Task Handle(RemoveProductCommand request, CancellationToken cancellationToken)
@@ -66,20 +76,24 @@ namespace GeekStore.Product.Application.Products.Commands
             cancellationToken.ThrowIfCancellationRequested();
 
             if (!request.IsValid())
+            {
                 _notificationService.AddNotifications(request.ValidationResult);
+                return;
+            }
 
-            _uow.BeginTransaction();
+            using var transaction = _context.Database.BeginTransaction();
 
             var entity = await _productRepository.GetById<Domain.Products.Product>(request.Id);
             if (entity == null)
             {
-                await _uow.RollbackAsync();
                 _notificationService.AddNotification(nameof(request.Id), "Produto não existe!");
                 return;
             }
 
             _productRepository.Delete(entity);
-            await _uow.CommitAsync();
+            _context.SaveChanges();
+
+            await transaction.CommitAsync();
         }
     }
 }
