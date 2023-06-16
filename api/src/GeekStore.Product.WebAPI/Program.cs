@@ -1,5 +1,6 @@
 using GeekStore.Core.DI;
 using GeekStore.Product.Data.Configurations;
+using GeekStore.Product.WebAPI.DI;
 using GeekStore.Product.WebAPI.Middlewares;
 using Microsoft.AspNetCore.Hosting;
 
@@ -15,6 +16,7 @@ builder.Services.UseSqlServer(builder.Configuration);
 
 builder.Services.AddCoreServices()
                 .AddDataServices()
+                .AddServices()
                 .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>()); ;
 
 var app = builder.Build();
