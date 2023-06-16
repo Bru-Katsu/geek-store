@@ -50,7 +50,7 @@ namespace GeekStore.Product.WebAPI.Controllers
         [HttpPut]
         [ProducesResponseType(typeof(ProductViewModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(IEnumerable<DomainNotification>), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> PutArtigo(UpdateProductViewModel viewModel)
+        public async Task<IActionResult> PutProduct(UpdateProductViewModel viewModel)
         {
             await _mediator.Send(new UpdateProductCommand(viewModel.Id, viewModel.Name, viewModel.Price, viewModel.Description, viewModel.Category, viewModel.ImageURL));
             var p = await _mediator.Send(new ProductQuery() { Id = viewModel.Id });
@@ -61,7 +61,7 @@ namespace GeekStore.Product.WebAPI.Controllers
         [HttpDelete("{id:guid}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(IEnumerable<DomainNotification>), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> DeleteArtigo([FromRoute] Guid id)
+        public async Task<IActionResult> DeleteProduct([FromRoute] Guid id)
         {
             await _mediator.Send(new RemoveProductCommand(id));
             return GetResponse();
