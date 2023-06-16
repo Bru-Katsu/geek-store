@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
@@ -22,6 +22,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Core", "src\GeekStore.Core\GeekStore.Core.csproj", "{237FBD46-35F7-4FAF-A839-84DDB1472006}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Product.Application", "src\GeekStore.Product.Application\GeekStore.Product.Application.csproj", "{99D49E01-9998-4CDF-A65E-052F1EB8A4EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekStore.Product.Tests", "GeekStore.Product.Tests\GeekStore.Product.Tests.csproj", "{F05DF97E-3711-4147-8061-DE1277389E53}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

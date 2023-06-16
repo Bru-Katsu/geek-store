@@ -10,38 +10,38 @@ namespace GeekStore.Core.Data
 
         protected Repository(TDbContext context) => _context = context;
 
-        public async Task<TEntity> GetById<TEntity>(Guid id) where TEntity : Entity
+        public async Task<TEntity> GetById<TEntity>(Guid id) where TEntity : Entity<TEntity>
         {
             return await _context.Set<TEntity>().FirstOrDefaultAsync(e => e.Id == id);
         }
 
-        public async Task<IEnumerable<TEntity>> Filter<TEntity>() where TEntity : Entity
+        public async Task<IEnumerable<TEntity>> Filter<TEntity>() where TEntity : Entity<TEntity>
         {
             return await _context.Set<TEntity>().ToListAsync();
         }
 
-        public async Task<IEnumerable<TEntity>> Filter<TEntity>(Expression<Func<TEntity, bool>> predicate) where TEntity : Entity
+        public async Task<IEnumerable<TEntity>> Filter<TEntity>(Expression<Func<TEntity, bool>> predicate) where TEntity : Entity<TEntity>
         {
             return await _context.Set<TEntity>().Where(predicate).ToListAsync();
         }
 
-        public void Insert<TEntity>(TEntity entity) where TEntity : Entity
+        public void Insert<TEntity>(TEntity entity) where TEntity : Entity<TEntity>
         {
             _context.Set<TEntity>().Add(entity);
         }
-        public void Update<TEntity>(TEntity entity) where TEntity : Entity
+        public void Update<TEntity>(TEntity entity) where TEntity : Entity<TEntity>
         {
             var editedEntity = _context.Set<TEntity>().FirstOrDefault(e => e.Id == entity.Id);
             editedEntity = entity;
             _context.Set<TEntity>().Update(editedEntity);
         }
 
-        public void Delete<TEntity>(TEntity entity) where TEntity : Entity
+        public void Delete<TEntity>(TEntity entity) where TEntity : Entity<TEntity>
         {
             _context.Set<TEntity>().Remove(entity);
         }
 
-        public void Delete<TEntity>(Guid id) where TEntity : Entity
+        public void Delete<TEntity>(Guid id) where TEntity : Entity<TEntity>
         {
             var entityToDelete = _context.Set<TEntity>().FirstOrDefault(e => e.Id == id);
             if (entityToDelete != null)
@@ -50,7 +50,7 @@ namespace GeekStore.Core.Data
             }
         }
 
-        public IQueryable<TEntity> AsQueryable<TEntity>() where TEntity : Entity
+        public IQueryable<TEntity> AsQueryable<TEntity>() where TEntity : Entity<TEntity>
         {
             return _context.Set<TEntity>().AsQueryable();
         }

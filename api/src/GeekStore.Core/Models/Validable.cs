@@ -1,4 +1,5 @@
 ﻿
+using FluentValidation;
 using FluentValidation.Results;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -15,5 +16,16 @@ namespace GeekStore.Core.Models
         public ValidationResult ValidationResult { get; protected set; }
 
         public virtual bool IsValid() => throw new NotImplementedException("Recurso de validação não está implementado!");
+    }
+
+    public abstract class Validable<T> : AbstractValidator<T>
+    {
+        public Validable()
+        {
+            ValidationResult = new ValidationResult();
+        }
+        public virtual bool IsValid() => throw new NotImplementedException();
+
+        public ValidationResult ValidationResult { get; protected set; }
     }
 }
