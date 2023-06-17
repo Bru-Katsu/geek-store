@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using GeekStore.Core.Helpers;
 using GeekStore.Core.Models;
 using System.ComponentModel.DataAnnotations;
 
@@ -91,20 +92,12 @@ namespace GeekStore.Product.Domain.Products
                 .WithMessage("A URL da imagem do produto não pode ficar em branco!")
                 .MaximumLength(300)
                 .WithMessage("A URL da imagem do produto deve conter no máximo 300 caracteres!")
-                .Must(IsValidImageUrl)
+                .Must(UrlHelper.IsValidImageUrl)
                 .WithMessage("A URL da imagem do produto não é válida. Certifique-se de fornecer uma URL válida.");
 
             RuleFor(x => x.Id)
                 .NotEmpty()
                 .WithMessage("O ID do produto não pode ficar em branco!");
-        }
-
-        private bool IsValidImageUrl(string url)
-        {
-            if (Uri.TryCreate(url, UriKind.Absolute, out Uri uri))
-                return uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps;
-
-            return false;
         }
     }
 }

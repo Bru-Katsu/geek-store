@@ -1,4 +1,4 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
@@ -22,6 +22,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Core", "src\GeekStore.Core\GeekStore.Core.csproj", "{237FBD46-35F7-4FAF-A839-84DDB1472006}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Product.Application", "src\GeekStore.Product.Application\GeekStore.Product.Application.csproj", "{99D49E01-9998-4CDF-A65E-052F1EB8A4EE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{32C7E5C9-BF99-4DF2-BC89-A01A3B2E58BB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.EventSourcing", "src\GeekStore.EventSourcing\GeekStore.EventSourcing.csproj", "{356B3F7E-3574-432C-BC5F-DE86E674B0E1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekStore.Product.Tests", "GeekStore.Product.Tests\GeekStore.Product.Tests.csproj", "{F05DF97E-3711-4147-8061-DE1277389E53}"
 EndProject
@@ -51,6 +55,14 @@ Global
 		{99D49E01-9998-4CDF-A65E-052F1EB8A4EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99D49E01-9998-4CDF-A65E-052F1EB8A4EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99D49E01-9998-4CDF-A65E-052F1EB8A4EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{356B3F7E-3574-432C-BC5F-DE86E674B0E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{356B3F7E-3574-432C-BC5F-DE86E674B0E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{356B3F7E-3574-432C-BC5F-DE86E674B0E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{356B3F7E-3574-432C-BC5F-DE86E674B0E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F05DF97E-3711-4147-8061-DE1277389E53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F05DF97E-3711-4147-8061-DE1277389E53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F05DF97E-3711-4147-8061-DE1277389E53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F05DF97E-3711-4147-8061-DE1277389E53}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +76,9 @@ Global
 		{78C89E56-0343-4BE3-AD48-FD929A264A29} = {7759E745-57FF-4A09-982F-1E4520A3AA63}
 		{237FBD46-35F7-4FAF-A839-84DDB1472006} = {B959E465-06DD-4346-9DD4-6E807260A8A1}
 		{99D49E01-9998-4CDF-A65E-052F1EB8A4EE} = {7759E745-57FF-4A09-982F-1E4520A3AA63}
+		{32C7E5C9-BF99-4DF2-BC89-A01A3B2E58BB} = {9C5327ED-7D6D-471F-A88F-6D09ED0AB225}
+		{356B3F7E-3574-432C-BC5F-DE86E674B0E1} = {32C7E5C9-BF99-4DF2-BC89-A01A3B2E58BB}
+		{F05DF97E-3711-4147-8061-DE1277389E53} = {1655B8E6-9782-4155-BB48-8AECDFE921D4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {30CF6A78-C893-431B-B7FC-F8723ACB50EF}

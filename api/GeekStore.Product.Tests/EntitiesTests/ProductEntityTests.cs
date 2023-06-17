@@ -16,7 +16,8 @@ namespace GeekStore.Product.Tests.EntitiesTests
             _productFixture = productFixture;
         }
 
-        [Fact]
+        [Fact(DisplayName = "Produto válido não deve ter erros")]
+        [Trait("Entities", "Product")]
         public void Product_IsValid_MustNotHaveErrors()
         {
             //Arrange            
@@ -31,7 +32,8 @@ namespace GeekStore.Product.Tests.EntitiesTests
         }
 
 
-        [Fact]
+        [Fact(DisplayName = "Produto com nome inválido vazio não deve ser válido")]
+        [Trait("Entities", "Product")]
         public void Product_InvalidName_Empty_ShouldNotBeValid()
         {
             // Arrange
@@ -45,7 +47,8 @@ namespace GeekStore.Product.Tests.EntitiesTests
             Assert.False(isValid);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Produto com nome inválido muito longo não deve ser válido")]
+        [Trait("Entities", "Product")]
         public void Product_InvalidName_TooLong_ShouldNotBeValid()
         {
             // Arrange
@@ -59,7 +62,8 @@ namespace GeekStore.Product.Tests.EntitiesTests
             Assert.False(isValid);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Produto com preço inválido negativo não deve ser válido")]
+        [Trait("Entities", "Product")]
         public void Product_InvalidPrice_Negative_ShouldNotBeValid()
         {
             // Arrange
@@ -73,7 +77,8 @@ namespace GeekStore.Product.Tests.EntitiesTests
             Assert.False(isValid);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Produto com descrição inválida muito longa não deve ser válido")]
+        [Trait("Entities", "Product")]
         public void Product_InvalidDescription_TooLong_ShouldNotBeValid()
         {
             // Arrange
@@ -87,7 +92,8 @@ namespace GeekStore.Product.Tests.EntitiesTests
             Assert.False(isValid);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Produto com categoria inválida muito longa não deve ser válido")]
+        [Trait("Entities", "Product")]
         public void Product_InvalidCategory_TooLong_ShouldNotBeValid()
         {
             // Arrange
@@ -101,7 +107,8 @@ namespace GeekStore.Product.Tests.EntitiesTests
             Assert.False(isValid);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Produto com URL de imagem inválida muito longa não deve ser válido")]
+        [Trait("Entities", "Product")]
         public void Product_InvalidImageURL_TooLong_ShouldNotBeValid()
         {
             // Arrange
@@ -115,7 +122,8 @@ namespace GeekStore.Product.Tests.EntitiesTests
             Assert.False(isValid);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Produto com URL de imagem inválida no formato inválido não deve ser válido")]
+        [Trait("Entities", "Product")]
         public void Product_InvalidImageURL_InvalidFormat_ShouldNotBeValid()
         {
             // Arrange
