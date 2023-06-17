@@ -27,7 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.EventSourcing", "src\GeekStore.EventSourcing\GeekStore.EventSourcing.csproj", "{356B3F7E-3574-432C-BC5F-DE86E674B0E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekStore.Product.Tests", "GeekStore.Product.Tests\GeekStore.Product.Tests.csproj", "{F05DF97E-3711-4147-8061-DE1277389E53}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekStore.Product.Tests", "tests\GeekStore.Product.Tests\GeekStore.Product.Tests.csproj", "{F05DF97E-3711-4147-8061-DE1277389E53}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

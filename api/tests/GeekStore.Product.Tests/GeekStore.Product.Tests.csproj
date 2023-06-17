@@ -24,13 +24,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\GeekStore.Product.Application\GeekStore.Product.Application.csproj" />
-    <ProjectReference Include="..\src\GeekStore.Product.Data\GeekStore.Product.Data.csproj" />
-    <ProjectReference Include="..\src\GeekStore.Product.Domain\GeekStore.Product.Domain.csproj" />
+    <Folder Include="CommandHandlerTests\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CommandHandlerTests\" />
+    <ProjectReference Include="..\..\src\GeekStore.Product.Application\GeekStore.Product.Application.csproj" />
+    <ProjectReference Include="..\..\src\GeekStore.Product.Data\GeekStore.Product.Data.csproj" />
+    <ProjectReference Include="..\..\src\GeekStore.Product.Domain\GeekStore.Product.Domain.csproj" />
   </ItemGroup>
 
 </Project>
