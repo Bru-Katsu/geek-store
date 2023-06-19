@@ -1,6 +1,5 @@
 ﻿using GeekStore.Core.Queries;
 using GeekStore.Product.Application.Products.ViewModels;
-using System.ComponentModel.DataAnnotations;
 
 namespace GeekStore.Product.Application.Products.Queries
 {

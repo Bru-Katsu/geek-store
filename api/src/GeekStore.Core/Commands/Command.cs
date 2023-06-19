@@ -1,5 +1,4 @@
-﻿using FluentValidation.Results;
-using GeekStore.Core.Models;
+﻿using GeekStore.Core.Models;
 using MediatR;
 
 namespace GeekStore.Core.Commands

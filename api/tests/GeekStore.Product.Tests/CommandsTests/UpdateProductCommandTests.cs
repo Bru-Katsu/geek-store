@@ -1,12 +1,6 @@
 ﻿using Bogus;
 using Bogus.Extensions;
 using GeekStore.Product.Application.Products.Commands;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GeekStore.Product.Tests.CommandsTests
 {

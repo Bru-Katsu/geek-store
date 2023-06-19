@@ -1,6 +1,5 @@
 ﻿using Bogus;
 using Bogus.Extensions;
-using GeekStore.Product.Tests.Common;
 using GeekStore.Product.Tests.Fixtures;
 
 namespace GeekStore.Product.Tests.EntitiesTests

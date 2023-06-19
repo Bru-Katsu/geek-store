@@ -31,13 +31,18 @@ namespace GeekStore.Product.Application.Products.Commands
             }
 
             var entity = new Domain.Products.Product(request.Name, request.Price, request.Description, request.Category, request.ImageURL);
+            if (!entity.IsValid())
+            {
+                _notificationService.AddNotifications(entity.ValidationResult);
+                return;
+            }
             
             using var transaction = _context.Database.BeginTransaction();
 
             _productRepository.Insert(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync(cancellationToken);
 
-            await transaction.CommitAsync();
+            await transaction.CommitAsync(cancellationToken);
         }
 
         public async Task Handle(UpdateProductCommand request, CancellationToken cancellationToken)
@@ -63,10 +68,16 @@ namespace GeekStore.Product.Application.Products.Commands
             entity.ChangeCategory(request.Category);
             entity.ChangeImageUrl(request.ImageURL);
 
+            if (!entity.IsValid())
+            {
+                _notificationService.AddNotifications(entity.ValidationResult);
+                return;
+            }
+
             using var transaction = _context.Database.BeginTransaction();
 
             _productRepository.Update(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync(cancellationToken);
 
             await transaction.CommitAsync(cancellationToken);
         }
@@ -81,8 +92,6 @@ namespace GeekStore.Product.Application.Products.Commands
                 return;
             }
 
-            using var transaction = _context.Database.BeginTransaction();
-
             var entity = await _productRepository.GetById<Domain.Products.Product>(request.Id);
             if (entity == null)
             {
@@ -90,10 +99,12 @@ namespace GeekStore.Product.Application.Products.Commands
                 return;
             }
 
-            _productRepository.Delete(entity);
-            _context.SaveChanges();
+            using var transaction = _context.Database.BeginTransaction();
 
-            await transaction.CommitAsync();
+            _productRepository.Delete(entity);
+            await _context.SaveChangesAsync(cancellationToken);
+
+            await transaction.CommitAsync(cancellationToken);
         }
     }
 }

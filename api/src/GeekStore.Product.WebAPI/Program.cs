@@ -2,7 +2,6 @@ using GeekStore.Core.DI;
 using GeekStore.Product.Data.Configurations;
 using GeekStore.Product.WebAPI.DI;
 using GeekStore.Product.WebAPI.Middlewares;
-using Microsoft.AspNetCore.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
