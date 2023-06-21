@@ -12,11 +12,6 @@ namespace GeekStore.Product.WebAPI.Controllers
             _notificationService = notificationService;
         }
 
-        //protected ActionResult<T> GetResponse<T>(T objeto = default)
-        //{
-        //    return (ActionResult<T>) GetResponseObject(objeto as object);
-        //}
-
         protected IActionResult GetResponse(object objeto = default)
         {
             return (IActionResult) GetResponseObject(objeto);
@@ -25,9 +20,12 @@ namespace GeekStore.Product.WebAPI.Controllers
         private object GetResponseObject(object objeto = default)
         {
             var n = _notificationService.GetNotifications();
-            if(n.Count() > 0)
+            if(n.Any())
             {
-                return BadRequest(new { errors = n.ToList() });
+                return BadRequest(new 
+                { 
+                    errors = n.ToList() 
+                });
             }
             else
             {

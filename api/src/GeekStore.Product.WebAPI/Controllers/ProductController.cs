@@ -23,10 +23,18 @@ namespace GeekStore.Product.WebAPI.Controllers
         [HttpGet("{id:guid}")]
         [ProducesResponseType(typeof(ProductViewModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(IEnumerable<DomainNotification>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetProduct([FromRoute] Guid id)
         {
-            var item = await _mediator.Send(new ProductQuery { Id = id });
-            return GetResponse(item);
+            var product = await _mediator.Send(new ProductQuery 
+            { 
+                Id = id 
+            });
+
+            if (product == null)
+                return NotFound();
+
+            return GetResponse(product);
         }
 
         [HttpGet("all/")]
@@ -53,9 +61,12 @@ namespace GeekStore.Product.WebAPI.Controllers
         public async Task<IActionResult> PutProduct(UpdateProductViewModel viewModel)
         {
             await _mediator.Send(new UpdateProductCommand(viewModel.Id, viewModel.Name, viewModel.Price, viewModel.Description, viewModel.Category, viewModel.ImageURL));
-            var p = await _mediator.Send(new ProductQuery() { Id = viewModel.Id });
+            var product = await _mediator.Send(new ProductQuery() 
+            { 
+                Id = viewModel.Id 
+            });
 
-            return GetResponse(p);
+            return GetResponse(product);
         }
 
         [HttpDelete("{id:guid}")]
