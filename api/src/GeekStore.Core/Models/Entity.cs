@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GeekStore.Core.Models
 {
-    public abstract class Entity<TEntity> : Validable<TEntity> where TEntity : class
+    public abstract class Entity : Validable
     {
         [Key]
         [Column("id")]

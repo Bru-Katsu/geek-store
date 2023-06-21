@@ -24,8 +24,10 @@ namespace GeekStore.Core.Models
         {
             ValidationResult = new ValidationResult();
         }
-        public virtual bool IsValid() => throw new NotImplementedException();
 
+        [NotMapped]
         public ValidationResult ValidationResult { get; protected set; }
+
+        public virtual bool IsValid() => throw new NotImplementedException("Recurso de validação não está implementado!");
     }
 }

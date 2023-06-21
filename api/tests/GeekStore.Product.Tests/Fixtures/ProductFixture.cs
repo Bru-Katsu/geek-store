@@ -1,5 +1,6 @@
 ﻿using Bogus;
 using Bogus.Extensions;
+using GeekStore.Product.Tests.Common;
 
 namespace GeekStore.Product.Tests.Fixtures
 {
@@ -7,7 +8,7 @@ namespace GeekStore.Product.Tests.Fixtures
     {
         public Domain.Products.Product GenerateValidProduct()
         {
-            var productFaker = new Faker<Domain.Products.Product>()
+            var productFaker = new Faker<Domain.Products.Product>(Constants.LOCALE)
                 .CustomInstantiator(f =>
                 {
                     var name = f.Commerce.ProductName().ClampLength(1, 150);
