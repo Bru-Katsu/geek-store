@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
-using GeekStore.Core.Commands;
 using GeekStore.Core.Helpers;
+using GeekStore.Core.Messages;
 
 namespace GeekStore.Product.Application.Products.Commands
 {

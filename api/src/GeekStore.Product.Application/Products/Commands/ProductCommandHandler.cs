@@ -1,4 +1,5 @@
 ﻿using GeekStore.Core.Notifications;
+using GeekStore.Product.Application.Products.Events;
 using GeekStore.Product.Domain.Products.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -12,11 +13,16 @@ namespace GeekStore.Product.Application.Products.Commands
         private readonly INotificationService _notificationService;
         private readonly IProductRepository _productRepository;
         private readonly DbContext _context;
+        private readonly IMediator _mediator;
 
-        public ProductCommandHandler(INotificationService notificationService, IProductRepository productRepository, DbContext context)
+        public ProductCommandHandler(INotificationService notificationService, 
+                                     IProductRepository productRepository,
+                                     IMediator mediator,
+                                     DbContext context)
         {
             _notificationService = notificationService;
             _productRepository = productRepository;
+            _mediator = mediator;
             _context = context;
         }
 
@@ -41,6 +47,8 @@ namespace GeekStore.Product.Application.Products.Commands
 
             _productRepository.Insert(entity);
             await _context.SaveChangesAsync(cancellationToken);
+
+            await _mediator.Publish(new ProductAddedEvent(entity));
 
             await transaction.CommitAsync(cancellationToken);
         }
@@ -79,6 +87,8 @@ namespace GeekStore.Product.Application.Products.Commands
             _productRepository.Update(entity);
             await _context.SaveChangesAsync(cancellationToken);
 
+            await _mediator.Publish(new ProductUpdatedEvent(entity));
+
             await transaction.CommitAsync(cancellationToken);
         }
 
@@ -103,6 +113,8 @@ namespace GeekStore.Product.Application.Products.Commands
 
             _productRepository.Delete(entity);
             await _context.SaveChangesAsync(cancellationToken);
+
+            await _mediator.Publish(new ProductRemovedEvent(entity));
 
             await transaction.CommitAsync(cancellationToken);
         }

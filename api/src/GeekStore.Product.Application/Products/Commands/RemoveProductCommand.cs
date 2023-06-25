@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using GeekStore.Core.Commands;
+using GeekStore.Core.Messages;
 
 namespace GeekStore.Product.Application.Products.Commands
 {

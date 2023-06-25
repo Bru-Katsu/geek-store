@@ -1,9 +1,11 @@
 ﻿using FluentValidation.Results;
 using GeekStore.Core.Notifications;
 using GeekStore.Product.Application.Products.Commands;
+using GeekStore.Product.Application.Products.Events;
 using GeekStore.Product.Domain.Products.Repositories;
 using GeekStore.Product.Tests.Extensions;
 using GeekStore.Product.Tests.Fixtures;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Moq;
@@ -55,6 +57,9 @@ namespace GeekStore.Product.Tests.CommandHandlerTests
             mocker.GetMock<DbContext>()
                   .Verify(context => context.SaveChangesAsync(CancellationToken.None), Times.Once);
 
+            mocker.GetMock<IMediator>()
+                  .Verify(mediator => mediator.Publish(It.IsAny<ProductAddedEvent>(), CancellationToken.None), Times.Once);
+
             mocker.GetMock<IDbContextTransaction>()
                   .Verify(transaction => transaction.CommitAsync(CancellationToken.None), Times.Once);
         }
@@ -92,6 +97,9 @@ namespace GeekStore.Product.Tests.CommandHandlerTests
 
             mocker.GetMock<DbContext>()
                   .Verify(context => context.SaveChangesAsync(CancellationToken.None), Times.Never);
+
+            mocker.GetMock<IMediator>()
+                  .Verify(mediator => mediator.Publish(It.IsAny<ProductAddedEvent>(), CancellationToken.None), Times.Never);
 
             mocker.GetMock<IDbContextTransaction>()
                   .Verify(transaction => transaction.CommitAsync(CancellationToken.None), Times.Never);
@@ -133,6 +141,9 @@ namespace GeekStore.Product.Tests.CommandHandlerTests
             mocker.GetMock<DbContext>()
                   .Verify(context => context.SaveChangesAsync(CancellationToken.None), Times.Once);
 
+            mocker.GetMock<IMediator>()
+                  .Verify(mediator => mediator.Publish(It.IsAny<ProductUpdatedEvent>(), CancellationToken.None), Times.Once);
+
             mocker.GetMock<IDbContextTransaction>()
                   .Verify(transaction => transaction.CommitAsync(CancellationToken.None), Times.Once);
         }
@@ -171,6 +182,9 @@ namespace GeekStore.Product.Tests.CommandHandlerTests
             mocker.GetMock<DbContext>()
                   .Verify(context => context.SaveChangesAsync(CancellationToken.None), Times.Never);
 
+            mocker.GetMock<IMediator>()
+                  .Verify(mediator => mediator.Publish(It.IsAny<ProductUpdatedEvent>(), CancellationToken.None), Times.Never);
+
             mocker.GetMock<IDbContextTransaction>()
                   .Verify(transaction => transaction.CommitAsync(CancellationToken.None), Times.Never);
         }
@@ -208,6 +222,9 @@ namespace GeekStore.Product.Tests.CommandHandlerTests
 
             mocker.GetMock<DbContext>()
                   .Verify(context => context.SaveChangesAsync(CancellationToken.None), Times.Never);
+
+            mocker.GetMock<IMediator>()
+                  .Verify(mediator => mediator.Publish(It.IsAny<ProductUpdatedEvent>(), CancellationToken.None), Times.Never);
 
             mocker.GetMock<IDbContextTransaction>()
                   .Verify(transaction => transaction.CommitAsync(CancellationToken.None), Times.Never);
@@ -249,6 +266,9 @@ namespace GeekStore.Product.Tests.CommandHandlerTests
             mocker.GetMock<DbContext>()
                   .Verify(context => context.SaveChangesAsync(CancellationToken.None), Times.Once);
 
+            mocker.GetMock<IMediator>()
+                  .Verify(mediator => mediator.Publish(It.IsAny<ProductRemovedEvent>(), CancellationToken.None), Times.Once);
+
             mocker.GetMock<IDbContextTransaction>()
                   .Verify(transaction => transaction.CommitAsync(CancellationToken.None), Times.Once);
         }
@@ -287,6 +307,9 @@ namespace GeekStore.Product.Tests.CommandHandlerTests
             mocker.GetMock<DbContext>()
                   .Verify(context => context.SaveChangesAsync(CancellationToken.None), Times.Never);
 
+            mocker.GetMock<IMediator>()
+                  .Verify(mediator => mediator.Publish(It.IsAny<ProductRemovedEvent>(), CancellationToken.None), Times.Never);
+
             mocker.GetMock<IDbContextTransaction>()
                   .Verify(transaction => transaction.CommitAsync(CancellationToken.None), Times.Never);
         }
@@ -324,6 +347,9 @@ namespace GeekStore.Product.Tests.CommandHandlerTests
 
             mocker.GetMock<DbContext>()
                   .Verify(context => context.SaveChangesAsync(CancellationToken.None), Times.Never);
+
+            mocker.GetMock<IMediator>()
+                  .Verify(mediator => mediator.Publish(It.IsAny<ProductRemovedEvent>(), CancellationToken.None), Times.Never);
 
             mocker.GetMock<IDbContextTransaction>()
                   .Verify(transaction => transaction.CommitAsync(CancellationToken.None), Times.Never);

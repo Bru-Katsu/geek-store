@@ -13,7 +13,7 @@ namespace GeekStore.Product.Data.Configurations
 {
     public static class DependencyInjectionConfigurations
     {
-        public static IServiceCollection AddDataServices(this IServiceCollection services)
+        public static IServiceCollection AddProductDataServices(this IServiceCollection services)
         {
             services.AddScoped<DbContext, ProductDataContext>(provider => provider.GetService<ProductDataContext>());
             services.AddScoped<IProductRepository, ProductRepository>();

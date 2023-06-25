@@ -1,7 +1,8 @@
 using GeekStore.Core.DI;
 using GeekStore.Product.Data.Configurations;
-using GeekStore.Product.WebAPI.DI;
 using GeekStore.Product.WebAPI.Middlewares;
+using GeekStore.EventSourcing.DI;
+using GeekStore.Product.Application.DI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,9 +15,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.UseSqlServer(builder.Configuration);
 
 builder.Services.AddCoreServices()
-                .AddDataServices()
-                .AddServices()
-                .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>()); ;
+                .AddProductDataServices()
+                .AddProductApplicationServices()
+                .AddEventSourcing()
+                .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
 
 var app = builder.Build();
 

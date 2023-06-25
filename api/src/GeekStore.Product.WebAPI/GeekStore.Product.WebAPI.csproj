@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GeekStore.EventSourcing\GeekStore.EventSourcing.csproj" />
     <ProjectReference Include="..\GeekStore.Product.Data\GeekStore.Product.Data.csproj" />
   </ItemGroup>
 
