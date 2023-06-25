@@ -2,7 +2,7 @@
   <section id="products-list" *ngIf="allProducts$ | async as page">
     <section class="filters">
       <input type="text" placeholder="Pesquisar" (keyup)="onSearch($event)">
-      <button class="btn primary small">
+      <button class="btn primary small" [routerLink]="['new']">
         <i-feather name="plus" class="icon small pr-1"/>
         Novo Produto
       </button>
@@ -22,7 +22,7 @@
           <td>{{ produto.name }}</td>
           <td>{{ produto.price | currency:'BRL' }}</td>
           <td class="actions">
-            <button class="btn">
+            <button class="btn" (click)="onRemove(produto)">
               <i-feather name="trash2" class="icon small"/>
             </button>
             <button class="btn" [routerLink]="[produto.id, 'edit']">

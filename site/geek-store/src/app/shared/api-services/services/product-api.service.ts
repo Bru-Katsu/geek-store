@@ -28,4 +28,8 @@ export class ProductApiService extends ApiServiceBase {
   updateProduct(product: ProductDetail) {
     return this.http.put<ProductDetail>(`${this.apiAddress}/product`, product);
   }
+
+  removeProduct(productId: string) {
+    return this.http.delete<void>(`${this.apiAddress}/product/${productId}`);
+  }
 }

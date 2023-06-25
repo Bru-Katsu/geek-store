@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, Observable, Subject, catchError, combineLatest, filter, map, startWith, switchMap, take, tap } from 'rxjs';
-import { ProductDetail } from 'src/app/shared/api-services/models/product-detail';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BehaviorSubject, Observable, Subject, catchError, combineLatest, filter, from, iif, map, merge, of, startWith, switchMap, take, tap } from 'rxjs';
+import { ProductDetail, newProductDetail } from 'src/app/shared/api-services/models/product-detail';
 import { ProductApiService } from 'src/app/shared/api-services/services/product-api.service';
 import { useValidations } from 'src/app/shared/operators/form-validation';
 import { indicate } from 'src/app/shared/operators/indicator';
@@ -13,24 +13,46 @@ import { indicate } from 'src/app/shared/operators/indicator';
   styleUrls: ['./product-editor.component.scss']
 })
 export class ProductEditorComponent implements OnInit {
-  constructor(private route: ActivatedRoute, private productApi: ProductApiService, private fb: FormBuilder) { }
+  constructor(private route: ActivatedRoute,
+              private productApi: ProductApiService,
+              private fb: FormBuilder,
+              private router: Router) { }
 
   loading$ = new Subject<boolean>();
   saving$ = new Subject<boolean>();
   product$!: Observable<ProductDetail>;
   form$!: Observable<FormGroup>;
 
-  onEdited$ = new Subject<void>();
+  addProductAction$ = new Subject<ProductDetail>();
+  updateProductAction$ = new Subject<ProductDetail>();
+
+  private productUpdated$ = this.updateProductAction$.pipe(
+    indicate(this.saving$),
+    switchMap(product => this.productApi.updateProduct(product))
+  );
+
+  private productAdded$ = this.addProductAction$.pipe(
+    indicate(this.saving$),
+    switchMap(product => this.productApi.addProduct(product)),
+    //navegar para a edição atual do item (preciso ajustar commands da API para retornar o produto inserido)
+    tap(() => this.router.navigate([''], {relativeTo: this.route}))
+  );
+
+  private productEvent$ = merge(this.productUpdated$, this.productAdded$);
 
   ngOnInit(): void {
-    this.product$ = this.onEdited$.pipe(
-      startWith(undefined),
-      indicate(this.saving$),
+    this.product$ = this.productEvent$.pipe(
+      startWith(null),
       switchMap(() => this.route.paramMap),
       switchMap(params => {
-        const productId = params.get('id') ?? '';
-        return this.productApi.getProduct(productId);
-      })
+        const productId = params.get('id');
+        if(productId)
+          return this.productApi.getProduct(productId).pipe(
+            indicate(this.loading$)
+          );
+        else
+          return of(newProductDetail())
+      }),
     );
 
     this.form$ = this.product$.pipe(
@@ -48,10 +70,9 @@ export class ProductEditorComponent implements OnInit {
   }
 
   save(product: ProductDetail){
-    this.productApi.updateProduct(product).pipe(
-      indicate(this.loading$),
-      tap(() => this.onEdited$.next()),
-      take(1)
-    ).subscribe();
+    if(product.id)
+      this.updateProductAction$.next(product);
+    else
+      this.addProductAction$.next(product);
   }
 }

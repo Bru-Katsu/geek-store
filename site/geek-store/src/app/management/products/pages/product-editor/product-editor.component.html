@@ -6,21 +6,21 @@
         <label for="productName">
           Nome
         </label>
-        <input id="productName" formControlName="name"/>
+        <input type="text" id="productName" formControlName="name"/>
       </div>
 
       <div class="field">
         <label for="productCategory">
           Categoria
         </label>
-        <input id="productCategory" formControlName="category"/>
+        <input type="text" id="productCategory" formControlName="category"/>
       </div>
 
       <div class="field">
         <label for="productPrice">
           Preço
         </label>
-        <input id="productPrice" formControlName="price"/>
+        <input type="number" id="productPrice" formControlName="price"/>
       </div>
 
       <div class="field full-width">
@@ -30,7 +30,16 @@
         <textarea id="productDescription" formControlName="description"></textarea>
       </div>
 
-      <button type="submit" class="btn primary" [disabled]="!form.dirty || !form.valid">Salvar</button>
+      <div class="field full-width">
+        <label for="productImage">
+          Imagem do Produto (url)
+        </label>
+        <input type="text" id="productImage" formControlName="imageURL">
+      </div>
+
+      <button type="submit" class="btn primary" [disabled]="!form.dirty || !form.valid">
+        Salvar
+      </button>
     </form>
   </main>
 </ng-container>
