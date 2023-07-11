@@ -1,10 +1,11 @@
 ﻿using FluentValidation;
 using GeekStore.Core.Helpers;
 using GeekStore.Core.Messages;
+using GeekStore.Core.Results;
 
 namespace GeekStore.Product.Application.Products.Commands
 {
-    public sealed class AddProductCommand : Command
+    public sealed class AddProductCommand : Command<Result<Guid>>
     {
         public AddProductCommand(string name, decimal price, string description, string category, string imageURL)
         {

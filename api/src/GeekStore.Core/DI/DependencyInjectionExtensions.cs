@@ -1,4 +1,5 @@
-﻿using GeekStore.Core.Mediator;
+﻿using GeekStore.Core.Behaviors;
+using GeekStore.Core.Mediator;
 using GeekStore.Core.Notifications;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,7 +12,12 @@ namespace GeekStore.Core.DI
         {
             services.AddScoped<INotificationService, NotificationService>();           
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(RetryBehavior<,>));
-            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(RetryBehavior<,>));
+
+            return services;
+        }
+
+        public static IServiceCollection UseCustomMediator(this IServiceCollection services)
+        {
             services.AddScoped<IMediator, MediatorDecorator>();
 
             return services;

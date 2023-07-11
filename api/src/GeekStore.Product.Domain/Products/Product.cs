@@ -92,10 +92,6 @@ namespace GeekStore.Product.Domain.Products
                     .WithMessage("A URL da imagem do produto deve conter no máximo 300 caracteres!")
                     .Must(UrlHelper.IsValidImageUrl)
                     .WithMessage("A URL da imagem do produto não é válida. Certifique-se de fornecer uma URL válida.");
-
-                RuleFor(x => x.Id)
-                    .NotEmpty()
-                    .WithMessage("O ID do produto não pode ficar em branco!");
             }
         }
     }

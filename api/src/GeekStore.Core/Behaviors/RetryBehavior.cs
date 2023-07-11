@@ -1,23 +1,26 @@
 ﻿using MediatR;
 using Polly;
 
-public class RetryBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+namespace GeekStore.Core.Behaviors
 {
-    private readonly int _maxRetryAttempts;
-    private readonly TimeSpan _pauseBetweenFailures;
-
-    public RetryBehavior()
+    public class RetryBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     {
-        _maxRetryAttempts = 10;
-        _pauseBetweenFailures = TimeSpan.FromMilliseconds(50);
-    }
+        private readonly int _maxRetryAttempts;
+        private readonly TimeSpan _pauseBetweenFailures;
 
-    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
-    {
-        var retryPolicy = Policy
-            .Handle<Exception>()
-            .WaitAndRetryAsync(_maxRetryAttempts, attempt => _pauseBetweenFailures);
+        public RetryBehavior()
+        {
+            _maxRetryAttempts = 10;
+            _pauseBetweenFailures = TimeSpan.FromMilliseconds(50);
+        }
 
-        return await retryPolicy.ExecuteAsync(async () => await next());
+        public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
+        {
+            var retryPolicy = Policy
+                                .Handle<Exception>(ex => ex is not OperationCanceledException)
+                                .WaitAndRetryAsync(_maxRetryAttempts, attempt => _pauseBetweenFailures);
+
+            return await retryPolicy.ExecuteAsync(async () => await next());
+        }
     }
 }

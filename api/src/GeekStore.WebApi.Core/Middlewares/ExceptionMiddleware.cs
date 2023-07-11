@@ -1,8 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using System.Net;
 using System.Text;
 
-namespace GeekStore.Product.WebAPI.Middlewares
+namespace GeekStore.WebApi.Core.Middlewares
 {
     public class ExceptionMiddleware
     {
@@ -20,7 +21,7 @@ namespace GeekStore.Product.WebAPI.Middlewares
             }
             catch (OperationCanceledException ex)
             {
-                await HandleOperationCanceledExceptionAsync(httpContext, ex);
+                await HandleOperationCanceledExceptionAsync(httpContext);
             }
             catch (Exception ex)
             {
@@ -38,7 +39,7 @@ namespace GeekStore.Product.WebAPI.Middlewares
             await context.Response.WriteAsync(jsonString, Encoding.UTF8);
         }
 
-        private async Task HandleOperationCanceledExceptionAsync(HttpContext context, Exception exception)
+        private async Task HandleOperationCanceledExceptionAsync(HttpContext context)
         {
             context.Response.StatusCode = 444;
             context.Response.ContentType = "application/json";

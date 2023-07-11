@@ -5,6 +5,7 @@ namespace GeekStore.Core.Notifications
     public interface INotificationService
     {
         IEnumerable<DomainNotification> GetNotifications();
+        bool HasNotifications();
 
         void AddNotification(string key, string message);
         void AddNotification(DomainNotification domainNotification);

@@ -42,5 +42,10 @@ namespace GeekStore.Core.Notifications
         {
             _notifications.Clear();
         }
+
+        public bool HasNotifications()
+        {
+            return _notifications.Any();
+        }
     }
 }

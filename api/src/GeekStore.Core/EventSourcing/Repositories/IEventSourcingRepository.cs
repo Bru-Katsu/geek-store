@@ -1,5 +1,4 @@
 ﻿using GeekStore.Core.Messages;
-using System.Collections.Generic;
 
 namespace GeekStore.Core.EventSourcing.Repositories
 {

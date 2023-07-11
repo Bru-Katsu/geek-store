@@ -1,5 +1,4 @@
 ﻿using FluentValidation.Results;
-using GeekStore.Core.Messages;
 using MediatR;
 
 namespace GeekStore.Core.Messages
@@ -11,6 +10,14 @@ namespace GeekStore.Core.Messages
             Timestamp = DateTime.UtcNow;
         }
 
+        public DateTime Timestamp { get; private set; }
+        public ValidationResult ValidationResult { get; protected set; }
+
+        public virtual bool IsValid() => throw new NotImplementedException("Recurso de validação não está implementado!");
+    }
+
+    public abstract class Command<TResult> : Message, IRequest<TResult>
+    {
         public DateTime Timestamp { get; private set; }
         public ValidationResult ValidationResult { get; protected set; }
 

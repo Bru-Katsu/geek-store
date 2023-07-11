@@ -1,4 +1,5 @@
-﻿using GeekStore.Product.Application.Products.Commands;
+﻿using GeekStore.Core.Results;
+using GeekStore.Product.Application.Products.Commands;
 using GeekStore.Product.Application.Products.Events;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,7 +10,7 @@ namespace GeekStore.Product.Application.DI
     {
         public static IServiceCollection AddProductApplicationServices(this IServiceCollection services)
         {
-            services.AddScoped<IRequestHandler<AddProductCommand>, ProductCommandHandler>();
+            services.AddScoped<IRequestHandler<AddProductCommand, Result<Guid>>, ProductCommandHandler>();
             services.AddScoped<IRequestHandler<UpdateProductCommand>, ProductCommandHandler>();
             services.AddScoped<IRequestHandler<RemoveProductCommand>, ProductCommandHandler>();
 

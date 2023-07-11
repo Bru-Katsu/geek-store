@@ -24,7 +24,7 @@ namespace GeekStore.Product.Tests.CommandHandlerTests
 
         #region AddProductCommand
         [Fact(DisplayName = "Envio do comando de adição de produto válido para o CommandHandler")]
-        [Trait("CommandHandler", "AddProductCommand")]
+        [Trait("CommandHandler", nameof(AddProductCommand))]
         public async Task AddProduct_CommandIsValid_CommandShouldExecuteWithSuccess()
         {
             //Arrange
@@ -65,7 +65,7 @@ namespace GeekStore.Product.Tests.CommandHandlerTests
         }
 
         [Fact(DisplayName = "Envio do comando de adição de produto inválido para o CommandHandler")]
-        [Trait("CommandHandler", "AddProductCommand")]
+        [Trait("CommandHandler", nameof(AddProductCommand))]
         public async Task AddProduct_CommandIsNotValid_CommandShouldExecuteWithFail()
         {
             //Arrange
@@ -108,7 +108,7 @@ namespace GeekStore.Product.Tests.CommandHandlerTests
 
         #region UpdateProductCommand
         [Fact(DisplayName = "Envio do comando de atualização de produto válido para o CommandHandler")]
-        [Trait("CommandHandler", "UpdateProductCommand")]
+        [Trait("CommandHandler", nameof(UpdateProductCommand))]
         public async Task UpdateProduct_CommandIsValid_CommandShouldExecuteWithSuccess()
         {
             //Arrange
@@ -149,7 +149,7 @@ namespace GeekStore.Product.Tests.CommandHandlerTests
         }
 
         [Fact(DisplayName = "Envio do comando de atualização de produto válido para o CommandHandler")]
-        [Trait("CommandHandler", "UpdateProductCommand")]
+        [Trait("CommandHandler", nameof(UpdateProductCommand))]
         public async Task UpdateProduct_ProductNotExists_CommandShouldExecuteWithFail()
         {
             //Arrange
@@ -190,7 +190,7 @@ namespace GeekStore.Product.Tests.CommandHandlerTests
         }
 
         [Fact(DisplayName = "Envio do comando de atualização de produto inválido para o CommandHandler")]
-        [Trait("CommandHandler", "UpdateProductCommand")]
+        [Trait("CommandHandler", nameof(UpdateProductCommand))]
         public async Task UpdateProduct_CommandIsNotValid_CommandShouldExecuteWithFail()
         {
             //Arrange
@@ -232,8 +232,8 @@ namespace GeekStore.Product.Tests.CommandHandlerTests
         #endregion
 
         #region RemoveProductCommand
-        [Fact(DisplayName = "Envio do comando de atualização de produto válido para o CommandHandler")]
-        [Trait("CommandHandler", "RemoveProductCommand")]
+        [Fact(DisplayName = "Envio do comando de remoção de produto válido para o CommandHandler")]
+        [Trait("CommandHandler", nameof(RemoveProductCommand))]
         public async Task DeleteProduct_CommandIsValid_CommandShouldExecuteWithSuccess()
         {
             //Arrange
@@ -273,8 +273,8 @@ namespace GeekStore.Product.Tests.CommandHandlerTests
                   .Verify(transaction => transaction.CommitAsync(CancellationToken.None), Times.Once);
         }
 
-        [Fact(DisplayName = "Envio do comando de atualização de produto válido para o CommandHandler")]
-        [Trait("CommandHandler", "RemoveProductCommand")]
+        [Fact(DisplayName = "Envio do comando de remoção de produto válido para o CommandHandler")]
+        [Trait("CommandHandler", nameof(RemoveProductCommand))]
         public async Task DeleteProduct_ProductNotExists_CommandShouldExecuteWithFail()
         {
             //Arrange
@@ -314,8 +314,8 @@ namespace GeekStore.Product.Tests.CommandHandlerTests
                   .Verify(transaction => transaction.CommitAsync(CancellationToken.None), Times.Never);
         }
 
-        [Fact(DisplayName = "Envio do comando de atualização de produto inválido para o CommandHandler")]
-        [Trait("CommandHandler", "RemoveProductCommand")]
+        [Fact(DisplayName = "Envio do comando de remoção de produto inválido para o CommandHandler")]
+        [Trait("CommandHandler", nameof(RemoveProductCommand))]
         public async Task DeleteProduct_CommandIsNotValid_CommandShouldExecuteWithFail()
         {
             //Arrange

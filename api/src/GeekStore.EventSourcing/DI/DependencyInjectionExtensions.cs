@@ -1,4 +1,5 @@
-﻿using GeekStore.Core.EventSourcing.Repositories;
+﻿using GeekStore.Core.DI;
+using GeekStore.Core.EventSourcing.Repositories;
 using GeekStore.EventSourcing.Repositories;
 using GeekStore.EventSourcing.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +12,7 @@ namespace GeekStore.EventSourcing.DI
         {
             services.AddSingleton<IEventStoreService, EventStoreService>();
             services.AddSingleton<IEventSourcingRepository, EventSourcingRepository>();
+            services.UseCustomMediator();
 
             return services;
         }

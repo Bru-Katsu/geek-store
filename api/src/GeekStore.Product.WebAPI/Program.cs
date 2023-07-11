@@ -1,39 +1,27 @@
-using GeekStore.Core.DI;
 using GeekStore.Product.Data.Configurations;
-using GeekStore.Product.WebAPI.Middlewares;
-using GeekStore.EventSourcing.DI;
-using GeekStore.Product.Application.DI;
+using GeekStore.WebApi.Core.Identity;
+using GeekStore.Product.WebAPI.Configuration;
+using GeekStore.WebApi.Core.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.UseSqlServer(builder.Configuration);
 
-builder.Services.AddCoreServices()
-                .AddProductDataServices()
-                .AddProductApplicationServices()
-                .AddEventSourcing()
-                .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddApiConfiguration()
+                .AddSqlServer(builder.Configuration)
+                .AddEndpointsApiExplorer()
+                .AddSwaggerConfiguration()
+                .AddAuthConfiguration(builder.Configuration);
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(options =>
-    {
-        options.DocumentTitle = "Product API";
-    });
-}
+app.UseSwaggerConfiguration();
 
-app.UseMiddleware<ExceptionMiddleware>();
-app.UseAuthorization();
+app.UseHttpsRedirection();
+
 app.UseCors(options =>
 {
     options
@@ -41,6 +29,13 @@ app.UseCors(options =>
         .AllowAnyMethod()
         .WithOrigins("http://localhost:4200");
 });
+
+app.UseRouting();
+
+app.UseAuthConfiguration();
+
+app.UseMiddleware<ExceptionMiddleware>();
+
 app.MapControllers();
 
 app.Run();

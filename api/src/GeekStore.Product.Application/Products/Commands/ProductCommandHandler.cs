@@ -1,4 +1,5 @@
 ﻿using GeekStore.Core.Notifications;
+using GeekStore.Core.Results;
 using GeekStore.Product.Application.Products.Events;
 using GeekStore.Product.Domain.Products.Repositories;
 using MediatR;
@@ -6,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GeekStore.Product.Application.Products.Commands
 {
-    public sealed class ProductCommandHandler : IRequestHandler<AddProductCommand>,
+    public sealed class ProductCommandHandler : IRequestHandler<AddProductCommand, Result<Guid>>,
                                                 IRequestHandler<UpdateProductCommand>,
                                                 IRequestHandler<RemoveProductCommand>
     {
@@ -26,23 +27,23 @@ namespace GeekStore.Product.Application.Products.Commands
             _context = context;
         }
 
-        public async Task Handle(AddProductCommand request, CancellationToken cancellationToken)
+        public async Task<Result<Guid>> Handle(AddProductCommand request, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
             if (!request.IsValid())
             {
                 _notificationService.AddNotifications(request.ValidationResult);
-                return;
+                return new FailResult<Guid>();
             }
 
             var entity = new Domain.Products.Product(request.Name, request.Price, request.Description, request.Category, request.ImageURL);
             if (!entity.IsValid())
             {
                 _notificationService.AddNotifications(entity.ValidationResult);
-                return;
+                return new FailResult<Guid>();
             }
-            
+
             using var transaction = _context.Database.BeginTransaction();
 
             _productRepository.Insert(entity);
@@ -51,6 +52,8 @@ namespace GeekStore.Product.Application.Products.Commands
             await _mediator.Publish(new ProductAddedEvent(entity));
 
             await transaction.CommitAsync(cancellationToken);
+
+            return new SuccessResult<Guid>(entity.Id);
         }
 
         public async Task Handle(UpdateProductCommand request, CancellationToken cancellationToken)

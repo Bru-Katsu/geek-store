@@ -7,7 +7,7 @@ namespace GeekStore.Product.Data.Configurations
 {
     public static class EFConfiguration
     {
-        public static IServiceCollection UseSqlServer(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddSqlServer(this IServiceCollection services, IConfiguration configuration)
         {
             var connection = configuration.GetConnectionString("SqlServerConnection");
 
