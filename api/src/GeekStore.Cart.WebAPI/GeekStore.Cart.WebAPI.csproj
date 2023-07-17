@@ -8,11 +8,14 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.4" />
+    <PackageReference Include="NetDevPack.Security.Jwt.AspNetCore" Version="7.1.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\GeekStore.Cart.Application\GeekStore.Cart.Application.csproj" />
+    <ProjectReference Include="..\GeekStore.Cart.Data\GeekStore.Cart.Data.csproj" />
+    <ProjectReference Include="..\GeekStore.WebApi.Core\GeekStore.WebApi.Core.csproj" />
   </ItemGroup>
 
 </Project>

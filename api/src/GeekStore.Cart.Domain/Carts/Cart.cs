@@ -8,39 +8,47 @@ namespace GeekStore.Cart.Domain.Carts
         private Cart(Guid userId, IEnumerable<CartItem> items)
         {
             _items = new Dictionary<Guid, CartItem>();
-            UserId = userId;
+            Id = userId;
+        }        
+        
+        public Guid? CouponId { get; private set; }
+        public void SetCoupon(Guid couponId)
+        {
+            CouponId = couponId;
         }
 
         private IDictionary<Guid, CartItem> _items;
         public IReadOnlyCollection<CartItem> Items => _items.Values.ToList();
-
-        public Guid UserId { get; private set; }
-
         public void AddItem(CartItem item)
         {
             if(!item.IsValid())
                 throw new ArgumentException("Item inválido!", nameof(item));
 
-            if (_items.ContainsKey(item.ProductId))
+            if (_items.ContainsKey(item.Id))
             {
-                var refItem = _items[item.ProductId];
+                var refItem = _items[item.Id];
 
-                refItem.SetName(item.ProductName);
+                refItem.SetName(item.Name);
                 refItem.ChangePrice(item.Price);
-                refItem.ChangeQuantity(item.Quantity + refItem.Quantity);
+                refItem.ChangeQuantity(item.Quantity);
 
-                _items[item.ProductId] = refItem;
+                _items[item.Id] = refItem;
             }
             else
             {
-                _items.Add(item.ProductId, item);
+                _items.Add(item.Id, item);
             }
         }
 
-        public void RemoveItem(CartItem item)
+        public void RemoveItem(Guid productId)
         {
-            if(_items.ContainsKey(item.ProductId))
-                _items.Remove(item.ProductId);
+            if(_items.ContainsKey(productId))
+                _items.Remove(productId);
+        }
+
+        public void Clear()
+        {
+            _items?.Clear();
         }
 
         public override bool IsValid()
@@ -53,7 +61,12 @@ namespace GeekStore.Cart.Domain.Carts
         {
             public CartEntityValidation()
             {
-                RuleFor(x => x.UserId)
+                RuleFor(x => x.CouponId)
+                    .NotEqual(Guid.Empty)
+                    .When(x => x.CouponId.HasValue)
+                    .WithMessage("Id de cupom inválido!");
+
+                RuleFor(x => x.Id)
                     .NotEmpty()
                     .WithMessage("Id de usuário inválido!");
             }

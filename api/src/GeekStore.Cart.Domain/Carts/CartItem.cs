@@ -7,18 +7,16 @@ namespace GeekStore.Cart.Domain.Carts
     {
         public CartItem(Guid productId, string productName, int quantity, decimal price)
         {
-            ProductId = productId;
-            ProductName = productName;
+            Id = productId;
+            Name = productName;
             Quantity = quantity;
             Price = price;
         }
 
-        public Guid ProductId { get; private set; }
-
-        public string ProductName { get; private set; }
+        public string Name { get; private set; }
         public void SetName(string name)
         {
-            ProductName = name;
+            Name = name;
         }
 
         public int Quantity { get; private set; }
@@ -45,7 +43,15 @@ namespace GeekStore.Cart.Domain.Carts
             {
                 RuleFor(x => x.Id)
                     .NotEmpty()
-                    .WithMessage("Id inválido!");
+                    .WithMessage("Id do produto inválido!");
+
+                RuleFor(x => x.Name)
+                    .NotEmpty()
+                    .WithMessage("Nome do produto não pode ficar vazio!");
+
+                RuleFor(x => x.Quantity)
+                    .GreaterThan(0)
+                    .WithMessage("Quantidade não pode ser menor ou igual a zero!");
 
                 RuleFor(x => x.Price)
                     .GreaterThan(0)

@@ -43,13 +43,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Identity.Tests", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cart", "Cart", "{3916492C-0AD4-49C2-BD74-377CE9CE17AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekStore.Cart.WebAPI", "src\GeekStore.Cart.WebAPI\GeekStore.Cart.WebAPI.csproj", "{0B54FBD4-3AF1-4942-A5DC-F4A7960559DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Cart.WebAPI", "src\GeekStore.Cart.WebAPI\GeekStore.Cart.WebAPI.csproj", "{0B54FBD4-3AF1-4942-A5DC-F4A7960559DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekStore.Cart.Domain", "src\GeekStore.Cart.Domain\GeekStore.Cart.Domain.csproj", "{C834C141-E79B-4AD0-BEE3-EF8F387C8156}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Cart.Domain", "src\GeekStore.Cart.Domain\GeekStore.Cart.Domain.csproj", "{C834C141-E79B-4AD0-BEE3-EF8F387C8156}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekStore.Cart.Data", "src\GeekStore.Cart.Data\GeekStore.Cart.Data.csproj", "{85193EB0-FAED-4654-93FF-3662D143AEF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Cart.Data", "src\GeekStore.Cart.Data\GeekStore.Cart.Data.csproj", "{85193EB0-FAED-4654-93FF-3662D143AEF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekStore.Cart.Application", "src\GeekStore.Cart.Application\GeekStore.Cart.Application.csproj", "{F3D34268-79D0-4840-BD7D-D2C0964E71E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Cart.Application", "src\GeekStore.Cart.Application\GeekStore.Cart.Application.csproj", "{F3D34268-79D0-4840-BD7D-D2C0964E71E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekStore.Cart.Tests", "src\GeekStore.Cart.Tests\GeekStore.Cart.Tests.csproj", "{84A895DC-5AF1-418B-AFB9-4338A60BCAD4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -125,6 +127,10 @@ Global
 		{F3D34268-79D0-4840-BD7D-D2C0964E71E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3D34268-79D0-4840-BD7D-D2C0964E71E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3D34268-79D0-4840-BD7D-D2C0964E71E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84A895DC-5AF1-418B-AFB9-4338A60BCAD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84A895DC-5AF1-418B-AFB9-4338A60BCAD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84A895DC-5AF1-418B-AFB9-4338A60BCAD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84A895DC-5AF1-418B-AFB9-4338A60BCAD4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -152,6 +158,7 @@ Global
 		{C834C141-E79B-4AD0-BEE3-EF8F387C8156} = {3916492C-0AD4-49C2-BD74-377CE9CE17AE}
 		{85193EB0-FAED-4654-93FF-3662D143AEF4} = {3916492C-0AD4-49C2-BD74-377CE9CE17AE}
 		{F3D34268-79D0-4840-BD7D-D2C0964E71E0} = {3916492C-0AD4-49C2-BD74-377CE9CE17AE}
+		{84A895DC-5AF1-418B-AFB9-4338A60BCAD4} = {1655B8E6-9782-4155-BB48-8AECDFE921D4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {30CF6A78-C893-431B-B7FC-F8723ACB50EF}

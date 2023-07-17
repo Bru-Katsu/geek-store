@@ -15,8 +15,8 @@ namespace GeekStore.Cart.Data.Factories
         {
             return new CartItemDTO()
             {
-                ProductId = entity.ProductId,
-                ProductName = entity.ProductName,
+                ProductId = entity.Id,
+                ProductName = entity.Name,
                 Quantity = entity.Quantity,
                 Price = entity.Price
             };

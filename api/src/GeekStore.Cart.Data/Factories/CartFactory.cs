@@ -15,12 +15,12 @@ namespace GeekStore.Cart.Data.Factories
         {
             return new CartDTO
             {
-                UserId = entity.UserId,
+                UserId = entity.Id,
                 Items = entity.Items.Select(item => new CartItemDTO()
                 {
-                    ProductId = item.ProductId,
+                    ProductId = item.Id,
                     Price = item.Price,
-                    ProductName = item.ProductName,
+                    ProductName = item.Name,
                     Quantity = item.Quantity,
                 })
             };

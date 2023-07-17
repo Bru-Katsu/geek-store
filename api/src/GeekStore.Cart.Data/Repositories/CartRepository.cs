@@ -34,13 +34,13 @@ namespace GeekStore.Cart.Data.Repositories
 
         public async Task DeleteAsync(Domain.Carts.Cart cart)
         {
-            await _redisCache.RemoveAsync(cart.UserId.ToString());
+            await _redisCache.RemoveAsync(cart.Id.ToString());
         }
 
         public async Task SetAsync(Domain.Carts.Cart cart)
         {
             var content = JsonConvert.SerializeObject(_cartFactory.CreateModel(cart));
-            await _redisCache.SetStringAsync(cart.UserId.ToString(), content);
+            await _redisCache.SetStringAsync(cart.Id.ToString(), content);
         }
     }
 }
