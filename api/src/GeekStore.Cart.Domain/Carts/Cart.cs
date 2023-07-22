@@ -5,9 +5,14 @@ namespace GeekStore.Cart.Domain.Carts
 {
     public class Cart : Entity
     {       
-        private Cart(Guid userId, IEnumerable<CartItem> items)
+        private Cart(Guid userId, Guid? couponId, IEnumerable<CartItem> items)
         {
             _items = new Dictionary<Guid, CartItem>();
+
+            foreach (var item in items)
+                _items.Add(item.Id, item);
+
+            CouponId = couponId;
             Id = userId;
         }        
         
@@ -17,12 +22,20 @@ namespace GeekStore.Cart.Domain.Carts
             CouponId = couponId;
         }
 
+        public void UnsetCoupon()
+        {
+            CouponId = null;
+        }
+
         private IDictionary<Guid, CartItem> _items;
         public IReadOnlyCollection<CartItem> Items => _items.Values.ToList();
         public void AddItem(CartItem item)
         {
-            if(!item.IsValid())
-                throw new ArgumentException("Item inválido!", nameof(item));
+            if (!item.IsValid())
+            {
+                ValidationResult.Errors.AddRange(item.ValidationResult.Errors);
+                return;
+            }
 
             if (_items.ContainsKey(item.Id))
             {
@@ -44,11 +57,6 @@ namespace GeekStore.Cart.Domain.Carts
         {
             if(_items.ContainsKey(productId))
                 _items.Remove(productId);
-        }
-
-        public void Clear()
-        {
-            _items?.Clear();
         }
 
         public override bool IsValid()
@@ -76,12 +84,12 @@ namespace GeekStore.Cart.Domain.Carts
         {
             public static Cart NewCart(Guid userId)
             {
-                return new Cart(userId, new List<CartItem>());
+                return new Cart(userId, null, new List<CartItem>());
             }
 
-            public static Cart CreateWith(Guid userId, IEnumerable<CartItem> items)
+            public static Cart CreateWith(Guid userId, Guid? couponId, IEnumerable<CartItem> items)
             {
-                return new Cart(userId, items);
+                return new Cart(userId, couponId, items);
             }
         }
     }

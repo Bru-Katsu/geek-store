@@ -3,9 +3,9 @@ using GeekStore.Core.Messages;
 
 namespace GeekStore.Cart.Application.Cart.Commands
 {
-    public class ApplyCouponOnCartCommand : Command
+    public class ApplyCouponCartCommand : Command
     {
-        public ApplyCouponOnCartCommand(Guid userId, Guid couponId)
+        public ApplyCouponCartCommand(Guid userId, Guid couponId)
         {
             UserId = userId;
             CouponId = couponId;
@@ -20,7 +20,7 @@ namespace GeekStore.Cart.Application.Cart.Commands
             return ValidationResult.IsValid;
         }
 
-        private class ApplyCouponCommandValidation : AbstractValidator<ApplyCouponOnCartCommand>
+        private class ApplyCouponCommandValidation : AbstractValidator<ApplyCouponCartCommand>
         {
             public ApplyCouponCommandValidation()
             {

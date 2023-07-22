@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GeekStore.Cart.Data.DTOs
+﻿namespace GeekStore.Cart.Data.DTOs
 {
     public class CartDTO
     {
         public Guid UserId { get; set; }
+        public Guid? CouponId { get; set; }
         public IEnumerable<CartItemDTO> Items { get; set; }
     }
 

@@ -4,9 +4,10 @@ using MediatR;
 
 namespace GeekStore.Cart.Application.Cart.Commands
 {
-    public class CartCommandHandler : IRequestHandler<AddProductToCartCommand>, 
-                                      IRequestHandler<RemoveProductFromCartCommand>,
-                                      IRequestHandler<ApplyCouponOnCartCommand>
+    public class CartCommandHandler : IRequestHandler<AddProductCartCommand>, 
+                                      IRequestHandler<RemoveProductCartCommand>,
+                                      IRequestHandler<ApplyCouponCartCommand>,
+                                      IRequestHandler<RemoveCouponCartCommand>
     {
         private readonly ICartRepository _cartRepository;
         private readonly INotificationService _notificationService;
@@ -17,7 +18,7 @@ namespace GeekStore.Cart.Application.Cart.Commands
             _notificationService = notificationService;
         }
 
-        public async Task Handle(AddProductToCartCommand request, CancellationToken cancellationToken)
+        public async Task Handle(AddProductCartCommand request, CancellationToken cancellationToken)
         {
             if (!request.IsValid())
             {
@@ -41,7 +42,7 @@ namespace GeekStore.Cart.Application.Cart.Commands
             await _cartRepository.SetAsync(cart);
         }
 
-        public async Task Handle(RemoveProductFromCartCommand request, CancellationToken cancellationToken)
+        public async Task Handle(RemoveProductCartCommand request, CancellationToken cancellationToken)
         {
             if (!request.IsValid())
             {
@@ -67,9 +68,9 @@ namespace GeekStore.Cart.Application.Cart.Commands
             await _cartRepository.SetAsync(cart);
         }
 
-        public async Task Handle(ApplyCouponOnCartCommand request, CancellationToken cancellationToken)
+        public async Task Handle(ApplyCouponCartCommand request, CancellationToken cancellationToken)
         {
-            if (request.IsValid())
+            if (!request.IsValid())
             {
                 _notificationService.AddNotifications(request.ValidationResult);
                 return;
@@ -83,6 +84,32 @@ namespace GeekStore.Cart.Application.Cart.Commands
             }
 
             cart.SetCoupon(request.CouponId);
+
+            if (!cart.IsValid())
+            {
+                _notificationService.AddNotifications(cart.ValidationResult);
+                return;
+            }
+
+            await _cartRepository.SetAsync(cart);
+        }
+
+        public async Task Handle(RemoveCouponCartCommand request, CancellationToken cancellationToken)
+        {
+            if (!request.IsValid())
+            {
+                _notificationService.AddNotifications(request.ValidationResult);
+                return;
+            }
+
+            var cart = await _cartRepository.GetCartAsync(request.UserId);
+            if (cart == null)
+            {
+                _notificationService.AddNotification(nameof(request.UserId), "Carrinho não encontrado.");
+                return;
+            }
+
+            cart.UnsetCoupon();
 
             if (!cart.IsValid())
             {

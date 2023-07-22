@@ -1,7 +1,5 @@
-using GeekStore.Product.Data.Configurations;
 using GeekStore.WebApi.Core.Identity;
 using GeekStore.Product.WebAPI.Configuration;
-using GeekStore.WebApi.Core.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,32 +7,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddApiConfiguration()
-                .AddSqlServer(builder.Configuration)
-                .AddEndpointsApiExplorer()
+builder.Services.AddApiConfiguration(builder.Configuration)
                 .AddSwaggerConfiguration()
                 .AddAuthConfiguration(builder.Configuration);
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-app.UseSwaggerConfiguration();
-
-app.UseHttpsRedirection();
-
-app.UseCors(options =>
-{
-    options
-        .AllowAnyHeader()
-        .AllowAnyMethod()
-        .WithOrigins("http://localhost:4200");
-});
-
-app.UseRouting();
-
-app.UseAuthConfiguration();
-
-app.UseMiddleware<ExceptionMiddleware>();
+app.UseSwaggerConfiguration()
+   .UseApiConfiguration();
 
 app.MapControllers();
 

@@ -43,7 +43,7 @@ namespace GeekStore.Cart.WebAPI.Controllers
         [ProducesResponseType(typeof(CartViewModel), StatusCodes.Status200OK)]
         public async Task<IActionResult> ApplyCoupon([FromRoute] Guid userId, [FromRoute] Guid couponId)
         {
-            await _mediator.Send(new ApplyCouponOnCartCommand(userId, couponId));
+            await _mediator.Send(new ApplyCouponCartCommand(userId, couponId));
 
             if (HasErrors())
                 return CreateResponse();
@@ -62,7 +62,7 @@ namespace GeekStore.Cart.WebAPI.Controllers
         [ProducesResponseType(typeof(CartViewModel), StatusCodes.Status200OK)]
         public async Task<IActionResult> AddProductIntoCart([FromRoute] Guid userId, [FromBody] CartItemViewModel cartItem)
         {
-            await _mediator.Send(new AddProductToCartCommand(userId, cartItem.ProductId, cartItem.ProductName, cartItem.Quantity, cartItem.Price));
+            await _mediator.Send(new AddProductCartCommand(userId, cartItem.ProductId, cartItem.ProductName, cartItem.Quantity, cartItem.Price));
 
             if (HasErrors())
                 return CreateResponse();
@@ -81,7 +81,7 @@ namespace GeekStore.Cart.WebAPI.Controllers
         [ProducesResponseType(typeof(CartViewModel), StatusCodes.Status200OK)]
         public async Task<IActionResult> RemoveProductFromCart([FromRoute] Guid userId, [FromRoute] Guid productId)
         {
-            await _mediator.Send(new RemoveProductFromCartCommand(userId, productId));
+            await _mediator.Send(new RemoveProductCartCommand(userId, productId));
 
             if (HasErrors())
                 return CreateResponse();

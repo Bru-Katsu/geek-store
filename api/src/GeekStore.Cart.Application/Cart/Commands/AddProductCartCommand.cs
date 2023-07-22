@@ -3,9 +3,9 @@ using GeekStore.Core.Messages;
 
 namespace GeekStore.Cart.Application.Cart.Commands
 {
-    public class AddProductToCartCommand : Command
+    public class AddProductCartCommand : Command
     {
-        public AddProductToCartCommand(Guid userId, Guid productId, string productName, int productQuantity, decimal productPrice)
+        public AddProductCartCommand(Guid userId, Guid productId, string productName, int productQuantity, decimal productPrice)
         {
             UserId = userId;
             ProductId = productId;
@@ -23,13 +23,13 @@ namespace GeekStore.Cart.Application.Cart.Commands
 
         public override bool IsValid()
         {
-            ValidationResult = new AddProductToCartCommandValidation().Validate(this);
+            ValidationResult = new AddProductCartCommandValidation().Validate(this);
             return ValidationResult.IsValid;
         }
 
-        private class AddProductToCartCommandValidation : AbstractValidator<AddProductToCartCommand>
+        private class AddProductCartCommandValidation : AbstractValidator<AddProductCartCommand>
         {
-            public AddProductToCartCommandValidation()
+            public AddProductCartCommandValidation()
             {
                 RuleFor(x => x.UserId)
                     .NotEmpty()

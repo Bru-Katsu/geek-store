@@ -4,13 +4,18 @@ using GeekStore.EventSourcing.DI;
 using GeekStore.Product.Application.DI;
 using GeekStore.Core.DI;
 using GeekStore.Product.Data.Configurations;
+using GeekStore.WebApi.Core.Middlewares;
+using GeekStore.Product.WebAPI.Configuration;
 
 namespace GeekStore.Product.WebAPI.Configuration
 {
     public static class ApiConfig
     {
-        public static IServiceCollection AddApiConfiguration(this IServiceCollection services)
+        public static IServiceCollection AddApiConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddSqlServer(configuration)
+                    .AddEndpointsApiExplorer();
+
             services.AddCoreServices()
                     .AddProductDataServices()
                     .AddProductApplicationServices()
@@ -26,6 +31,18 @@ namespace GeekStore.Product.WebAPI.Configuration
 
         public static IApplicationBuilder UseApiConfiguration(this IApplicationBuilder app)
         {
+            app.UseHttpsRedirection();
+
+            app.UseCors(options =>
+            {
+                options
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .WithOrigins("http://localhost:4200");
+            });
+
+            app.UseRouting();
+            app.UseMiddleware<ExceptionMiddleware>();
             app.UseAuthConfiguration();
             app.UseJwksDiscovery();
 

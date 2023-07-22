@@ -3,9 +3,9 @@ using GeekStore.Core.Messages;
 
 namespace GeekStore.Cart.Application.Cart.Commands
 {
-    public class RemoveProductFromCartCommand : Command
+    public class RemoveProductCartCommand : Command
     {
-        public RemoveProductFromCartCommand(Guid userId, Guid productId)
+        public RemoveProductCartCommand(Guid userId, Guid productId)
         {
             UserId = userId;
             ProductId = productId;
@@ -20,7 +20,7 @@ namespace GeekStore.Cart.Application.Cart.Commands
             return ValidationResult.IsValid;
         }
 
-        private class RemoveProductFromCartCommandValidation : AbstractValidator<RemoveProductFromCartCommand>
+        private class RemoveProductFromCartCommandValidation : AbstractValidator<RemoveProductCartCommand>
         {
             public RemoveProductFromCartCommandValidation()
             {

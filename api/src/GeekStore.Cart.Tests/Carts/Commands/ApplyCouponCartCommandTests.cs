@@ -2,14 +2,14 @@
 
 namespace GeekStore.Cart.Tests.Carts.Commands
 {
-    public class ApplyCouponOnCartCommandTests
+    public class ApplyCouponCartCommandTests
     {
         [Fact(DisplayName = "Comando de aplicar cupom de descontos do carrinho deve ser válido")]
-        [Trait("Commands", nameof(ApplyCouponOnCartCommand))]
-        public void ApplyCouponOnCartCommand_ShouldBeValid_WhenValidInput()
+        [Trait("Commands", nameof(ApplyCouponCartCommand))]
+        public void ApplyCouponCartCommand_ShouldBeValid_WhenValidInput()
         {
             //Arrange
-            var command = new ApplyCouponOnCartCommand(Guid.NewGuid(), Guid.NewGuid());
+            var command = new ApplyCouponCartCommand(Guid.NewGuid(), Guid.NewGuid());
 
             //Act
             var isValid = command.IsValid();
@@ -20,11 +20,11 @@ namespace GeekStore.Cart.Tests.Carts.Commands
         }
 
         [Fact(DisplayName = "Deve ter erro de validação quando o id do usuário é inválido")]
-        [Trait("Commands", nameof(ApplyCouponOnCartCommand))]
-        public void ApplyCouponOnCartCommand_ShouldHaveValidationError_WhenUserIdInvalid()
+        [Trait("Commands", nameof(ApplyCouponCartCommand))]
+        public void ApplyCouponCartCommand_ShouldHaveValidationError_WhenUserIdInvalid()
         {
             //Arrange
-            var command = new ApplyCouponOnCartCommand(Guid.Empty, Guid.NewGuid());
+            var command = new ApplyCouponCartCommand(Guid.Empty, Guid.NewGuid());
 
             //Act
             var isValid = command.IsValid();
@@ -32,16 +32,16 @@ namespace GeekStore.Cart.Tests.Carts.Commands
             //Assert
             Assert.False(isValid);
             Assert.Single(command.ValidationResult.Errors);
-            Assert.Contains(nameof(ApplyCouponOnCartCommand.UserId), command.ValidationResult.Errors.Select(x => x.PropertyName));
+            Assert.Contains(nameof(ApplyCouponCartCommand.UserId), command.ValidationResult.Errors.Select(x => x.PropertyName));
         }
 
 
         [Fact(DisplayName = "Deve ter erro de validação quando o id do cupom é inválido")]
-        [Trait("Commands", nameof(ApplyCouponOnCartCommand))]
-        public void ApplyCouponOnCartCommand_ShouldHaveValidationError_WhenCouponIdInvalid()
+        [Trait("Commands", nameof(ApplyCouponCartCommand))]
+        public void ApplyCouponCartCommand_ShouldHaveValidationError_WhenCouponIdInvalid()
         {
             //Arrange
-            var command = new ApplyCouponOnCartCommand(Guid.NewGuid(), Guid.Empty);
+            var command = new ApplyCouponCartCommand(Guid.NewGuid(), Guid.Empty);
 
             //Act
             var isValid = command.IsValid();
@@ -49,7 +49,7 @@ namespace GeekStore.Cart.Tests.Carts.Commands
             //Assert
             Assert.False(isValid);
             Assert.Single(command.ValidationResult.Errors);
-            Assert.Contains(nameof(ApplyCouponOnCartCommand.CouponId), command.ValidationResult.Errors.Select(x => x.PropertyName));
+            Assert.Contains(nameof(ApplyCouponCartCommand.CouponId), command.ValidationResult.Errors.Select(x => x.PropertyName));
         }
     }
 }

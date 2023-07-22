@@ -8,9 +8,9 @@ namespace GeekStore.Cart.Application.DI
     {
         public static IServiceCollection AddCartApplicationServices(this IServiceCollection services)
         {
-            services.AddScoped<IRequestHandler<AddProductToCartCommand>, CartCommandHandler>();
-            services.AddScoped<IRequestHandler<ApplyCouponOnCartCommand>, CartCommandHandler>();
-            services.AddScoped<IRequestHandler<RemoveProductFromCartCommand>, CartCommandHandler>();
+            services.AddScoped<IRequestHandler<AddProductCartCommand>, CartCommandHandler>();
+            services.AddScoped<IRequestHandler<ApplyCouponCartCommand>, CartCommandHandler>();
+            services.AddScoped<IRequestHandler<RemoveProductCartCommand>, CartCommandHandler>();
 
             return services;
         }
