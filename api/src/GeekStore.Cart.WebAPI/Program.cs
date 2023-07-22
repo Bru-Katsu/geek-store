@@ -1,13 +1,13 @@
+using GeekStore.Cart.WebAPI.Configurations;
 using GeekStore.WebApi.Core.Identity;
-using GeekStore.Product.WebAPI.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add services to the container
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddApiConfiguration(builder.Configuration)
+builder.Services.AddApiConfiguration(builder.Configuration)                
                 .AddSwaggerConfiguration()
                 .AddAuthConfiguration(builder.Configuration);
 

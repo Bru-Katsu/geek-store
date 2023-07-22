@@ -1,25 +1,22 @@
 ﻿using GeekStore.WebApi.Core.User;
 using GeekStore.WebApi.Core.Identity;
-using GeekStore.EventSourcing.DI;
-using GeekStore.Product.Application.DI;
 using GeekStore.Core.DI;
-using GeekStore.Product.Data.Configurations;
+using GeekStore.Cart.Data.DI;
+using GeekStore.Cart.Application.DI;
+using GeekStore.Core.Helpers;
 using GeekStore.WebApi.Core.Middlewares;
-using GeekStore.Product.WebAPI.Configuration;
 
-namespace GeekStore.Product.WebAPI.Configuration
+namespace GeekStore.Cart.WebAPI.Configurations
 {
     public static class ApiConfig
     {
         public static IServiceCollection AddApiConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddSqlServer(configuration)
-                    .AddEndpointsApiExplorer();
+            services.AddEndpointsApiExplorer();
 
             services.AddCoreServices()
-                    .AddProductDataServices()
-                    .AddProductApplicationServices()
-                    .AddEventSourcing()
+                    .AddCartDataServices(configuration.GetCaching("RedisAddress"))
+                    .AddCartApplicationServices()
                     .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
 
 
