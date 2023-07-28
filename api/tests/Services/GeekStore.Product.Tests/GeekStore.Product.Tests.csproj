@@ -30,9 +30,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\GeekStore.Product.Application\GeekStore.Product.Application.csproj" />
-    <ProjectReference Include="..\..\src\GeekStore.Product.Data\GeekStore.Product.Data.csproj" />
-    <ProjectReference Include="..\..\src\GeekStore.Product.Domain\GeekStore.Product.Domain.csproj" />
+    <ProjectReference Include="..\..\..\src\Services\Product\GeekStore.Product.Application\GeekStore.Product.Application.csproj" />
+    <ProjectReference Include="..\..\..\src\Services\Product\GeekStore.Product.Domain\GeekStore.Product.Domain.csproj" />
   </ItemGroup>
 
 </Project>

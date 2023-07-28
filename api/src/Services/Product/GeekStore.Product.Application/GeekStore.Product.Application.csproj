@@ -11,9 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GeekStore.Core\GeekStore.Core.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\GeekStore.Core\GeekStore.Core.csproj" />
     <ProjectReference Include="..\GeekStore.Product.Domain\GeekStore.Product.Domain.csproj" />
-    <ProjectReference Include="..\GeekStore.WebApi.Core\GeekStore.WebApi.Core.csproj" />
   </ItemGroup>
 
 </Project>

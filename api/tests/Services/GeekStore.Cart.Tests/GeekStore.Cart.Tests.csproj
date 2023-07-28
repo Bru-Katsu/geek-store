@@ -25,8 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GeekStore.Cart.Application\GeekStore.Cart.Application.csproj" />
-    <ProjectReference Include="..\GeekStore.Cart.Domain\GeekStore.Cart.Domain.csproj" />
+    <ProjectReference Include="..\..\..\src\Services\Cart\GeekStore.Cart.Application\GeekStore.Cart.Application.csproj" />
+    <ProjectReference Include="..\..\..\src\Services\Cart\GeekStore.Cart.Data\GeekStore.Cart.Data.csproj" />
   </ItemGroup>
 
 </Project>

@@ -26,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\GeekStore.Core\GeekStore.Core.csproj" />
+    <ProjectReference Include="..\..\..\src\BuildingBlocks\GeekStore.Core\GeekStore.Core.csproj" />
   </ItemGroup>
 
 </Project>

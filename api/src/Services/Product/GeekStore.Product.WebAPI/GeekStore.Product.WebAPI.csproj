@@ -19,9 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GeekStore.EventSourcing\GeekStore.EventSourcing.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\GeekStore.EventSourcing\GeekStore.EventSourcing.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\GeekStore.WebApi.Core\GeekStore.WebApi.Core.csproj" />
     <ProjectReference Include="..\GeekStore.Product.Data\GeekStore.Product.Data.csproj" />
-    <ProjectReference Include="..\GeekStore.WebApi.Core\GeekStore.WebApi.Core.csproj" />
   </ItemGroup>
 
 </Project>

@@ -22,12 +22,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GeekStore.Core\GeekStore.Core.csproj" />
-    <ProjectReference Include="..\GeekStore.EventSourcing\GeekStore.EventSourcing.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\GeekStore.Core\GeekStore.Core.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\GeekStore.EventSourcing\GeekStore.EventSourcing.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\GeekStore.WebApi.Core\GeekStore.WebApi.Core.csproj" />
     <ProjectReference Include="..\GeekStore.Identity.Application\GeekStore.Identity.Application.csproj" />
     <ProjectReference Include="..\GeekStore.Identity.Data\GeekStore.Identity.Data.csproj" />
     <ProjectReference Include="..\GeekStore.Identity.Domain\GeekStore.Identity.Domain.csproj" />
-    <ProjectReference Include="..\GeekStore.WebApi.Core\GeekStore.WebApi.Core.csproj" />
   </ItemGroup>
 
 </Project>

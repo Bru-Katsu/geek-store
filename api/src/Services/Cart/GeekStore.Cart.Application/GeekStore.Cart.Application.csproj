@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\GeekStore.Core\GeekStore.Core.csproj" />
     <ProjectReference Include="..\GeekStore.Cart.Domain\GeekStore.Cart.Domain.csproj" />
-    <ProjectReference Include="..\GeekStore.Core\GeekStore.Core.csproj" />
   </ItemGroup>
 
 </Project>
