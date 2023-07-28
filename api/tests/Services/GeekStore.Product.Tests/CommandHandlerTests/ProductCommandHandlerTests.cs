@@ -103,7 +103,7 @@ namespace GeekStore.Product.Tests.CommandHandlerTests
 
             mocker.GetMock<IDbContextTransaction>()
                   .Verify(transaction => transaction.CommitAsync(CancellationToken.None), Times.Never);
-        }
+        }        
         #endregion
 
         #region UpdateProductCommand

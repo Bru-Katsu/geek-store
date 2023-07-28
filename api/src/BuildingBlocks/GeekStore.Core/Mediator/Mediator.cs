@@ -4,12 +4,12 @@ using MediatR;
 
 namespace GeekStore.Core.Mediator
 {
-    internal class MediatorDecorator : MediatR.Mediator
+    public class MediatorProxy : MediatR.Mediator
     {
         private readonly IEventSourcingRepository _eventSourcingRepository;
-        public MediatorDecorator(IServiceProvider serviceProvider, 
-                                 INotificationPublisher publisher, 
-                                 IEventSourcingRepository eventSourcingRepository) : base(serviceProvider, publisher)
+        public MediatorProxy(IServiceProvider serviceProvider, 
+                             INotificationPublisher publisher, 
+                             IEventSourcingRepository eventSourcingRepository) : base(serviceProvider, publisher)
         {
             _eventSourcingRepository = eventSourcingRepository;
         }

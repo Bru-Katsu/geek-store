@@ -18,7 +18,7 @@ namespace GeekStore.Core.DI
 
         public static IServiceCollection UseCustomMediator(this IServiceCollection services)
         {
-            services.AddScoped<IMediator, MediatorDecorator>();
+            services.AddScoped<IMediator, MediatorProxy>();
 
             return services;
         }

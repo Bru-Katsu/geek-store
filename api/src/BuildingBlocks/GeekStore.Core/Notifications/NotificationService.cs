@@ -2,7 +2,7 @@
 
 namespace GeekStore.Core.Notifications
 {
-    internal class NotificationService : INotificationService
+    public class NotificationService : INotificationService
     {
         private readonly List<DomainNotification> _notifications;
 

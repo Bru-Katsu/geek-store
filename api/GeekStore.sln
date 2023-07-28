@@ -1,57 +1,58 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9C5327ED-7D6D-471F-A88F-6D09ED0AB225}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1655B8E6-9782-4155-BB48-8AECDFE921D4}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{32C7E5C9-BF99-4DF2-BC89-A01A3B2E58BB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Core", "src\BuildingBlocks\GeekStore.Core\GeekStore.Core.csproj", "{237FBD46-35F7-4FAF-A839-84DDB1472006}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.WebApi.Core", "src\BuildingBlocks\GeekStore.WebApi.Core\GeekStore.WebApi.Core.csproj", "{B2CBAEF9-0D78-4424-B73B-616DD5149D6F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.EventSourcing", "src\BuildingBlocks\GeekStore.EventSourcing\GeekStore.EventSourcing.csproj", "{356B3F7E-3574-432C-BC5F-DE86E674B0E1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{B468FDB5-8416-42DA-917D-0D3756354D82}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Product", "Product", "{7759E745-57FF-4A09-982F-1E4520A3AA63}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Product.WebAPI", "src\GeekStore.Product.WebAPI\GeekStore.Product.WebAPI.csproj", "{DA4D5857-55DB-44AD-8EFC-9CD3440C6672}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Product.WebAPI", "src\Services\Product\GeekStore.Product.WebAPI\GeekStore.Product.WebAPI.csproj", "{DA4D5857-55DB-44AD-8EFC-9CD3440C6672}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Product.Data", "src\GeekStore.Product.Data\GeekStore.Product.Data.csproj", "{B2082931-03EB-41B5-9841-2F76490F6CC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Product.Data", "src\Services\Product\GeekStore.Product.Data\GeekStore.Product.Data.csproj", "{B2082931-03EB-41B5-9841-2F76490F6CC0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Product.Domain", "src\GeekStore.Product.Domain\GeekStore.Product.Domain.csproj", "{78C89E56-0343-4BE3-AD48-FD929A264A29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Product.Domain", "src\Services\Product\GeekStore.Product.Domain\GeekStore.Product.Domain.csproj", "{78C89E56-0343-4BE3-AD48-FD929A264A29}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Core", "src\GeekStore.Core\GeekStore.Core.csproj", "{237FBD46-35F7-4FAF-A839-84DDB1472006}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Product.Application", "src\GeekStore.Product.Application\GeekStore.Product.Application.csproj", "{99D49E01-9998-4CDF-A65E-052F1EB8A4EE}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{32C7E5C9-BF99-4DF2-BC89-A01A3B2E58BB}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.EventSourcing", "src\GeekStore.EventSourcing\GeekStore.EventSourcing.csproj", "{356B3F7E-3574-432C-BC5F-DE86E674B0E1}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Product.Tests", "tests\GeekStore.Product.Tests\GeekStore.Product.Tests.csproj", "{F05DF97E-3711-4147-8061-DE1277389E53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Product.Application", "src\Services\Product\GeekStore.Product.Application\GeekStore.Product.Application.csproj", "{99D49E01-9998-4CDF-A65E-052F1EB8A4EE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{B5D03EB9-D518-4601-A121-027EF8827B24}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Identity.WebAPI", "src\GeekStore.Identity.WebAPI\GeekStore.Identity.WebAPI.csproj", "{DDD3FA4B-46ED-4187-BC7F-C54E45B5F044}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Identity.WebAPI", "src\Services\Identity\GeekStore.Identity.WebAPI\GeekStore.Identity.WebAPI.csproj", "{DDD3FA4B-46ED-4187-BC7F-C54E45B5F044}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.WebApi.Core", "src\GeekStore.WebApi.Core\GeekStore.WebApi.Core.csproj", "{B2CBAEF9-0D78-4424-B73B-616DD5149D6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Identity.Application", "src\Services\Identity\GeekStore.Identity.Application\GeekStore.Identity.Application.csproj", "{E7830B3B-A151-4C84-9FD8-3695F3726F1E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Identity.Application", "src\GeekStore.Identity.Application\GeekStore.Identity.Application.csproj", "{E7830B3B-A151-4C84-9FD8-3695F3726F1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Identity.Domain", "src\Services\Identity\GeekStore.Identity.Domain\GeekStore.Identity.Domain.csproj", "{45D2E701-931F-4090-BA43-7657FA040619}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Identity.Domain", "src\GeekStore.Identity.Domain\GeekStore.Identity.Domain.csproj", "{45D2E701-931F-4090-BA43-7657FA040619}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Identity.Data", "src\GeekStore.Identity.Data\GeekStore.Identity.Data.csproj", "{ED08391A-7264-4491-933E-E90E9561052E}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Identity.Tests", "tests\GeekStore.Identity.Tests\GeekStore.Identity.Tests.csproj", "{36A43F5F-3382-455A-84B7-EA6093012269}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Identity.Data", "src\Services\Identity\GeekStore.Identity.Data\GeekStore.Identity.Data.csproj", "{ED08391A-7264-4491-933E-E90E9561052E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cart", "Cart", "{3916492C-0AD4-49C2-BD74-377CE9CE17AE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Cart.WebAPI", "src\GeekStore.Cart.WebAPI\GeekStore.Cart.WebAPI.csproj", "{0B54FBD4-3AF1-4942-A5DC-F4A7960559DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Cart.WebAPI", "src\Services\Cart\GeekStore.Cart.WebAPI\GeekStore.Cart.WebAPI.csproj", "{0B54FBD4-3AF1-4942-A5DC-F4A7960559DA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Cart.Domain", "src\GeekStore.Cart.Domain\GeekStore.Cart.Domain.csproj", "{C834C141-E79B-4AD0-BEE3-EF8F387C8156}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Cart.Domain", "src\Services\Cart\GeekStore.Cart.Domain\GeekStore.Cart.Domain.csproj", "{C834C141-E79B-4AD0-BEE3-EF8F387C8156}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Cart.Data", "src\GeekStore.Cart.Data\GeekStore.Cart.Data.csproj", "{85193EB0-FAED-4654-93FF-3662D143AEF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Cart.Data", "src\Services\Cart\GeekStore.Cart.Data\GeekStore.Cart.Data.csproj", "{85193EB0-FAED-4654-93FF-3662D143AEF4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Cart.Application", "src\GeekStore.Cart.Application\GeekStore.Cart.Application.csproj", "{F3D34268-79D0-4840-BD7D-D2C0964E71E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Cart.Application", "src\Services\Cart\GeekStore.Cart.Application\GeekStore.Cart.Application.csproj", "{F3D34268-79D0-4840-BD7D-D2C0964E71E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekStore.Cart.Tests", "src\GeekStore.Cart.Tests\GeekStore.Cart.Tests.csproj", "{84A895DC-5AF1-418B-AFB9-4338A60BCAD4}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1655B8E6-9782-4155-BB48-8AECDFE921D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekStore.Core.Tests", "tests\BuildingBlocks\GeekStore.Core.Tests\GeekStore.Core.Tests.csproj", "{34E0A487-CC0E-40EB-938D-FF253DA894FA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Cart.Tests", "tests\Services\GeekStore.Cart.Tests\GeekStore.Cart.Tests.csproj", "{84A895DC-5AF1-418B-AFB9-4338A60BCAD4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Product.Tests", "tests\Services\GeekStore.Product.Tests\GeekStore.Product.Tests.csproj", "{F05DF97E-3711-4147-8061-DE1277389E53}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Identity.Tests", "tests\Services\GeekStore.Identity.Tests\GeekStore.Identity.Tests.csproj", "{36A43F5F-3382-455A-84B7-EA6093012269}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -131,6 +132,10 @@ Global
 		{84A895DC-5AF1-418B-AFB9-4338A60BCAD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84A895DC-5AF1-418B-AFB9-4338A60BCAD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84A895DC-5AF1-418B-AFB9-4338A60BCAD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34E0A487-CC0E-40EB-938D-FF253DA894FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34E0A487-CC0E-40EB-938D-FF253DA894FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34E0A487-CC0E-40EB-938D-FF253DA894FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34E0A487-CC0E-40EB-938D-FF253DA894FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -159,6 +164,7 @@ Global
 		{85193EB0-FAED-4654-93FF-3662D143AEF4} = {3916492C-0AD4-49C2-BD74-377CE9CE17AE}
 		{F3D34268-79D0-4840-BD7D-D2C0964E71E0} = {3916492C-0AD4-49C2-BD74-377CE9CE17AE}
 		{84A895DC-5AF1-418B-AFB9-4338A60BCAD4} = {1655B8E6-9782-4155-BB48-8AECDFE921D4}
+		{34E0A487-CC0E-40EB-938D-FF253DA894FA} = {1655B8E6-9782-4155-BB48-8AECDFE921D4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {30CF6A78-C893-431B-B7FC-F8723ACB50EF}
