@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GeekStore.Coupon.WebAPI.Controllers
 {
+    [Route("api/[controller]")]
     public class CouponController : MainController
     {
         private readonly IMediator _mediator;
@@ -19,7 +20,7 @@ namespace GeekStore.Coupon.WebAPI.Controllers
         }
 
         [Authorize]
-        [HttpGet("{couponCode:string}")]
+        [HttpGet("{couponCode}")]
         [ProducesResponseType(typeof(CouponViewModel), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
