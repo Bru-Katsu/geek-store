@@ -61,7 +61,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Coupon.Applicatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Coupon.Domain", "src\Services\Coupon\GeekStore.Coupon.Domain\GeekStore.Coupon.Domain.csproj", "{1EC58321-77F8-4C7A-84D1-EE8B5E11377D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Coupon.Data", "Services\Coupon\GeekStore.Coupon.Data\GeekStore.Coupon.Data.csproj", "{76442ACB-C31E-42BE-8CDD-9CDC17D71B50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Coupon.Data", "src\Services\Coupon\GeekStore.Coupon.Data\GeekStore.Coupon.Data.csproj", "{76442ACB-C31E-42BE-8CDD-9CDC17D71B50}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Coupon.WebAPI", "src\Services\Coupon\GeekStore.Coupon.WebAPI\GeekStore.Coupon.WebAPI.csproj", "{FF26A8DE-061F-4323-A57D-8C4F2BF03265}"
 EndProject
