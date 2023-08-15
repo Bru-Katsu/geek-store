@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace GeekStore.WebApi.Core.User
 {
@@ -11,7 +12,7 @@ namespace GeekStore.WebApi.Core.User
                 throw new ArgumentException(nameof(principal));
             }
 
-            var claim = principal.FindFirst(ClaimTypes.NameIdentifier);
+            var claim = principal.FindFirst(JwtRegisteredClaimNames.NameId);
             return claim?.Value;
         }
 

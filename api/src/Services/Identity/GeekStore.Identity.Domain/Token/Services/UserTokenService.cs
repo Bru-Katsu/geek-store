@@ -35,7 +35,8 @@ namespace GeekStore.Identity.Domain.Token.Services
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Nbf, DateTime.UtcNow.ToUnixEpochDate().ToString()),
-                new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToUnixEpochDate().ToString(), ClaimValueTypes.Integer64)
+                new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToUnixEpochDate().ToString(), ClaimValueTypes.Integer64),
+                new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString()),
             }).Concat(userRoles.Select(role => new Claim("role", role)));
 
             return new ClaimsIdentity(userClaims);
@@ -50,7 +51,7 @@ namespace GeekStore.Identity.Domain.Token.Services
                 Issuer = $"{_aspNetUser.GetHttpContext().Request.Scheme}://{_aspNetUser.GetHttpContext().Request.Host}",
                 Subject = identityClaims,
                 Expires = DateTime.UtcNow.AddHours(1),
-                SigningCredentials = key
+                SigningCredentials = key,
             };
 
             var token = _tokenHandler.CreateToken(descriptor);

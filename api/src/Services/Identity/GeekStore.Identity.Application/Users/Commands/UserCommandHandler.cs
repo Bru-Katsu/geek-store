@@ -3,11 +3,12 @@ using GeekStore.Identity.Domain.User;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using GeekStore.Identity.Application.Users.Events;
+using System.Security.Claims;
 
 namespace GeekStore.Identity.Application.Users.Commands
 {
     public class UserCommandHandler : IRequestHandler<LoginCommand, bool>,
-                                        IRequestHandler<CreateUserCommand, bool>
+                                      IRequestHandler<CreateUserCommand, bool>
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
@@ -63,6 +64,15 @@ namespace GeekStore.Identity.Application.Users.Commands
 
             var user = new User(request.Email);
             var result = await _userManager.CreateAsync(user, request.Password);
+
+            var claims = new []
+            { 
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Name, user.UserName),
+            };
+
+            await _userManager.AddClaimsAsync(user, claims);
 
             if (!result.Succeeded)
                 _notificationService.AddNotifications(result.Errors.Select(x => new DomainNotification("Login", x.Description)));
