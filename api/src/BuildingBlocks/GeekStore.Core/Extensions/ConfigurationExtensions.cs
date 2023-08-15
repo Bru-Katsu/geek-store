@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace GeekStore.Core.Helpers
+namespace GeekStore.Core.Extensions
 {
     public static class ConfigurationExtensions
     {

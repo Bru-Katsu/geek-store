@@ -3,8 +3,8 @@ using Microsoft.IdentityModel.Tokens;
 using NetDevPack.Security.Jwt.Core.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using GeekStore.Core.Helpers;
 using GeekStore.WebApi.Core.User;
+using GeekStore.Core.Extensions;
 
 namespace GeekStore.Identity.Domain.Token.Services
 {

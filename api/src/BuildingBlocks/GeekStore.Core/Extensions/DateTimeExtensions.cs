@@ -1,4 +1,4 @@
-﻿namespace GeekStore.Core.Helpers
+﻿namespace GeekStore.Core.Extensions
 {
     public static class DateTimeExtensions
     {
