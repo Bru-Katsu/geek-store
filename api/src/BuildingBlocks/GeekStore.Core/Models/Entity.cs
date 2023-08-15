@@ -6,7 +6,7 @@ namespace GeekStore.Core.Models
     public abstract class Entity : Validable
     {
         [Key]
-        [Column("id")]
+        [Column("Id")]
         public Guid Id { get; protected set; }
     }
 }
