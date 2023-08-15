@@ -16,17 +16,14 @@ namespace GeekStore.Order.WebAPI.Controllers
     [Route("api/[controller]")]
     public class OrderController : MainController
     {
-        private readonly IAspNetUser _aspNetUser;
         private readonly IMediator _mediator;
         public OrderController(INotificationService notificationService, 
-                               IAspNetUser aspNetUser, 
                                IMediator mediator) : base(notificationService)
         {
-            _aspNetUser = aspNetUser;
             _mediator = mediator;
         }
 
-        [HttpGet("{guid:orderId}")]
+        [HttpGet("{orderId}")]
         [Authorize]
         [ProducesResponseType(typeof(OrderViewModel), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -43,7 +40,7 @@ namespace GeekStore.Order.WebAPI.Controllers
             return Ok(order);
         }
 
-        [HttpGet("{guid:userId}/all")]
+        [HttpGet("{userId}/all")]
         [Authorize]
         [ProducesResponseType(typeof(OrderListViewModel), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllOrders(Guid userId)
@@ -60,14 +57,14 @@ namespace GeekStore.Order.WebAPI.Controllers
         [Authorize]
         [ProducesResponseType(typeof(OrderViewModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> CreateOrder([FromBody] CreateOrderRequest request)
+        public async Task<IActionResult> CreateOrder([FromBody] CreateOrderRequest request, [FromServices] IAspNetUser user)
         {
-            var userId = _aspNetUser.GetUserId();
+            var userId = user.GetUserId();
             var items = request.Items.Select(i => new OrderItemDTO(i.ProductId, i.ProductName, i.ProductImage, i.Quantity, i.Price));
 
             var command = new CreateOrderCommand(userId, 
-                                                 new AddressDTO(request.Street, request.City, request.State, request.Country, request.ZipCode), 
-                                                 new CouponDTO(request.CouponCode, request.DiscountAmount), 
+                                                 new AddressDTO(request.Address.Street, request.Address.City, request.Address.State, request.Address.Country, request.Address.ZipCode), 
+                                                 new CouponDTO(request.Coupon.CouponCode, request.Coupon.DiscountAmount), 
                                                  items);
 
             var result = await _mediator.Send(command);

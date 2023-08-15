@@ -3,13 +3,21 @@
     public class CreateOrderRequest
     {
         public IEnumerable<OrderItemRequest> Items { get; set; }
+        public OrderAddressRequest Address { get; set; }
+        public OrderCouponRequest Coupon { get; set; }
+    }
 
+    public class OrderAddressRequest
+    {
         public string Street { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string Country { get; set; }
         public string ZipCode { get; set; }
+    }
 
+    public class OrderCouponRequest
+    {
         public string CouponCode { get; set; }
         public decimal DiscountAmount { get; set; }
     }

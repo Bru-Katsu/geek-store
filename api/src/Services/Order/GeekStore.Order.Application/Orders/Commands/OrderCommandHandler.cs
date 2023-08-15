@@ -61,6 +61,8 @@ namespace GeekStore.Order.Application.Orders.Commands
             }
 
             _orderRepository.Insert(entity);
+            _orderRepository.SaveChanges();
+
             await _mediator.Publish(new OrderCreatedEvent(entity));
 
             return new SuccessResult<Guid>(entity.Id);
