@@ -36,7 +36,6 @@ namespace GeekStore.Identity.Domain.Token.Services
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Nbf, DateTime.UtcNow.ToUnixEpochDate().ToString()),
                 new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToUnixEpochDate().ToString(), ClaimValueTypes.Integer64),
-                new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString()),
             }).Concat(userRoles.Select(role => new Claim("role", role)));
 
             return new ClaimsIdentity(userClaims);

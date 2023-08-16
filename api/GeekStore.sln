@@ -75,7 +75,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Order.Data", "src
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Order.WebAPI", "src\Services\Order\GeekStore.Order.WebAPI\GeekStore.Order.WebAPI.csproj", "{0742B0C4-A36B-4D3F-A4DA-0F0A8BCEDC76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekStore.Order.Tests", "tests\Services\GeekStore.Order.Tests\GeekStore.Order.Tests.csproj", "{B13F47D6-35B8-4F0B-9018-DF216CC97109}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Order.Tests", "tests\Services\GeekStore.Order.Tests\GeekStore.Order.Tests.csproj", "{B13F47D6-35B8-4F0B-9018-DF216CC97109}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

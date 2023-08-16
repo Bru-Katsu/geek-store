@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\BuildingBlocks\GeekStore.WebApi.Core\GeekStore.WebApi.Core.csproj" />
-    <ProjectReference Include="..\..\..\src\Services\Coupon\GeekStore.Coupon.Domain\GeekStore.Coupon.Domain.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\GeekStore.WebApi.Core\GeekStore.WebApi.Core.csproj" />
+    <ProjectReference Include="..\GeekStore.Coupon.Domain\GeekStore.Coupon.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -18,10 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Services\Coupon\GeekStore.Coupon.Data\GeekStore.Coupon.Data.csproj" />
     <ProjectReference Include="..\..\..\BuildingBlocks\GeekStore.Core\GeekStore.Core.csproj" />
     <ProjectReference Include="..\..\..\BuildingBlocks\GeekStore.WebApi.Core\GeekStore.WebApi.Core.csproj" />
     <ProjectReference Include="..\GeekStore.Coupon.Application\GeekStore.Coupon.Application.csproj" />
+    <ProjectReference Include="..\GeekStore.Coupon.Data\GeekStore.Coupon.Data.csproj" />
   </ItemGroup>
 
 </Project>
