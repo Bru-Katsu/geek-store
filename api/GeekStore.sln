@@ -77,6 +77,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Order.WebAPI", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.Order.Tests", "tests\Services\GeekStore.Order.Tests\GeekStore.Order.Tests.csproj", "{B13F47D6-35B8-4F0B-9018-DF216CC97109}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Customer", "Customer", "{3F03D3B2-8E1B-4D8E-B268-08481A94EE5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekStore.Customer.Domain", "src\Services\Customer\GeekStore.Customer.Domain\GeekStore.Customer.Domain.csproj", "{28CEE084-D585-4877-8C43-8F85C63661CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekStore.Customer.Application", "src\Services\Customer\GeekStore.Customer.Application\GeekStore.Customer.Application.csproj", "{F32CED13-B73D-4632-BE3D-604669F6EC4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekStore.Customer.Data", "src\Services\Customer\GeekStore.Customer.Data\GeekStore.Customer.Data.csproj", "{6B0573BA-9B4B-4651-9987-451F2B3B1CBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekStore.Customer.WebAPI", "src\Services\Customer\GeekStore.Customer.WebAPI\GeekStore.Customer.WebAPI.csproj", "{5356418A-0CD1-417B-8B4D-FA68592032FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -195,6 +205,22 @@ Global
 		{B13F47D6-35B8-4F0B-9018-DF216CC97109}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B13F47D6-35B8-4F0B-9018-DF216CC97109}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B13F47D6-35B8-4F0B-9018-DF216CC97109}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28CEE084-D585-4877-8C43-8F85C63661CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28CEE084-D585-4877-8C43-8F85C63661CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28CEE084-D585-4877-8C43-8F85C63661CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28CEE084-D585-4877-8C43-8F85C63661CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F32CED13-B73D-4632-BE3D-604669F6EC4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F32CED13-B73D-4632-BE3D-604669F6EC4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F32CED13-B73D-4632-BE3D-604669F6EC4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F32CED13-B73D-4632-BE3D-604669F6EC4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B0573BA-9B4B-4651-9987-451F2B3B1CBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B0573BA-9B4B-4651-9987-451F2B3B1CBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B0573BA-9B4B-4651-9987-451F2B3B1CBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B0573BA-9B4B-4651-9987-451F2B3B1CBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5356418A-0CD1-417B-8B4D-FA68592032FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5356418A-0CD1-417B-8B4D-FA68592032FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5356418A-0CD1-417B-8B4D-FA68592032FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5356418A-0CD1-417B-8B4D-FA68592032FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -235,6 +261,11 @@ Global
 		{175358E8-6706-429F-AC3D-E54FE31A9853} = {16F32A49-9580-42A4-855E-4355C74E4EE4}
 		{0742B0C4-A36B-4D3F-A4DA-0F0A8BCEDC76} = {16F32A49-9580-42A4-855E-4355C74E4EE4}
 		{B13F47D6-35B8-4F0B-9018-DF216CC97109} = {1655B8E6-9782-4155-BB48-8AECDFE921D4}
+		{3F03D3B2-8E1B-4D8E-B268-08481A94EE5B} = {B468FDB5-8416-42DA-917D-0D3756354D82}
+		{28CEE084-D585-4877-8C43-8F85C63661CB} = {3F03D3B2-8E1B-4D8E-B268-08481A94EE5B}
+		{F32CED13-B73D-4632-BE3D-604669F6EC4C} = {3F03D3B2-8E1B-4D8E-B268-08481A94EE5B}
+		{6B0573BA-9B4B-4651-9987-451F2B3B1CBC} = {3F03D3B2-8E1B-4D8E-B268-08481A94EE5B}
+		{5356418A-0CD1-417B-8B4D-FA68592032FC} = {3F03D3B2-8E1B-4D8E-B268-08481A94EE5B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {30CF6A78-C893-431B-B7FC-F8723ACB50EF}
