@@ -8,6 +8,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\BuildingBlocks\GeekStore.Core\GeekStore.Core.csproj" />
+		<ProjectReference Include="..\..\..\BuildingBlocks\GeekStore.MessageBus\GeekStore.MessageBus.csproj" />
 		<ProjectReference Include="..\GeekStore.Identity.Domain\GeekStore.Identity.Domain.csproj" />
 	</ItemGroup>
 

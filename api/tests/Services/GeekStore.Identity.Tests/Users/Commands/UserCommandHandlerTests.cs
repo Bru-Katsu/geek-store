@@ -8,6 +8,7 @@ using GeekStore.Identity.Domain.User;
 using Microsoft.AspNetCore.Identity;
 using Bogus;
 using GeekStore.Identity.Application.Users.Events;
+using Bogus.Extensions.Brazil;
 
 namespace GeekStore.Identity.Tests.Users.Commands
 {
@@ -31,7 +32,7 @@ namespace GeekStore.Identity.Tests.Users.Commands
 
             var user = _userFixture.CreateValidUser();
 
-            var command = new CreateUserCommand(user.Email, _faker.Internet.Password());
+            var command = new CreateUserCommand(user.Email, _faker.Internet.Password(), _faker.Person.FirstName, _faker.Person.LastName, _faker.Person.Cpf(), _faker.Person.DateOfBirth);
 
             var commandHandler = mocker.CreateInstance<UserCommandHandler>();
 
@@ -66,7 +67,7 @@ namespace GeekStore.Identity.Tests.Users.Commands
             //Arrange
             var mocker = new AutoMocker();
 
-            var command = new CreateUserCommand("email.invalido.com", string.Empty);
+            var command = new CreateUserCommand("email.invalido.com", string.Empty, string.Empty, string.Empty, string.Empty, DateTime.Now.AddMinutes(10));          
 
             var commandHandler = mocker.CreateInstance<UserCommandHandler>();
 
@@ -103,7 +104,7 @@ namespace GeekStore.Identity.Tests.Users.Commands
 
             var user = _userFixture.CreateValidUser();
 
-            var command = new CreateUserCommand(user.Email, _faker.Internet.Password());
+            var command = new CreateUserCommand(user.Email, _faker.Internet.Password(), _faker.Person.FirstName, _faker.Person.LastName, _faker.Person.Cpf(), _faker.Person.DateOfBirth);
 
             var commandHandler = mocker.CreateInstance<UserCommandHandler>();
 

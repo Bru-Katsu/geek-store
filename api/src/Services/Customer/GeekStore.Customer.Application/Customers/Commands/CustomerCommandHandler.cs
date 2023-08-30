@@ -7,7 +7,8 @@ using MediatR;
 
 namespace GeekStore.Customer.Application.Customers.Commands
 {
-    public class CustomerCommandHandler : IRequestHandler<CreateCustomerCommand, Result<Guid>>
+    public class CustomerCommandHandler : IRequestHandler<CreateCustomerCommand, Result<Guid>>,
+                                          IRequestHandler<ChangeProfileImageCommand>
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly INotificationService _notificationService;
@@ -30,10 +31,10 @@ namespace GeekStore.Customer.Application.Customers.Commands
                 return new FailResult<Guid>();
             }
 
-            var customer = new Domain.Customers.Customer(request.UserId, request.Name, request.Surname, request.Birthday, request.Document);
+            var customer = new Domain.Customers.Customer(request.UserId, request.Name, request.Surname, request.Birthday, request.Document, request.Email);
             if (!customer.IsValid())
             {
-                _notificationService.AddNotifications(request.ValidationResult);
+                _notificationService.AddNotifications(customer.ValidationResult);
                 return new FailResult<Guid>();
             }
 
@@ -52,6 +53,35 @@ namespace GeekStore.Customer.Application.Customers.Commands
             await _mediator.Publish(new CustomerCreatedEvent(customer));
 
             return new SuccessResult<Guid>(customer.Id);
+        }
+
+        public async Task Handle(ChangeProfileImageCommand request, CancellationToken cancellationToken)
+        {
+            if (!request.IsValid())
+            {
+                _notificationService.AddNotifications(request.ValidationResult);
+                return;
+            }
+
+            var customer = await _customerRepository.GetById<Domain.Customers.Customer>(request.Id);
+            if(customer == null)
+            {
+                _notificationService.AddNotification(nameof(customer.Id), "Cliente inexistente!");
+                return;
+            }
+
+            customer.ChangeProfileImage(request.ProfileImage);
+
+            if (!customer.IsValid())
+            {
+                _notificationService.AddNotifications(request.ValidationResult);
+                return;
+            }
+
+            _customerRepository.Update(customer);
+            _customerRepository.SaveChanges();
+
+            await _mediator.Publish(new CustomerCreatedEvent(customer));
         }
     }
 }

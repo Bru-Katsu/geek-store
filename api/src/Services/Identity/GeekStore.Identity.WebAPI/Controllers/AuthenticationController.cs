@@ -29,7 +29,7 @@ namespace GeekStore.Identity.WebAPI.Controllers
             if (!ModelState.IsValid)
                 return CreateResponse(ModelState);
 
-            var success = await _mediator.Send(new CreateUserCommand(newUser.Email, newUser.Password));
+            var success = await _mediator.Send(new CreateUserCommand(newUser.Email, newUser.Password, newUser.Name, newUser.Surname, newUser.Cpf, newUser.Birthday));
             if (!success)
                 return CreateResponse();
 

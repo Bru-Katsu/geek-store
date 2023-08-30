@@ -6,7 +6,7 @@ namespace GeekStore.Customer.Domain.Customers
     public class Customer : Entity
     {
         protected Customer() { }
-        public Customer(Guid userId, string name, string surname, DateTime birthday, string document)
+        public Customer(Guid userId, string name, string surname, DateTime birthday, string document, string email)
         {
             Id = Guid.NewGuid();
             UserId = userId;
@@ -17,6 +17,7 @@ namespace GeekStore.Customer.Domain.Customers
             Document = document;
 
             Addresses = new List<CustomerAddress>();
+            Email = email;
         }
 
         public Guid UserId { get; private set; }
@@ -52,6 +53,12 @@ namespace GeekStore.Customer.Domain.Customers
         public void ChangeProfileImage(string profileImage)
         {
             ProfileImage = profileImage;
+        }
+
+        public string Email { get; set; }
+        public void ChangeEmail(string email)
+        {
+            Email = email;
         }
 
         public override bool IsValid()
@@ -93,6 +100,14 @@ namespace GeekStore.Customer.Domain.Customers
                 RuleFor(x => x.ProfileImage)
                     .MaximumLength(300)
                     .WithMessage("O link de imagem do perfil deve conter no máximo 300 caracteres!");
+
+                RuleFor(x => x.Email)
+                    .EmailAddress()
+                    .WithMessage("Endereço de e-mail inválido!")
+                    .NotEmpty()
+                    .WithMessage("O e-mail não pode ficar em branco!")
+                    .MaximumLength(512)
+                    .WithMessage("O e-mail deve conter no máximo 512 caracteres!");
             }
         }
     }

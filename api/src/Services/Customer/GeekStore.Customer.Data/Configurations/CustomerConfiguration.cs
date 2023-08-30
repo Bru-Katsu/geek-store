@@ -32,7 +32,12 @@ namespace GeekStore.Customer.Data.Configurations
                    .HasMaxLength(100);
 
             builder.Property(x => x.ProfileImage)
-                   .HasMaxLength(300);            
+                   .IsRequired(false)
+                   .HasMaxLength(300);
+
+            builder.Property(x => x.Email)
+                   .IsRequired()
+                   .HasMaxLength(512);
         }
     }
 }

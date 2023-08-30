@@ -8,7 +8,8 @@ using System.Security.Claims;
 namespace GeekStore.Identity.Application.Users.Commands
 {
     public class UserCommandHandler : IRequestHandler<LoginCommand, bool>,
-                                      IRequestHandler<CreateUserCommand, bool>
+                                      IRequestHandler<CreateUserCommand, bool>,
+                                      IRequestHandler<DeleteUserByEmailCommand, bool>
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
@@ -70,6 +71,9 @@ namespace GeekStore.Identity.Application.Users.Commands
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.GivenName, request.Name),
+                new Claim(ClaimTypes.Surname, request.Surname),
+                new Claim(ClaimTypes.DateOfBirth, $"{request.Birthday:yyyy-MM-dd}"),
             };
 
             await _userManager.AddClaimsAsync(user, claims);
@@ -77,7 +81,27 @@ namespace GeekStore.Identity.Application.Users.Commands
             if (!result.Succeeded)
                 _notificationService.AddNotifications(result.Errors.Select(x => new DomainNotification("Login", x.Description)));
 
-            await _mediator.Publish(new UserCreatedEvent(user));
+            await _mediator.Publish(new UserCreatedEvent(request.Name, request.Surname, request.Document, request.Birthday, user));
+            return !_notificationService.HasNotifications();
+        }
+
+        public async Task<bool> Handle(DeleteUserByEmailCommand request, CancellationToken cancellationToken)
+        {
+            if (!request.IsValid())
+            {
+                _notificationService.AddNotifications(request.ValidationResult);
+                return false;
+            }
+
+            var user = await _userManager.FindByEmailAsync(request.Email);
+            if (user == null)
+            {
+                _notificationService.AddNotification("Erro", "Não existe uma conta vinculada a esse e-mail");
+                return false;
+            }
+
+            var result = await _userManager.DeleteAsync(user);
+
             return result.Succeeded;
         }
     }

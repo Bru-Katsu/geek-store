@@ -8,6 +8,13 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["src/Services/Customer/GeekStore.Customer.WebAPI/GeekStore.Customer.WebAPI.csproj", "src/Services/Customer/GeekStore.Customer.WebAPI/"]
+COPY ["src/BuildingBlocks/GeekStore.EventSourcing/GeekStore.EventSourcing.csproj", "src/BuildingBlocks/GeekStore.EventSourcing/"]
+COPY ["src/BuildingBlocks/GeekStore.Core/GeekStore.Core.csproj", "src/BuildingBlocks/GeekStore.Core/"]
+COPY ["src/BuildingBlocks/GeekStore.MessageBus/GeekStore.MessageBus.csproj", "src/BuildingBlocks/GeekStore.MessageBus/"]
+COPY ["src/BuildingBlocks/GeekStore.WebApi.Core/GeekStore.WebApi.Core.csproj", "src/BuildingBlocks/GeekStore.WebApi.Core/"]
+COPY ["src/Services/Customer/GeekStore.Customer.Application/GeekStore.Customer.Application.csproj", "src/Services/Customer/GeekStore.Customer.Application/"]
+COPY ["src/Services/Customer/GeekStore.Customer.Domain/GeekStore.Customer.Domain.csproj", "src/Services/Customer/GeekStore.Customer.Domain/"]
+COPY ["src/Services/Customer/GeekStore.Customer.Data/GeekStore.Customer.Data.csproj", "src/Services/Customer/GeekStore.Customer.Data/"]
 RUN dotnet restore "src/Services/Customer/GeekStore.Customer.WebAPI/GeekStore.Customer.WebAPI.csproj"
 COPY . .
 WORKDIR "/src/src/Services/Customer/GeekStore.Customer.WebAPI"

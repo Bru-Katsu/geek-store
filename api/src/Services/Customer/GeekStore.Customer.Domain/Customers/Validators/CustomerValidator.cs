@@ -8,7 +8,7 @@ namespace GeekStore.Customer.Domain.Customers.Validators
     {
         public CustomerAddValidator(ICustomerRepository customerRepository)
         {
-            Add(new NotAllowDuplicateCustomerDocumentsSpec(customerRepository), "Um usuário já está utilizando esse mesmo documento de identificação");
+            Add(new NotAllowDuplicateCustomerDocumentsSpec(customerRepository), "Um usuário já está associado a este documento de identificação");
         }
     }
 }

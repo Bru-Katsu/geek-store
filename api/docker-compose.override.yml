@@ -1,0 +1,128 @@
+version: '3.4'
+
+services:
+  geekstore.rabbitmq:
+    container_name: geekstore.rabbit
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBIT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBIT_PASSWORD}
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+
+  geekstore.cart.redis:
+    container_name: geekstore.cart.redis
+
+  geekstore.eventstore:
+    container_name: geekstore.eventstore
+    environment:
+      - ACCEPT_EULA= "Y"
+      - EVENTSTORE_INSECURE=true
+      - EVENTSTORE_RUN_PROJECTIONS=All
+      - EVENTSTORE_ENABLE_EXTERNAL_TCP=true
+      - EVENTSTORE_ENABLE_ATOM_PUB_OVER_HTTP=true
+    ports:
+      - "1113:1113"
+      - "2113:2113"
+
+  geekstore.product.webapi:
+    container_name: geekstore.product.webapi
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:49158;http://+:49159
+      - AuthenticationSettings__JksUrlAuthentication=https://geekstore.identity.webapi:49170/jwks
+    ports:
+      - "49159:49159"
+      - "49158:49158"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+      - geekstore.identity.webapi
+      - geekstore.eventstore
+
+  geekstore.order.webapi:
+    container_name: geekstore.order.webapi
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:49172;http://+:49171
+      - AuthenticationSettings__JksUrlAuthentication=https://geekstore.identity.webapi:49170/jwks
+      - ConnectionStrings__EventStoreConnection=${EVENTSTORE_CONNECTION}
+    ports:
+      - "49171:49171"
+      - "49172:49172"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+      - geekstore.identity.webapi
+      - geekstore.eventstore
+
+  geekstore.identity.webapi:
+    container_name: geekstore.identity.webapi
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:49170;http://+:49169
+      - AuthenticationSettings__JksUrlAuthentication=https://geekstore.identity.webapi:49170/jwks
+      - ConnectionStrings__EventStoreConnection=${EVENTSTORE_CONNECTION}
+      - ConnectionStrings__MessageBusConnection=${RABBIT_CONNECTION}
+    ports:
+      - "49169:49169"
+      - "49170:49170"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+      - geekstore.eventstore
+      - geekstore.rabbitmq
+
+  geekstore.customer.webapi:
+    container_name: geekstore.customer.webapi
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:49180;http://+:49179
+      - AuthenticationSettings__JksUrlAuthentication=https://geekstore.identity.webapi:49170/jwks
+      - ConnectionStrings__EventStoreConnection=${EVENTSTORE_CONNECTION}
+      - ConnectionStrings__MessageBusConnection=${RABBIT_CONNECTION}
+    ports:
+      - "49179:49179"
+      - "49180:49180"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+      - geekstore.identity.webapi
+      - geekstore.eventstore
+      - geekstore.rabbitmq
+
+  geekstore.coupon.webapi:
+    container_name: geekstore.coupon.webapi
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:49155;http://+:49154
+      - AuthenticationSettings__JksUrlAuthentication=https://geekstore.identity.webapi:49170/jwks
+    ports:
+      - "49154:49154"
+      - "49155:49155"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+      - geekstore.identity.webapi
+
+  geekstore.cart.webapi:
+    container_name: geekstore.cart.webapi
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:49157;http://+:49156
+      - AuthenticationSettings__JksUrlAuthentication=https://geekstore.identity.webapi:49170/jwks
+      - CacheSettings__RedisAddress=geekstore.cart.redis:6379
+    ports:
+      - "49156:49156"
+      - "49157:49157"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+      - geekstore.cart.redis
+      - geekstore.identity.webapi

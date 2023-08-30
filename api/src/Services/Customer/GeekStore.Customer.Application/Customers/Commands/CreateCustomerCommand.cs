@@ -6,13 +6,14 @@ namespace GeekStore.Customer.Application.Customers.Commands
 {
     public class CreateCustomerCommand : Command<Result<Guid>>
     {
-        public CreateCustomerCommand(Guid userId, string name, string surname, DateTime birthday, string document)
+        public CreateCustomerCommand(Guid userId, string name, string surname, DateTime birthday, string document, string email)
         {
             UserId = userId;
             Name = name;
             Surname = surname;
             Birthday = birthday;
             Document = document;
+            Email = email;
         }
 
         public Guid UserId { get; }
@@ -20,6 +21,7 @@ namespace GeekStore.Customer.Application.Customers.Commands
         public string Surname { get; }
         public DateTime Birthday { get; }
         public string Document { get; }
+        public string Email { get; }
 
         public override bool IsValid()
         {
@@ -50,6 +52,12 @@ namespace GeekStore.Customer.Application.Customers.Commands
                 RuleFor(x => x.Document)
                     .NotEmpty()
                     .WithMessage("Infome o documento de identificação!");
+
+                RuleFor(x => x.Email)
+                    .EmailAddress()
+                    .WithMessage("Endereço de e-mail inválido!")
+                    .NotEmpty()
+                    .WithMessage("O e-mail não pode ficar em branco!");
             }
         }
     }

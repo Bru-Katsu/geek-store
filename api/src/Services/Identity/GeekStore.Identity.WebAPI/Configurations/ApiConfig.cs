@@ -5,13 +5,34 @@ namespace GeekStore.Identity.WebAPI.Configurations
 {
     public static class ApiConfig
     {
-        public static IServiceCollection AddApiConfiguration(this IServiceCollection services, IConfiguration Configuration)
+        public static IServiceCollection AddApiConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddControllers();
 
-            services.AddIdentityConfiguration(Configuration);
+            services.AddIdentityConfiguration(configuration);
 
-            services.AddDependencyInjectionConfiguration();
+            services.AddDependencyInjectionConfiguration(configuration);
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("Total", builder =>
+                {
+                    builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                });
+                
+            });
+
+            services.AddLogging(builder =>
+            {
+                builder
+                    .AddDebug()
+                    .AddConsole()
+                    .AddConfiguration(configuration.GetSection("Logging"))
+                    .SetMinimumLevel(LogLevel.Information);
+            });
 
             services.AddEndpointsApiExplorer();
 
@@ -27,6 +48,8 @@ namespace GeekStore.Identity.WebAPI.Configurations
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("Total");
 
             app.UseMiddleware<ExceptionMiddleware>();
 
