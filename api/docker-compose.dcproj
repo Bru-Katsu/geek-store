@@ -4,8 +4,10 @@
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
     <ProjectGuid>4b5e064e-b027-4f5e-9146-12644fb391b3</ProjectGuid>
-    <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
+    <DockerLaunchAction>None</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
+  </PropertyGroup>
+  <PropertyGroup>
     <DockerServiceName>geekstore.product.webapi</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>

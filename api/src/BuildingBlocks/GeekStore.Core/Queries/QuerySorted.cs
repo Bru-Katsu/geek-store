@@ -8,6 +8,6 @@
             Sortings = sortings;
         }
 
-        public IEnumerable<SorterDescriptor> Sortings { get; set; }
+        public IEnumerable<SorterDescriptor> Sortings { get; set; } = new List<SorterDescriptor>();
     }
 }

@@ -1,4 +1,6 @@
+using GeekStore.Coupon.Data.Context;
 using GeekStore.Coupon.WebAPI.Configuration;
+using GeekStore.WebApi.Core.Extensions;
 using GeekStore.WebApi.Core.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,8 +18,8 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 app.UseSwaggerConfiguration()
-   .UseApiConfiguration();
+   .UseApiConfiguration()
+   .ApplyMigrationsFrom<CouponDataContext>();
 
 app.MapControllers();
-
 app.Run();

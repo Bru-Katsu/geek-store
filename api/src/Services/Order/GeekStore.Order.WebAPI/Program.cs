@@ -1,5 +1,7 @@
+using GeekStore.Order.Data.Context;
 using GeekStore.Order.WebAPI.Configuration;
 using GeekStore.WebApi.Core.Identity;
+using GeekStore.WebApi.Core.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,8 +18,8 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 app.UseSwaggerConfiguration()
-   .UseApiConfiguration();
+   .UseApiConfiguration()
+   .ApplyMigrationsFrom<OrderDataContext>();
 
 app.MapControllers();
-
 app.Run();

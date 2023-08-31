@@ -14,7 +14,7 @@ namespace GeekStore.Identity.WebAPI.Configurations
                     .PersistKeysToDatabaseStore<IdentityContext>()
                     .UseJwtValidation();
 
-            services.AddDbContext<IdentityContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<IdentityContext>(options => options.UseSqlServer(configuration.GetConnectionString("SqlServerConnection")));
 
             services.AddDefaultIdentity<User>()
                     .AddRoles<IdentityRole<Guid>>()

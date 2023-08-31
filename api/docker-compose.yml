@@ -1,5 +1,8 @@
 version: '3.4'
 services:
+  geekstore.sqlserver:
+   image: mcr.microsoft.com/mssql/server:2022-latest
+
   geekstore.rabbitmq:
    image: rabbitmq:3-management
 

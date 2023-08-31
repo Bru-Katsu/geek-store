@@ -1,4 +1,6 @@
+using GeekStore.Customer.Data.Context;
 using GeekStore.Customer.WebAPI.Configurations;
+using GeekStore.WebApi.Core.Extensions;
 using GeekStore.WebApi.Core.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,9 +17,9 @@ builder.Services.AddApiConfiguration(builder.Configuration)
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-app.UseSwaggerConfiguration()
-   .UseApiConfiguration();
+app.UseSwaggerConfiguration()   
+   .UseApiConfiguration()
+   .ApplyMigrationsFrom<CustomerDataContext>();
 
 app.MapControllers();
-
 app.Run();

@@ -49,7 +49,7 @@ namespace GeekStore.Customer.WebAPI.Configurations
             return services;
         }
 
-        public static IApplicationBuilder UseApiConfiguration(this IApplicationBuilder app)
+        public static WebApplication UseApiConfiguration(this WebApplication app)
         {
             app.UseHttpsRedirection();
 
