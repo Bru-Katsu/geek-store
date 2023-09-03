@@ -40,7 +40,6 @@ namespace GeekStore.Customer.Application.Customers.Commands
 
             var addValidator = new CustomerAddValidator(_customerRepository);
             var results = await addValidator.ValidateAsync(customer);
-
             if (!results.IsValid)
             {
                 _notificationService.AddNotifications(results);
@@ -81,7 +80,7 @@ namespace GeekStore.Customer.Application.Customers.Commands
             _customerRepository.Update(customer);
             _customerRepository.SaveChanges();
 
-            await _mediator.Publish(new CustomerCreatedEvent(customer));
+            await _mediator.Publish(new CustomerProfileImageChangedEvent(customer));
         }
     }
 }
