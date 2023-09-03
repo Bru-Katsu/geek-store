@@ -25,7 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\api\src\Services\Customer\GeekStore.Customer.Application\GeekStore.Customer.Application.csproj" />
+    <ProjectReference Include="..\..\..\src\Services\Customer\GeekStore.Customer.Application\GeekStore.Customer.Application.csproj" />
+    <ProjectReference Include="..\..\..\src\Services\Customer\GeekStore.Customer.Domain\GeekStore.Customer.Domain.csproj" />
   </ItemGroup>
 
 </Project>

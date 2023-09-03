@@ -91,7 +91,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekStore.MessageBus", "src
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{4B5E064E-B027-4F5E-9146-12644FB391B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekStore.Customer.Tests", "..\GeekStore.Customer.Tests\GeekStore.Customer.Tests.csproj", "{867F0CCF-041A-4816-8CE0-D34029364CF2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekStore.Customer.Tests", "tests\Services\GeekStore.Customer.Tests\GeekStore.Customer.Tests.csproj", "{867F0CCF-041A-4816-8CE0-D34029364CF2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
