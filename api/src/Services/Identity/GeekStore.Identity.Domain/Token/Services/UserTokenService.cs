@@ -5,6 +5,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using GeekStore.WebApi.Core.User;
 using GeekStore.Core.Extensions;
+using Microsoft.Extensions.Configuration;
+using GeekStore.WebApi.Core.Identity;
 
 namespace GeekStore.Identity.Domain.Token.Services
 {
@@ -14,15 +16,18 @@ namespace GeekStore.Identity.Domain.Token.Services
         private readonly IJwtService _jwtService;
         private readonly IAspNetUser _aspNetUser;
         private readonly JwtSecurityTokenHandler _tokenHandler;
+        private readonly IConfiguration _configuration;
 
         public UserTokenService(UserManager<Domain.User.User> userManager,
                                 IJwtService jwtService,
-                                IAspNetUser aspNetUser)
+                                IAspNetUser aspNetUser,
+                                IConfiguration configuration)
         {
             _userManager = userManager;
             _jwtService = jwtService;
             _aspNetUser = aspNetUser;
             _tokenHandler = new JwtSecurityTokenHandler();
+            _configuration = configuration;
         }
 
         public async Task<ClaimsIdentity> GetConfiguredUserClaims(IEnumerable<Claim> claims, Domain.User.User user)
@@ -45,9 +50,13 @@ namespace GeekStore.Identity.Domain.Token.Services
         {
             var key = await _jwtService.GetCurrentSigningCredentials();
 
+            //var appSettingsSection = _configuration.Get<AuthenticationSettings>();
+
+            var issuer = new Uri("https://geekstore.identity.webapi:49170/jwks");
             var descriptor = new SecurityTokenDescriptor()
             {
-                Issuer = $"{_aspNetUser.GetHttpContext().Request.Scheme}://{_aspNetUser.GetHttpContext().Request.Host}",
+                //Issuer = $"{_aspNetUser.GetHttpContext().Request.Scheme}://{_aspNetUser.GetHttpContext().Request.Host}",
+                Issuer = $"{issuer.Scheme}://{issuer.Authority}",
                 Subject = identityClaims,
                 Expires = DateTime.UtcNow.AddHours(1),
                 SigningCredentials = key,

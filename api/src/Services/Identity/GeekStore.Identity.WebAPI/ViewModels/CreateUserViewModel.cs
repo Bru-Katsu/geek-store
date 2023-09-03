@@ -9,6 +9,12 @@ namespace GeekStore.Identity.WebAPI.ViewModels
         public string Name { get; set; }
 
         [Required(ErrorMessage = "O Campo {0} é obrigatório")]
+        public string Surname { get; set; }
+        
+        [Required(ErrorMessage = "O Campo {0} é obrigatório")]
+        public DateTime Birthday { get; }
+
+        [Required(ErrorMessage = "O Campo {0} é obrigatório")]
         public string Cpf { get; set; }
 
         [Required(ErrorMessage = "O Campo {0} é obrigatório")]

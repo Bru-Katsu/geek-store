@@ -1,0 +1,49 @@
+version: '3.4'
+services:
+  geekstore.sqlserver:
+   image: mcr.microsoft.com/mssql/server:2022-latest
+
+  geekstore.rabbitmq:
+   image: rabbitmq:3-management
+
+  geekstore.cart.redis:
+    image: redis:alpine
+  
+  geekstore.eventstore:
+    image: eventstore/eventstore:latest
+
+  geekstore.product.webapi:
+    image: ${DOCKER_REGISTRY-}geekstoreproductwebapi
+    build:
+      context: .
+      dockerfile: src/Services/Product/GeekStore.Product.WebAPI/Dockerfile
+
+  geekstore.order.webapi:
+    image: ${DOCKER_REGISTRY-}geekstoreorderwebapi
+    build:
+      context: .
+      dockerfile: src/Services/Order/GeekStore.Order.WebAPI/Dockerfile
+
+  geekstore.identity.webapi:
+    image: ${DOCKER_REGISTRY-}geekstoreidentitywebapi
+    build:
+      context: .
+      dockerfile: src/Services/Identity/GeekStore.Identity.WebAPI/Dockerfile
+
+  geekstore.customer.webapi:
+    image: ${DOCKER_REGISTRY-}geekstorecustomerwebapi
+    build:
+      context: .
+      dockerfile: src/Services/Customer/GeekStore.Customer.WebAPI/Dockerfile
+
+  geekstore.coupon.webapi:
+    image: ${DOCKER_REGISTRY-}geekstorecouponwebapi
+    build:
+      context: .
+      dockerfile: src/Services/Coupon/GeekStore.Coupon.WebAPI/Dockerfile
+
+  geekstore.cart.webapi:
+    image: ${DOCKER_REGISTRY-}geekstorecartwebapi
+    build:
+      context: .
+      dockerfile: src/Services/Cart/GeekStore.Cart.WebAPI/Dockerfile

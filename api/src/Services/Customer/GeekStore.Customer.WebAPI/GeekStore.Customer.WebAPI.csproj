@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>8c1f8f0a-b231-49ae-ae3d-035b252bfae7</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..\..\..</DockerfileContext>
+    <DockerComposeProjectPath>..\..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.2" />
+    <PackageReference Include="NetDevPack.Security.Jwt.AspNetCore" Version="7.1.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.32.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\GeekStore.EventSourcing\GeekStore.EventSourcing.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\GeekStore.MessageBus\GeekStore.MessageBus.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\GeekStore.WebApi.Core\GeekStore.WebApi.Core.csproj" />
+    <ProjectReference Include="..\GeekStore.Customer.Application\GeekStore.Customer.Application.csproj" />
+    <ProjectReference Include="..\GeekStore.Customer.Data\GeekStore.Customer.Data.csproj" />
+  </ItemGroup>
+
+</Project>

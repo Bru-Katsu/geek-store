@@ -45,7 +45,7 @@ namespace GeekStore.Coupon.WebAPI.Configuration
             return services;
         }
 
-        public static IApplicationBuilder UseSwaggerConfiguration(this WebApplication app)
+        public static WebApplication UseSwaggerConfiguration(this WebApplication app)
         {
             if(app.Environment.IsDevelopment())
             {

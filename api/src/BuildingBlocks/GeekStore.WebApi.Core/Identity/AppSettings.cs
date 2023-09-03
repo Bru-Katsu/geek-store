@@ -1,6 +1,6 @@
 ﻿namespace GeekStore.WebApi.Core.Identity
 {
-    public class AppSettings
+    public class AuthenticationSettings
     {
         public string JksUrlAuthentication { get; set; }
     }

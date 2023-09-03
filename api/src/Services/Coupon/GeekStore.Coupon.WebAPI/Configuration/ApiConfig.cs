@@ -19,23 +19,38 @@ namespace GeekStore.Coupon.WebAPI.Configuration
                     .AddCouponApplicationServices()
                     .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("Total", builder =>
+                {
+                    builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                });
+
+            });
+
+            services.AddLogging(builder =>
+            {
+                builder
+                    .AddDebug()
+                    .AddConsole()
+                    .AddConfiguration(configuration.GetSection("Logging"))
+                    .SetMinimumLevel(LogLevel.Information);
+            });
+
             services.AddScoped<IAspNetUser, AspNetUser>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             return services;
         }
 
-        public static IApplicationBuilder UseApiConfiguration(this IApplicationBuilder app)
+        public static WebApplication UseApiConfiguration(this WebApplication app)
         {
             app.UseHttpsRedirection();
 
-            app.UseCors(options =>
-            {
-                options
-                    .AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .WithOrigins("http://localhost:4200");
-            });
+            app.UseCors("Total");
 
             app.UseRouting();
             app.UseMiddleware<ExceptionMiddleware>();

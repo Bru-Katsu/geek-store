@@ -18,6 +18,7 @@ namespace GeekStore.Identity.Application.DI
 
             services.AddScoped<IRequestHandler<CreateUserCommand, bool>, UserCommandHandler>();
             services.AddScoped<IRequestHandler<LoginCommand, bool>, UserCommandHandler>();
+            services.AddScoped<IRequestHandler<DeleteUserByEmailCommand, bool>, UserCommandHandler>();
 
             services.AddScoped<INotificationHandler<UserCreatedEvent>, UserEventHandler>();
             services.AddScoped<INotificationHandler<RefreshTokenCreatedEvent>, RefreshTokenEventHandler>();
