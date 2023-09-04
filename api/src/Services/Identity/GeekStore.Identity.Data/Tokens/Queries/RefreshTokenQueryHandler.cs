@@ -18,7 +18,7 @@ namespace GeekStore.Identity.Data.Tokens.Queries
 
         public async Task<RefreshTokenViewModel> Handle(RefreshTokenQuery request, CancellationToken cancellationToken)
         {
-            var query = _refreshTokenRepository.AsQueryable<RefreshToken>();
+            var query = _refreshTokenRepository.AsQueryable();
             var token = await query.FirstOrDefaultAsync(x => x.Id == request.Token, cancellationToken: cancellationToken);
 
 

@@ -86,7 +86,7 @@ namespace GeekStore.Identity.Application.Tokens.Commands
                 return new FailResult<Guid>();
             }
 
-            var refreshTokensByUser = await _refreshTokenRepository.Filter<RefreshToken>(x => x.UserName == request.Email);
+            var refreshTokensByUser = await _refreshTokenRepository.Filter(x => x.UserName == request.Email);
 
             var transaction = _context.Database.BeginTransaction();
 

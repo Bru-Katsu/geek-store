@@ -2,6 +2,6 @@
 
 namespace GeekStore.Identity.Domain.Token.Repositories
 {
-    public interface IRefreshTokenRepository : IRepository
+    public interface IRefreshTokenRepository : IRepository<RefreshToken>
     { }
 }

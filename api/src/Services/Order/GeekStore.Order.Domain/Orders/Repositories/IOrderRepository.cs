@@ -2,7 +2,6 @@
 
 namespace GeekStore.Order.Domain.Orders.Repositories
 {
-    public interface IOrderRepository : IRepository
-    {
-    }
+    public interface IOrderRepository : IRepository<Order>
+    { }
 }

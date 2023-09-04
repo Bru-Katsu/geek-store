@@ -66,7 +66,7 @@ namespace GeekStore.Product.Application.Products.Commands
                 return;
             }
 
-            var entity = await _productRepository.GetById<Domain.Products.Product>(request.Id);
+            var entity = await _productRepository.GetById(request.Id);
             if (entity == null)
             {
                 _notificationService.AddNotification(nameof(request.Id), "Produto não existe!");
@@ -105,7 +105,7 @@ namespace GeekStore.Product.Application.Products.Commands
                 return;
             }
 
-            var entity = await _productRepository.GetById<Domain.Products.Product>(request.Id);
+            var entity = await _productRepository.GetById(request.Id);
             if (entity == null)
             {
                 _notificationService.AddNotification(nameof(request.Id), "Produto não existe!");

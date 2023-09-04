@@ -3,17 +3,17 @@ using System.Linq.Expressions;
 
 namespace GeekStore.Core.Data
 {
-    public interface IRepository
+    public interface IRepository<TEntity> where TEntity : Entity
     {
-        Task<TEntity> GetById<TEntity>(Guid id) where TEntity : Entity;
-        Task<IEnumerable<TEntity>> Filter<TEntity>() where TEntity : Entity;
-        Task<IEnumerable<TEntity>> Filter<TEntity>(Expression<Func<TEntity, bool>> predicate) where TEntity : Entity;
+        Task<TEntity> GetById(Guid id);
+        Task<IEnumerable<TEntity>> Filter();
+        Task<IEnumerable<TEntity>> Filter(Expression<Func<TEntity, bool>> predicate);
 
-        void Insert<TEntity>(TEntity entity) where TEntity : Entity;
-        void Update<TEntity>(TEntity entity) where TEntity : Entity;
-        void Delete<TEntity>(TEntity entity) where TEntity : Entity;
-        void Delete<TEntity>(Guid id) where TEntity : Entity;
-        IQueryable<TEntity> AsQueryable<TEntity>() where TEntity : Entity;
+        void Insert(TEntity entity);
+        void Update(TEntity entity);
+        void Delete(TEntity entity);
+        void Delete(Guid id);
+        IQueryable<TEntity> AsQueryable();
         void SaveChanges();
     }
 }

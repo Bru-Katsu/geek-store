@@ -38,7 +38,7 @@ namespace GeekStore.Product.Tests.CommandHandlerTests
 
             mocker
                 .GetMock<IProductRepository>()
-                .Setup(repo => repo.GetById<Domain.Products.Product>(product.Id))
+                .Setup(repo => repo.GetById(product.Id))
                 .ReturnsAsync(product);
 
             //Act
@@ -79,7 +79,7 @@ namespace GeekStore.Product.Tests.CommandHandlerTests
 
             mocker
                 .GetMock<IProductRepository>()
-                .Setup(repo => repo.GetById<Domain.Products.Product>(product.Id))
+                .Setup(repo => repo.GetById(product.Id))
                 .ReturnsAsync(product);
 
             //Act
@@ -122,7 +122,7 @@ namespace GeekStore.Product.Tests.CommandHandlerTests
 
             mocker
                 .GetMock<IProductRepository>()
-                .Setup(repo => repo.GetById<Domain.Products.Product>(product.Id))
+                .Setup(repo => repo.GetById(product.Id))
                 .ReturnsAsync(product);
 
             //Act
@@ -163,7 +163,7 @@ namespace GeekStore.Product.Tests.CommandHandlerTests
 
             mocker
                 .GetMock<IProductRepository>()
-                .Setup(repo => repo.GetById<Domain.Products.Product>(product.Id))
+                .Setup(repo => repo.GetById(product.Id))
                 .ReturnsAsync(default(Domain.Products.Product));
 
             //Act
@@ -204,7 +204,7 @@ namespace GeekStore.Product.Tests.CommandHandlerTests
 
             mocker
                 .GetMock<IProductRepository>()
-                .Setup(repo => repo.GetById<Domain.Products.Product>(product.Id))
+                .Setup(repo => repo.GetById(product.Id))
                 .ReturnsAsync(product);
 
             //Act
@@ -247,7 +247,7 @@ namespace GeekStore.Product.Tests.CommandHandlerTests
 
             mocker
                 .GetMock<IProductRepository>()
-                .Setup(repo => repo.GetById<Domain.Products.Product>(product.Id))
+                .Setup(repo => repo.GetById(product.Id))
                 .ReturnsAsync(product);
 
             //Act
@@ -288,7 +288,7 @@ namespace GeekStore.Product.Tests.CommandHandlerTests
 
             mocker
                 .GetMock<IProductRepository>()
-                .Setup(repo => repo.GetById<Domain.Products.Product>(product.Id))
+                .Setup(repo => repo.GetById(product.Id))
                 .ReturnsAsync(default(Domain.Products.Product));
 
             //Act
@@ -329,7 +329,7 @@ namespace GeekStore.Product.Tests.CommandHandlerTests
 
             mocker
                 .GetMock<IProductRepository>()
-                .Setup(repo => repo.GetById<Domain.Products.Product>(product.Id))
+                .Setup(repo => repo.GetById(product.Id))
                 .ReturnsAsync(product);
 
             //Act

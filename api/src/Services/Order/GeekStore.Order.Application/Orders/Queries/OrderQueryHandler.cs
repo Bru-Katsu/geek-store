@@ -18,7 +18,7 @@ namespace GeekStore.Order.Application.Orders.Queries
 
         public async Task<OrderViewModel> Handle(OrderQuery request, CancellationToken cancellationToken)
         {
-            var order = await _orderRepository.GetById<Domain.Orders.Order>(request.OrderId);
+            var order = await _orderRepository.GetById(request.OrderId);
 
             return new OrderViewModel
             {
@@ -34,7 +34,7 @@ namespace GeekStore.Order.Application.Orders.Queries
 
         public async Task<Page<OrderListViewModel>> Handle(OrdersListQuery request, CancellationToken cancellationToken)
         {
-            var ordersQuery = _orderRepository.AsQueryable<Domain.Orders.Order>();
+            var ordersQuery = _orderRepository.AsQueryable();
 
             if(request.UserId.HasValue)
                 ordersQuery = ordersQuery.Where(order => order.UserId == request.UserId);

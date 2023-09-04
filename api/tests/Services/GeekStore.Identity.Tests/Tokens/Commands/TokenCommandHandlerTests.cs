@@ -50,7 +50,7 @@ namespace GeekStore.Identity.Tests.Tokens.Commands
 
             mocker
                 .GetMock<IRefreshTokenRepository>()
-                .Setup(repo => repo.GetById<Domain.Token.RefreshToken>(user.Id))
+                .Setup(repo => repo.GetById(user.Id))
                 .ReturnsAsync(token);
 
             mocker
@@ -111,7 +111,7 @@ namespace GeekStore.Identity.Tests.Tokens.Commands
 
             mocker
                 .GetMock<IRefreshTokenRepository>()
-                .Setup(repo => repo.GetById<Domain.Token.RefreshToken>(user.Id))
+                .Setup(repo => repo.GetById(user.Id))
                 .ReturnsAsync(token);
 
             mocker

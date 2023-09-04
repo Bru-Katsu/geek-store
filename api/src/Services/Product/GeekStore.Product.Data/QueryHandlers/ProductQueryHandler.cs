@@ -19,7 +19,7 @@ namespace GeekStore.Product.Data.QueryHandlers
 
         public async Task<Page<ProductsViewModel>> Handle(ProductListQuery request, CancellationToken cancellationToken)
         {
-            var query = _productRepository.AsQueryable<Domain.Products.Product>();
+            var query = _productRepository.AsQueryable();
 
             if (!string.IsNullOrEmpty(request.Name))
                 query = query.Where(x => x.Name.Contains(request.Name));
@@ -34,7 +34,7 @@ namespace GeekStore.Product.Data.QueryHandlers
 
         public async Task<ProductViewModel> Handle(ProductQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _productRepository.GetById<Domain.Products.Product>(request.Id);
+            var entity = await _productRepository.GetById(request.Id);
 
             return new ProductViewModel
             {

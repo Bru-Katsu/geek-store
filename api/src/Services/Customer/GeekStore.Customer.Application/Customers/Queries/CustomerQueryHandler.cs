@@ -18,7 +18,7 @@ namespace GeekStore.Customer.Application.Customers.Queries
 
         public async Task<CustomerViewModel> Handle(CustomerQuery request, CancellationToken cancellationToken)
         {
-            var customer = await _customerRepository.GetById<Domain.Customers.Customer>(request.Id);
+            var customer = await _customerRepository.GetById(request.Id);
 
             return new CustomerViewModel
             {
@@ -32,7 +32,7 @@ namespace GeekStore.Customer.Application.Customers.Queries
 
         public async Task<Page<CustomerListViewModel>> Handle(CustomerListQuery request, CancellationToken cancellationToken)
         {
-            var query = _customerRepository.AsQueryable<Domain.Customers.Customer>();
+            var query = _customerRepository.AsQueryable();
 
             if(!string.IsNullOrEmpty(request.Name))
                 query = query.Where(x => x.Name.Contains(request.Name));

@@ -175,7 +175,7 @@ namespace GeekStore.Customer.Tests.Customers.Commands
 
             mocker
                 .GetMock<ICustomerRepository>()
-                .Setup(repo => repo.GetById<Domain.Customers.Customer>(It.Is<Guid>(id => userId.Equals(id))))
+                .Setup(repo => repo.GetById(It.Is<Guid>(id => userId.Equals(id))))
                 .ReturnsAsync(_customerFixture.CreateValidCustomer);
 
             //Act
@@ -265,7 +265,7 @@ namespace GeekStore.Customer.Tests.Customers.Commands
 
             mocker
                 .GetMock<ICustomerRepository>()
-                .Setup(repo => repo.GetById<Domain.Customers.Customer>(It.Is<Guid>(id => userId.Equals(id))))
+                .Setup(repo => repo.GetById(It.Is<Guid>(id => userId.Equals(id))))
                 .ReturnsAsync(_customerFixture.CreateInvalidCustomer);
 
             //Act

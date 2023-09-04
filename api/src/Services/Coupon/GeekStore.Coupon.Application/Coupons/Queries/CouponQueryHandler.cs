@@ -15,7 +15,7 @@ namespace GeekStore.Coupon.Application.Coupons.Queries
 
         public async Task<CouponViewModel> Handle(CouponQuery request, CancellationToken cancellationToken)
         {
-            var entities = await _couponRepository.Filter<Domain.Coupons.Coupon>(e => e.CouponCode == request.CouponCode);
+            var entities = await _couponRepository.Filter(e => e.CouponCode == request.CouponCode);
             var coupon = entities.First();
 
             return new CouponViewModel

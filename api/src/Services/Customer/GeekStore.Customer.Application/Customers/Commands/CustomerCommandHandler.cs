@@ -62,7 +62,7 @@ namespace GeekStore.Customer.Application.Customers.Commands
                 return;
             }
 
-            var customer = await _customerRepository.GetById<Domain.Customers.Customer>(request.Id);
+            var customer = await _customerRepository.GetById(request.Id);
             if(customer == null)
             {
                 _notificationService.AddNotification(nameof(customer.Id), "Cliente inexistente!");

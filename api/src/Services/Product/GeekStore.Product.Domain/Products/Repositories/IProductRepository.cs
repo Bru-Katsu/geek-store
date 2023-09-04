@@ -2,6 +2,6 @@
 
 namespace GeekStore.Product.Domain.Products.Repositories
 {
-    public interface IProductRepository : IRepository
+    public interface IProductRepository : IRepository<Product>
     { }
 }

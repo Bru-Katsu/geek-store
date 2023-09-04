@@ -2,6 +2,6 @@
 
 namespace GeekStore.Coupon.Domain.Coupons.Repositories
 {
-    public interface ICouponRepository : IRepository
+    public interface ICouponRepository : IRepository<Coupon>
     { }
 }

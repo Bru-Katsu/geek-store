@@ -2,6 +2,6 @@
 
 namespace GeekStore.Customer.Domain.Customers.Repositories
 {
-    public interface ICustomerRepository : IRepository
+    public interface ICustomerRepository : IRepository<Customer>
     { }
 }

@@ -14,7 +14,7 @@ namespace GeekStore.Customer.Domain.Customers.Specifications
 
         public async Task<bool> IsSatisfiedBy(Customer entity)
         {
-            var customers = await _customerRepository.Filter<Customer>(c => c.Document == entity.Document);
+            var customers = await _customerRepository.Filter(c => c.Document == entity.Document);
             return !customers.Any();
         }
     }
