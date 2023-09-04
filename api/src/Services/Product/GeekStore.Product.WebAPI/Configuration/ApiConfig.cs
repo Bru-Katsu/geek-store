@@ -1,11 +1,10 @@
 ﻿using GeekStore.WebApi.Core.User;
 using GeekStore.WebApi.Core.Identity;
 using GeekStore.EventSourcing.DI;
-using GeekStore.Product.Application.DI;
 using GeekStore.Core.DI;
 using GeekStore.Product.Data.Configurations;
 using GeekStore.WebApi.Core.Middlewares;
-using GeekStore.Product.WebAPI.Configuration;
+using GeekStore.Product.Application;
 
 namespace GeekStore.Product.WebAPI.Configuration
 {
@@ -18,9 +17,8 @@ namespace GeekStore.Product.WebAPI.Configuration
 
             services.AddCoreServices()
                     .AddProductDataServices()
-                    .AddProductApplicationServices()
                     .AddEventSourcing()
-                    .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
+                    .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<ApplicationEntryPoint>());
 
             services.AddCors(options =>
             {

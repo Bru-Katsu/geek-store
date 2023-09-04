@@ -2,9 +2,9 @@
 using GeekStore.WebApi.Core.Identity;
 using GeekStore.Core.DI;
 using GeekStore.Cart.Data.DI;
-using GeekStore.Cart.Application.DI;
 using GeekStore.WebApi.Core.Middlewares;
 using GeekStore.Core.Extensions;
+using GeekStore.Cart.Application;
 
 namespace GeekStore.Cart.WebAPI.Configurations
 {
@@ -16,8 +16,7 @@ namespace GeekStore.Cart.WebAPI.Configurations
 
             services.AddCoreServices()
                     .AddCartDataServices(configuration.GetCaching("RedisAddress"))
-                    .AddCartApplicationServices()
-                    .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
+                    .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<ApplicationEntryPoint>());
 
             services.AddCors(options =>
             {

@@ -5,8 +5,7 @@ namespace GeekStore.Customer.Application.Customers.Queries
 {
     public class CustomerListQuery : QueryPaged<CustomerListViewModel>
     {
-        public string Name { get; set; }
-        public string Document { get; set; }
-
+        public string? Name { get; set; }
+        public string? Document { get; set; }
     }
 }

@@ -2,9 +2,9 @@ using GeekStore.WebApi.Core.User;
 using GeekStore.Core.DI;
 using GeekStore.WebApi.Core.Middlewares;
 using GeekStore.Customer.Data.DI;
-using GeekStore.Customer.Application.DI;
 using GeekStore.WebApi.Core.Identity;
 using GeekStore.MessageBus;
+using GeekStore.Customer.Application;
 
 namespace GeekStore.Customer.WebAPI.Configurations
 {
@@ -17,10 +17,9 @@ namespace GeekStore.Customer.WebAPI.Configurations
 
             services.AddCoreServices()
                     .AddCustomerDataServices()
-                    .AddCustomerApplicationServices()
                     .AddBackgroundServices()
                     .AddMessageBus(configuration.GetConnectionString("MessageBusConnection"))
-                    .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
+                    .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<ApplicationEntryPoint>());
 
             services.AddCors(options =>
             {

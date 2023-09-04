@@ -1,10 +1,10 @@
-using GeekStore.Identity.Application.DI;
 using GeekStore.Identity.Data.DI;
 using GeekStore.EventSourcing.DI;
 using GeekStore.WebApi.Core.User;
 using GeekStore.Identity.Domain.DI;
 using GeekStore.Core.DI;
 using GeekStore.MessageBus;
+using GeekStore.Identity.Application;
 
 namespace GeekStore.Identity.WebAPI.Configurations
 {
@@ -16,12 +16,11 @@ namespace GeekStore.Identity.WebAPI.Configurations
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddCoreServices()
-                    .AddIdentityApplicationServices()
                     .AddIdentityDataServices()
                     .AddIdentityDomainServices()
                     .AddEventSourcing()
                     .AddMessageBus(configuration.GetConnectionString("MessageBusConnection"))
-                    .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
+                    .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<ApplicationEntryPoint>());
 
             return services;
         }

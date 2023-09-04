@@ -1,10 +1,10 @@
 ﻿using GeekStore.WebApi.Core.User;
 using GeekStore.WebApi.Core.Identity;
 using GeekStore.EventSourcing.DI;
-using GeekStore.Order.Application.DI;
 using GeekStore.Core.DI;
 using GeekStore.WebApi.Core.Middlewares;
 using GeekStore.Order.Data.DI;
+using GeekStore.Order.Application;
 
 namespace GeekStore.Order.WebAPI.Configuration
 {
@@ -17,9 +17,8 @@ namespace GeekStore.Order.WebAPI.Configuration
 
             services.AddCoreServices()
                     .AddOrderDataServices()
-                    .AddOrderApplicationServices()
                     .AddEventSourcing()
-                    .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
+                    .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<ApplicationEntryPoint>());
 
             services.AddCors(options =>
             {

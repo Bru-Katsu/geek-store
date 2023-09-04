@@ -2,8 +2,8 @@
 using GeekStore.Core.DI;
 using GeekStore.WebApi.Core.Middlewares;
 using GeekStore.Coupon.Data.DI;
-using GeekStore.Coupon.Application.DI;
 using GeekStore.WebApi.Core.Identity;
+using GeekStore.Coupon.Application;
 
 namespace GeekStore.Coupon.WebAPI.Configuration
 {
@@ -16,8 +16,7 @@ namespace GeekStore.Coupon.WebAPI.Configuration
 
             services.AddCoreServices()
                     .AddCouponDataServices()
-                    .AddCouponApplicationServices()
-                    .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
+                    .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<ApplicationEntryPoint>());
 
             services.AddCors(options =>
             {
