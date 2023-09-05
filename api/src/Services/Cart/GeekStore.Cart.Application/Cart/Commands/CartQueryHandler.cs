@@ -3,7 +3,7 @@ using GeekStore.Cart.Application.Cart.ViewModels;
 using GeekStore.Cart.Domain.Carts.Repositories;
 using MediatR;
 
-namespace GeekStore.Cart.Data.QueryHandlers
+namespace GeekStore.Cart.Application.Cart.Commands
 {
     public class CartQueryHandler : IRequestHandler<CartQuery, CartViewModel>
     {

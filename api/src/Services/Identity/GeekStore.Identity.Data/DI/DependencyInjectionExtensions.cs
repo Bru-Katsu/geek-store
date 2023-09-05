@@ -1,8 +1,7 @@
 ﻿using GeekStore.Identity.Application.Tokens.Queries;
 using GeekStore.Identity.Application.Tokens.ViewModels;
 using GeekStore.Identity.Data.Context;
-using GeekStore.Identity.Data.Tokens.Queries;
-using GeekStore.Identity.Data.Tokens.Repositories;
+using GeekStore.Identity.Data.Repositories;
 using GeekStore.Identity.Domain.Token.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +15,6 @@ namespace GeekStore.Identity.Data.DI
         {
             services.AddTransient<DbContext, IdentityContext>(provider => provider.GetService<IdentityContext>());
             services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
-            services.AddScoped<IRequestHandler<RefreshTokenQuery, RefreshTokenViewModel>, RefreshTokenQueryHandler>();
 
             return services;
         }

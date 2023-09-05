@@ -1,13 +1,11 @@
-﻿using GeekStore.Identity.Application.Tokens.Queries;
-using GeekStore.Identity.Application.Tokens.ViewModels;
-using GeekStore.Identity.Domain.Token;
+﻿using GeekStore.Identity.Application.Tokens.ViewModels;
 using GeekStore.Identity.Domain.Token.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace GeekStore.Identity.Data.Tokens.Queries
+namespace GeekStore.Identity.Application.Tokens.Queries
 {
-    internal class RefreshTokenQueryHandler : IRequestHandler<RefreshTokenQuery, RefreshTokenViewModel>
+    public class RefreshTokenQueryHandler : IRequestHandler<RefreshTokenQuery, RefreshTokenViewModel>
     {
         private readonly IRefreshTokenRepository _refreshTokenRepository;
 

@@ -1,14 +1,13 @@
 ﻿using GeekStore.Core.Models;
-using GeekStore.Product.Application.Products.Queries;
 using GeekStore.Product.Application.Products.ViewModels;
 using GeekStore.Product.Domain.Products.Repositories;
 using MediatR;
 using GeekStore.Core.Data.Extensions;
 
-namespace GeekStore.Product.Data.QueryHandlers
+namespace GeekStore.Product.Application.Products.Queries
 {
-    internal class ProductQueryHandler : IRequestHandler<ProductListQuery, Page<ProductsViewModel>>,
-                                         IRequestHandler<ProductQuery, ProductViewModel>
+    public class ProductQueryHandler : IRequestHandler<ProductListQuery, Page<ProductsViewModel>>,
+                                       IRequestHandler<ProductQuery, ProductViewModel>
     {
         private readonly IProductRepository _productRepository;
 
