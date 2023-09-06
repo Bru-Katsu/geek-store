@@ -43,11 +43,13 @@ namespace GeekStore.Order.WebAPI.Controllers
         [HttpGet("{userId}/all")]
         [Authorize]
         [ProducesResponseType(typeof(OrderListViewModel), StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetAllOrders(Guid userId)
+        public async Task<IActionResult> GetAllOrders([FromRoute] Guid userId, [FromQuery] int pageIndex, [FromQuery] int pageSize)
         {
             var orders = await _mediator.Send(new OrdersListQuery()
             {
-                UserId = userId
+                UserId = userId,
+                PageSize = pageSize,
+                PageIndex = pageIndex
             });
 
             return Ok(orders);

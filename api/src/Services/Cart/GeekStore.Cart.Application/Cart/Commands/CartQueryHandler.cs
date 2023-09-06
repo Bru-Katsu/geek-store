@@ -18,6 +18,9 @@ namespace GeekStore.Cart.Application.Cart.Commands
         {
             var cart = await _cartRepository.GetCartAsync(request.UserId);
 
+            if (cart == null)
+                return default;
+
             return new CartViewModel
             {
                 UserId = cart.Id,

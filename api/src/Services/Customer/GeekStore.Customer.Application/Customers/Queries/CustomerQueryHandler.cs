@@ -20,6 +20,9 @@ namespace GeekStore.Customer.Application.Customers.Queries
         {
             var customer = await _customerRepository.GetById(request.Id);
 
+            if (customer is null)
+                return default;
+
             return new CustomerViewModel
             {
                 Id = customer.Id,
