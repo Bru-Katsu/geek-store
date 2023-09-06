@@ -57,7 +57,7 @@ namespace GeekStore.Cart.Application.Cart.Commands
                 return;
             }
 
-            cart.RemoveItem(request.UserId);
+            cart.RemoveItem(request.ProductId);
 
             if (!cart.IsValid())
             {
