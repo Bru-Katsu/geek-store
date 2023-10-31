@@ -17,7 +17,7 @@ namespace GeekStore.Customer.Domain.Customers
             Type = AddressType.Common;
         }
 
-        public Customer Customer { get; private set; }
+        public virtual Customer Customer { get; private set; }
         public Guid CustomerId { get; private set; }
 
         public string Street { get; private set; }

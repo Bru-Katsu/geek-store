@@ -131,11 +131,10 @@ namespace GeekStore.Order.Data.Migrations
                                 .HasColumnType("uniqueidentifier");
 
                             b1.Property<string>("CouponCode")
-                                .IsRequired()
                                 .HasMaxLength(10)
                                 .HasColumnType("nvarchar(10)");
 
-                            b1.Property<decimal>("DiscountAmount")
+                            b1.Property<decimal?>("DiscountAmount")
                                 .HasPrecision(18, 6)
                                 .HasColumnType("decimal(18,6)");
 
@@ -150,8 +149,7 @@ namespace GeekStore.Order.Data.Migrations
                     b.Navigation("Address")
                         .IsRequired();
 
-                    b.Navigation("Coupon")
-                        .IsRequired();
+                    b.Navigation("Coupon");
                 });
 
             modelBuilder.Entity("GeekStore.Order.Domain.Orders.OrderItem", b =>

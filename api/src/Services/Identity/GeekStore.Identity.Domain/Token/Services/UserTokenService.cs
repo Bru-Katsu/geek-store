@@ -3,34 +3,33 @@ using Microsoft.IdentityModel.Tokens;
 using NetDevPack.Security.Jwt.Core.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using GeekStore.WebApi.Core.User;
 using GeekStore.Core.Extensions;
 using Microsoft.Extensions.Configuration;
-using GeekStore.WebApi.Core.Identity;
+using GeekStore.WebApi.Core.User;
 
 namespace GeekStore.Identity.Domain.Token.Services
 {
     public class UserTokenService : IUserTokenService
     {
-        private readonly UserManager<Domain.User.User> _userManager;
+        private readonly UserManager<User.User> _userManager;
         private readonly IJwtService _jwtService;
-        private readonly IAspNetUser _aspNetUser;
         private readonly JwtSecurityTokenHandler _tokenHandler;
         private readonly IConfiguration _configuration;
+        private readonly IAspNetUser _aspNetUser;
 
-        public UserTokenService(UserManager<Domain.User.User> userManager,
+        public UserTokenService(UserManager<User.User> userManager,
                                 IJwtService jwtService,
-                                IAspNetUser aspNetUser,
-                                IConfiguration configuration)
+                                IConfiguration configuration,
+                                IAspNetUser aspNetUser)
         {
             _userManager = userManager;
             _jwtService = jwtService;
-            _aspNetUser = aspNetUser;
             _tokenHandler = new JwtSecurityTokenHandler();
             _configuration = configuration;
+            _aspNetUser = aspNetUser;
         }
 
-        public async Task<ClaimsIdentity> GetConfiguredUserClaims(IEnumerable<Claim> claims, Domain.User.User user)
+        public async Task<ClaimsIdentity> GetConfiguredUserClaims(IEnumerable<Claim> claims, User.User user)
         {
             var userRoles = await _userManager.GetRolesAsync(user);
 
@@ -41,6 +40,11 @@ namespace GeekStore.Identity.Domain.Token.Services
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Nbf, DateTime.UtcNow.ToUnixEpochDate().ToString()),
                 new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToUnixEpochDate().ToString(), ClaimValueTypes.Integer64),
+                new Claim(JwtRegisteredClaimNames.Aud, _configuration["AppTokenSettings:CartServiceAudience"]),
+                new Claim(JwtRegisteredClaimNames.Aud, _configuration["AppTokenSettings:CustomerServiceAudience"]),
+                new Claim(JwtRegisteredClaimNames.Aud, _configuration["AppTokenSettings:OrderServiceAudience"]),
+                new Claim(JwtRegisteredClaimNames.Aud, _configuration["AppTokenSettings:ProductServiceAudience"]),
+                new Claim(JwtRegisteredClaimNames.Aud, _configuration["AppTokenSettings:CouponServiceAudience"]),
             }).Concat(userRoles.Select(role => new Claim("role", role)));
 
             return new ClaimsIdentity(userClaims);
@@ -48,17 +52,17 @@ namespace GeekStore.Identity.Domain.Token.Services
 
         public async Task<string> EncodeJwtToken(ClaimsIdentity identityClaims)
         {
+            var now = DateTime.Now;
+
             var key = await _jwtService.GetCurrentSigningCredentials();
-
-            //var appSettingsSection = _configuration.Get<AuthenticationSettings>();
-
-            var issuer = new Uri("https://geekstore.identity.webapi:49170/jwks");
+            var issuer = new Uri(_configuration["AuthenticationSettings:JksUrlAuthentication"]);
             var descriptor = new SecurityTokenDescriptor()
             {
-                //Issuer = $"{_aspNetUser.GetHttpContext().Request.Scheme}://{_aspNetUser.GetHttpContext().Request.Host}",
                 Issuer = $"{issuer.Scheme}://{issuer.Authority}",
                 Subject = identityClaims,
-                Expires = DateTime.UtcNow.AddHours(1),
+                IssuedAt = now,
+                NotBefore = now,
+                Expires = now.AddHours(_configuration.GetValue<int>("AppTokenSettings:TokenExpirationHours")),
                 SigningCredentials = key,
             };
 

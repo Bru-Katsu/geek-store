@@ -8,13 +8,13 @@ namespace GeekStore.Order.Application.Orders.DTOs
 {
     public class CouponDTO
     {
-        public CouponDTO(string couponCode, decimal discountAmount)
+        public CouponDTO(string couponCode, decimal? discountAmount)
         {
             CouponCode = couponCode;
             DiscountAmount = discountAmount;
         }
 
         public string CouponCode { get; set; }
-        public decimal DiscountAmount { get; set; }
+        public decimal? DiscountAmount { get; set; }
     }
 }

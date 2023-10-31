@@ -40,7 +40,7 @@ namespace GeekStore.Identity.Tests.Tokens.Commands
 
             var configuration = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?>()
             {
-                ["AppTokenSettings:RefreshTokenExpiration"] = "1"
+                ["AppTokenSettings:RefreshTokenExpirationHours"] = "1"
             }).Build();
 
             mocker.Use<IConfiguration>(configuration);
@@ -101,7 +101,7 @@ namespace GeekStore.Identity.Tests.Tokens.Commands
 
             var configuration = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?>()
             {
-                ["AppTokenSettings:RefreshTokenExpiration"] = "1"
+                ["AppTokenSettings:RefreshTokenExpirationHours"] = "1"
             }).Build();
 
             mocker.Use<IConfiguration>(configuration);

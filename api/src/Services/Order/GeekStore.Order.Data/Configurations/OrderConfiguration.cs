@@ -43,9 +43,11 @@ namespace GeekStore.Order.Data.Configurations
             builder.OwnsOne(order => order.Coupon, coupon =>
             {
                 coupon.Property(c => c.CouponCode)
-                      .HasMaxLength(10);
+                      .HasMaxLength(10)
+                      .IsRequired(false);
 
-                coupon.Property(c => c.DiscountAmount);
+                coupon.Property(c => c.DiscountAmount)
+                      .IsRequired(false);
             });
         }
     }

@@ -3,7 +3,6 @@ using GeekStore.Identity.Application.Tokens.ViewModels;
 using GeekStore.Identity.Domain.Token.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
-using GeekStore.Identity.Domain.Token.ValueObjects;
 using GeekStore.Identity.Domain.Token.Services;
 using GeekStore.Identity.Application.Tokens.Events;
 using GeekStore.Identity.Domain.User;
@@ -54,15 +53,13 @@ namespace GeekStore.Identity.Application.Tokens.Commands
             var claims = await _userManager.GetClaimsAsync(user);
             var identityClaims = await _userTokenService.GetConfiguredUserClaims(claims, user);
             var encodedToken = await _userTokenService.EncodeJwtToken(identityClaims);
-
-            var userClaims = claims.Select(c => new UserClaim(c.Type, c.Value));
+            var expirationHours = _configuration.GetValue<int>("AppTokenSettings:TokenExpirationHours");
 
             return new SuccessResult<TokenResponseViewModel>(new TokenResponseViewModel
             {
                 AcessToken = encodedToken,
                 RefreshToken = request.RefreshTokenId,
-                ExpiresIn = TimeSpan.FromHours(1).TotalSeconds,
-                UserToken = new UserToken(user.Id, user.Email, userClaims)
+                ExpiresIn = TimeSpan.FromHours(expirationHours).TotalSeconds,
             });
         }
 
@@ -74,10 +71,8 @@ namespace GeekStore.Identity.Application.Tokens.Commands
                 return default;
             }
 
-            int hours = _configuration.GetRequiredSection("AppTokenSettings")
-                                      .GetValue<int>("RefreshTokenExpiration");
-
-            DateTime expiresIn = DateTime.UtcNow.AddHours(hours);
+            var hours = _configuration.GetValue<int>("AppTokenSettings:RefreshTokenExpirationHours");
+            var expiresIn = DateTime.UtcNow.AddHours(hours);
 
             var refreshToken = new RefreshToken(request.Email, expiresIn);
             if (!refreshToken.IsValid())
@@ -97,8 +92,8 @@ namespace GeekStore.Identity.Application.Tokens.Commands
 
             _refreshTokenRepository.Insert(refreshToken);
 
-            await _context.SaveChangesAsync();
-            await transaction.CommitAsync();
+            await _context.SaveChangesAsync(cancellationToken);
+            await transaction.CommitAsync(cancellationToken);
 
             await _mediator.Publish(new RefreshTokenCreatedEvent(refreshToken));
 

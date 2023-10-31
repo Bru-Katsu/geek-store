@@ -4,7 +4,7 @@
     {
         public IEnumerable<OrderItemRequest> Items { get; set; }
         public OrderAddressRequest Address { get; set; }
-        public OrderCouponRequest Coupon { get; set; }
+        public OrderCouponRequest? Coupon { get; set; }
     }
 
     public class OrderAddressRequest

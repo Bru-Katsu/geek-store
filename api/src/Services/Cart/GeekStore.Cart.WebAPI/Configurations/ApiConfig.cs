@@ -15,7 +15,7 @@ namespace GeekStore.Cart.WebAPI.Configurations
             services.AddEndpointsApiExplorer();
 
             services.AddCoreServices()
-                    .AddCartDataServices(configuration.GetCaching("RedisAddress"))
+                    .AddCartDataServices(configuration.GetCaching("RedisConnection"))
                     .AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<ApplicationEntryPoint>());
 
             services.AddCors(options =>

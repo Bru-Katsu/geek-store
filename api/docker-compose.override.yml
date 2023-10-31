@@ -8,6 +8,8 @@ services:
       - MSSQL_SA_PASSWORD=${MSSQL_ADMIN_PASSWORD}
     ports:
       - "1433:1433"
+    volumes:
+      - geekstore-sqldata:/var/opt/mssql
 
   geekstore.rabbitmq:
     container_name: geekstore.rabbit
@@ -20,6 +22,11 @@ services:
 
   geekstore.cart.redis:
     container_name: geekstore.cart.redis
+    environment:
+     - REDIS_PASSWORD=${REDIS_PASSWORD}
+
+  geekstore.gateway.redis:
+    container_name: geekstore.gateway.redis
     environment:
      - REDIS_PASSWORD=${REDIS_PASSWORD}
 
@@ -41,11 +48,9 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:49158;http://+:49159
       - AuthenticationSettings__JksUrlAuthentication=${JWT_AUTH_URL}
+      - AuthenticationSettings__JksAudience=${PRODUCT_SERVICE_AUD}
       - ConnectionStrings__EventStoreConnection=${EVENTSTORE_CONNECTION}
       - ConnectionStrings__SqlServerConnection=${PRODUCT_SERVICE_SQL}
-    ports:
-      - "49159:49159"
-      - "49158:49158"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
@@ -60,11 +65,9 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:49172;http://+:49171
       - AuthenticationSettings__JksUrlAuthentication=${JWT_AUTH_URL}
+      - AuthenticationSettings__JksAudience=${ORDER_SERVICE_AUD}
       - ConnectionStrings__EventStoreConnection=${EVENTSTORE_CONNECTION}
       - ConnectionStrings__SqlServerConnection=${ORDER_SERVICE_SQL}
-    ports:
-      - "49171:49171"
-      - "49172:49172"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
@@ -82,9 +85,13 @@ services:
       - ConnectionStrings__EventStoreConnection=${EVENTSTORE_CONNECTION}
       - ConnectionStrings__MessageBusConnection=${RABBIT_CONNECTION}
       - ConnectionStrings__SqlServerConnection=${IDENTITY_SERVICE_SQL}
-    ports:
-      - "49169:49169"
-      - "49170:49170"
+      - AppTokenSettings__RefreshTokenExpirationHours=8
+      - AppTokenSettings__TokenExpirationHours=1
+      - AppTokenSettings__CartServiceAudience=${CART_SERVICE_AUD}
+      - AppTokenSettings__CustomerServiceAudience=${CUSTOMER_SERVICE_AUD}
+      - AppTokenSettings__OrderServiceAudience=${ORDER_SERVICE_AUD}
+      - AppTokenSettings__ProductServiceAudience=${PRODUCT_SERVICE_AUD}
+      - AppTokenSettings__CouponServiceAudience=${COUPON_SERVICE_AUD}
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
@@ -99,12 +106,10 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:49180;http://+:49179
       - AuthenticationSettings__JksUrlAuthentication=${JWT_AUTH_URL}
+      - AuthenticationSettings__JksAudience=${CUSTOMER_SERVICE_AUD}
       - ConnectionStrings__EventStoreConnection=${EVENTSTORE_CONNECTION}
       - ConnectionStrings__MessageBusConnection=${RABBIT_CONNECTION}
       - ConnectionStrings__SqlServerConnection=${CUSTOMER_SERVICE_SQL}
-    ports:
-      - "49179:49179"
-      - "49180:49180"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
@@ -120,10 +125,8 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:49155;http://+:49154
       - AuthenticationSettings__JksUrlAuthentication=${JWT_AUTH_URL}
+      - AuthenticationSettings__JksAudience=${COUPON_SERVICE_AUD}
       - ConnectionStrings__SqlServerConnection=${COUPON_SERVICE_SQL}
-    ports:
-      - "49154:49154"
-      - "49155:49155"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
@@ -137,13 +140,41 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:49157;http://+:49156
       - AuthenticationSettings__JksUrlAuthentication=${JWT_AUTH_URL}
-      - CacheSettings__RedisAddress=geekstore.cart.redis:6379,password=${REDIS_PASSWORD}
-    ports:
-      - "49156:49156"
-      - "49157:49157"
+      - AuthenticationSettings__JksAudience=${CART_SERVICE_AUD}
+      - CacheSettings__RedisConnection=geekstore.cart.redis:6379,password=${REDIS_PASSWORD}
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
     depends_on:
       - geekstore.cart.redis
       - geekstore.identity.webapi
+
+  geekstore.website.gateway.webapi:
+    container_name: geekstore.website.gateway.webapi
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:49187;http://+:49188
+      - ServicesSettings__CartApi=https://geekstore.cart.webapi:49157/api
+      - ServicesSettings__CustomerApi=https://geekstore.customer.webapi:49180/api
+      - ServicesSettings__CouponApi=https://geekstore.coupon.webapi:49155/api
+      - ServicesSettings__OrderApi=https://geekstore.order.webapi:49172/api
+      - ServicesSettings__IdentityApi=https://geekstore.identity.webapi:49170/api
+      - ServicesSettings__ProductApi=https://geekstore.product.webapi:49158/api
+      - AuthenticationSettings__JksUrlAuthentication=${JWT_AUTH_URL}
+      - CacheSettings__RedisConnection=geekstore.gateway.redis:6379,password=${REDIS_PASSWORD}
+    ports:
+      - "49187:49187"
+      - "49188:49188"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+      - geekstore.product.webapi
+      - geekstore.order.webapi
+      - geekstore.identity.webapi
+      - geekstore.customer.webapi
+      - geekstore.coupon.webapi
+      - geekstore.cart.webapi
+volumes:
+  geekstore-sqldata:
+    external: false

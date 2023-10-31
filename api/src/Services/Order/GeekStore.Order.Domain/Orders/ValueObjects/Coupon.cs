@@ -6,14 +6,14 @@ namespace GeekStore.Order.Domain.Orders.ValueObjects
 {
     public class Coupon : ValueObject
     {
-        public Coupon(string couponCode, decimal discountAmount)
+        public Coupon(string couponCode, decimal? discountAmount)
         {
             CouponCode = couponCode;
             DiscountAmount = discountAmount;
         }
 
         public string CouponCode { get; }
-        public decimal DiscountAmount { get; }
+        public decimal? DiscountAmount { get; }
 
         public override ValidationResult Validate()
         {

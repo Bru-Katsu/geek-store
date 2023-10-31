@@ -30,7 +30,7 @@ namespace GeekStore.Order.Domain.Orders
             Address = address;
         }
 
-        public Coupon Coupon { get; private set; }
+        public Coupon? Coupon { get; private set; }
         public void ApplyCoupon(Coupon coupon)
         {
             Coupon = coupon;
@@ -94,7 +94,7 @@ namespace GeekStore.Order.Domain.Orders
                 return;
 
             decimal value = Total;
-            decimal discount = value * Coupon.DiscountAmount / 100;
+            decimal discount = value * Coupon.DiscountAmount.Value / 100;
 
             value -= discount;
 

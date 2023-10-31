@@ -11,7 +11,12 @@ namespace GeekStore.Customer.Data.DI
         {
             var connection = configuration.GetConnectionString("SqlServerConnection");
 
-            services.AddDbContext<CustomerDataContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<CustomerDataContext>(options =>
+            {
+                options.UseSqlServer(connection);
+                options.UseLazyLoadingProxies();
+            });
+
             return services;
         }
     }

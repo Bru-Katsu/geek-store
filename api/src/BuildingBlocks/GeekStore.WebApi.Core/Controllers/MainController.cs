@@ -18,7 +18,7 @@ namespace GeekStore.WebApi.Core.Controllers
         
         protected ActionResult CreateResponse(object result = null)
         {
-            if (HasErrors())
+            if (!HasErrors())
                 return Ok(result);
 
             return BadRequest(GetErrors());
@@ -41,7 +41,7 @@ namespace GeekStore.WebApi.Core.Controllers
             return CreateResponse();
         }
 
-        protected bool HasErrors() => !_notificationService.GetNotifications().Any();
+        protected bool HasErrors() => _notificationService.GetNotifications().Any();
 
         protected void AddValidationError(string erro) => _notificationService.AddNotification("error", erro);
 

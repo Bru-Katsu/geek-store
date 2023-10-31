@@ -1,4 +1,5 @@
-﻿using GeekStore.Core.Notifications;
+﻿using GeekStore.Core.Models;
+using GeekStore.Core.Notifications;
 using GeekStore.Customer.Application.Customers.Queries;
 using GeekStore.Customer.Application.Customers.ViewModels;
 using GeekStore.WebApi.Core.Controllers;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GeekStore.Customer.WebAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class CustomerController : MainController
     {
@@ -20,7 +22,6 @@ namespace GeekStore.Customer.WebAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize]
         [ProducesResponseType(typeof(CustomerViewModel), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetCustomer(Guid id)
@@ -36,9 +37,24 @@ namespace GeekStore.Customer.WebAPI.Controllers
             return Ok(customer);
         }
 
+        [HttpGet("users/{userId}")]
+        [ProducesResponseType(typeof(CustomerViewModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetCustomerByUserId(Guid userId)
+        {
+            var customer = await _mediator.Send(new CustomerByUserQuery()
+            {
+                UserId = userId
+            });
+
+            if (customer == null)
+                return NotFound();
+
+            return Ok(customer);
+        }
+
         [HttpGet]
-        [Authorize]
-        [ProducesResponseType(typeof(CustomerViewModel), StatusCodes.Status200OK)]        
+        [ProducesResponseType(typeof(Page<CustomerListViewModel>), StatusCodes.Status200OK)]        
         public async Task<IActionResult> GetCustomers([FromQuery] CustomerListQuery query)
         {
             var customer = await _mediator.Send(query);

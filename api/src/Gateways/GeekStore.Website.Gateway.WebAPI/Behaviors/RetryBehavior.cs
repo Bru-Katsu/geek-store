@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using Polly;
 
-namespace GeekStore.Core.Behaviors
+namespace GeekStore.Website.Gateway.WebAPI.Behaviors
 {
-    public class RetryBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    public class RetryBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
     {
         private readonly int _maxRetryAttempts;
         private readonly TimeSpan _pauseBetweenFailures;

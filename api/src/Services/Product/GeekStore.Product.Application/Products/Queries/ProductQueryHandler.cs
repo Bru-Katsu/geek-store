@@ -34,6 +34,9 @@ namespace GeekStore.Product.Application.Products.Queries
         public async Task<ProductViewModel> Handle(ProductQuery request, CancellationToken cancellationToken)
         {
             var entity = await _productRepository.GetById(request.Id);
+            
+            if (entity is null)
+                return default;
 
             return new ProductViewModel
             {

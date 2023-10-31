@@ -23,6 +23,7 @@ namespace GeekStore.WebApi.Core.Identity
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
             }
             ).AddJwtBearer(bearerOptions =>
             {
@@ -34,7 +35,9 @@ namespace GeekStore.WebApi.Core.Identity
                     ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
                 }; 
                 bearerOptions.SaveToken = true;
-                bearerOptions.SetJwksOptions(new JwkOptions(appSettings.JksUrlAuthentication));
+
+                var options = new JwkOptions(appSettings.JksUrlAuthentication, audience: appSettings.JksAudience);
+                bearerOptions.SetJwksOptions(options);
             });
 
             return builder;

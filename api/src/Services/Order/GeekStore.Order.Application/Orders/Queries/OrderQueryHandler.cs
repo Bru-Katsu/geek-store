@@ -25,7 +25,7 @@ namespace GeekStore.Order.Application.Orders.Queries
                 Id = order.Id,
                 CreationDate = order.CreationDate,
                 Address = new DTOs.AddressDTO(order.Address.Street, order.Address.City, order.Address.State, order.Address.Country, order.Address.ZipCode),
-                Coupon = new DTOs.CouponDTO(order.Coupon.CouponCode, order.Coupon.DiscountAmount),
+                Coupon = new DTOs.CouponDTO(order?.Coupon?.CouponCode, order?.Coupon?.DiscountAmount),
                 Items = order.OrderItems.Select(i => new DTOs.OrderItemDTO(i.ProductId, i.ProductName, i.ProductImage, i.Quantity, i.Price)),
                 Total = order.Total,
                 TotalDiscount = order.TotalDiscount,

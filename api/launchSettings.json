@@ -9,7 +9,8 @@
         "geekstore.identity.webapi": "StartDebugging",
         "geekstore.customer.webapi": "StartDebugging",
         "geekstore.coupon.webapi": "StartDebugging",
-        "geekstore.cart.webapi": "StartDebugging"
+        "geekstore.cart.webapi": "StartDebugging",
+        "geekstore.website.gateway.webapi": "StartDebugging"
       }
     }
   }

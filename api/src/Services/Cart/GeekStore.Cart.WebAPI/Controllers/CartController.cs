@@ -22,7 +22,6 @@ namespace GeekStore.Cart.WebAPI.Controllers
 
         [Authorize]
         [HttpGet("{userId:guid}")]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(CartViewModel), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetCart([FromRoute] Guid userId)
         {
@@ -30,9 +29,6 @@ namespace GeekStore.Cart.WebAPI.Controllers
             { 
                 UserId = userId
             });
-
-            if (response == null)
-                return NotFound();
 
             return Ok(response);
         }

@@ -1,4 +1,5 @@
-﻿using GeekStore.Core.Notifications;
+﻿using GeekStore.Core.Models;
+using GeekStore.Core.Notifications;
 using GeekStore.Order.Application.Orders.Commands;
 using GeekStore.Order.Application.Orders.DTOs;
 using GeekStore.Order.Application.Orders.Queries;
@@ -42,7 +43,7 @@ namespace GeekStore.Order.WebAPI.Controllers
 
         [HttpGet("{userId}/all")]
         [Authorize]
-        [ProducesResponseType(typeof(OrderListViewModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Page<OrderListViewModel>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllOrders([FromRoute] Guid userId, [FromQuery] int pageIndex, [FromQuery] int pageSize)
         {
             var orders = await _mediator.Send(new OrdersListQuery()
@@ -64,10 +65,13 @@ namespace GeekStore.Order.WebAPI.Controllers
             var userId = user.GetUserId();
             var items = request.Items.Select(i => new OrderItemDTO(i.ProductId, i.ProductName, i.ProductImage, i.Quantity, i.Price));
 
-            var command = new CreateOrderCommand(userId, 
-                                                 new AddressDTO(request.Address.Street, request.Address.City, request.Address.State, request.Address.Country, request.Address.ZipCode), 
-                                                 new CouponDTO(request.Coupon.CouponCode, request.Coupon.DiscountAmount), 
-                                                 items);
+            var couponDto = default(CouponDTO);
+            var addressDto = new AddressDTO(request.Address.Street, request.Address.City, request.Address.State, request.Address.Country, request.Address.ZipCode);
+
+            if (request.Coupon != null)
+                couponDto = new CouponDTO(request.Coupon.CouponCode, request.Coupon.DiscountAmount);
+
+            var command = new CreateOrderCommand(userId, addressDto, couponDto, items);
 
             var result = await _mediator.Send(command);
 

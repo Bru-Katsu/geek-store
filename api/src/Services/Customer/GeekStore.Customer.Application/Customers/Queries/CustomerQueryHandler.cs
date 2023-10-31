@@ -3,11 +3,13 @@ using GeekStore.Core.Models;
 using GeekStore.Customer.Application.Customers.ViewModels;
 using GeekStore.Customer.Domain.Customers.Repositories;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace GeekStore.Customer.Application.Customers.Queries
 {
     public class CustomerQueryHandler : IRequestHandler<CustomerQuery, CustomerViewModel>,
-                                        IRequestHandler<CustomerListQuery, Page<CustomerListViewModel>>
+                                        IRequestHandler<CustomerListQuery, Page<CustomerListViewModel>>,
+                                        IRequestHandler<CustomerByUserQuery, CustomerViewModel>
     {
         private readonly ICustomerRepository _customerRepository;
 
@@ -49,6 +51,23 @@ namespace GeekStore.Customer.Application.Customers.Queries
                 Name = entity.Name,
                 Surname = entity.Surname,
             }, request.PageIndex, request.PageSize);            
+        }
+
+        public async Task<CustomerViewModel> Handle(CustomerByUserQuery request, CancellationToken cancellationToken)
+        {
+            var customer = await _customerRepository.AsQueryable().FirstOrDefaultAsync(x => x.UserId == request.UserId);
+
+            if (customer is null)
+                return default;
+
+            return new CustomerViewModel
+            {
+                Id = customer.Id,
+                Name = customer.Name,
+                Surname = customer.Surname,
+                Birthday = customer.Birthday,
+                Document = customer.Document,
+            };
         }
     }
 }

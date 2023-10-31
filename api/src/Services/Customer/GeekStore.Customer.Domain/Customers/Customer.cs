@@ -43,10 +43,18 @@ namespace GeekStore.Customer.Domain.Customers
             Document = document;
         }
 
-        public ICollection<CustomerAddress> Addresses { get; set; }
+        public virtual ICollection<CustomerAddress> Addresses { get; set; }
         public void AddAddress(CustomerAddress address)
         {
             Addresses.Add(address);
+        }
+
+        public void RemoveAddress(CustomerAddress address)
+        {
+            if (!Addresses.Contains(address))
+                throw new InvalidOperationException("Endereço não existe!");
+            
+            Addresses.Remove(address);
         }
 
         public string ProfileImage { get; private set; }

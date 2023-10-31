@@ -40,9 +40,8 @@ namespace GeekStore.Identity.WebAPI.Controllers
 
             var tokenResult = await _mediator.Send(new GenerateTokenCommand(newUser.Email, createRefreshTokenResult.Data));
 
-            return CreateResponse(tokenResult);
+            return CreateResponse(tokenResult.Data);
         }
-
 
         [HttpPost("authenticate")]
         [ProducesResponseType(typeof(TokenResponseViewModel), StatusCodes.Status200OK)]
@@ -71,7 +70,7 @@ namespace GeekStore.Identity.WebAPI.Controllers
         [ProducesResponseType(typeof(TokenResponseViewModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(IEnumerable<Error>), StatusCodes.Status401Unauthorized)]
-        public async Task<IActionResult> RefreshToken([FromBody] ViewModels.RefreshTokenRequestViewModel refreshToken)
+        public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenRequestViewModel refreshToken)
         {
             var vm = await _mediator.Send(new RefreshTokenQuery()
             {

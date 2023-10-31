@@ -8,6 +8,9 @@ services:
 
   geekstore.cart.redis:
     image: redis:alpine
+
+  geekstore.gateway.redis:
+    image: redis:alpine
   
   geekstore.eventstore:
     image: eventstore/eventstore:latest
@@ -47,3 +50,10 @@ services:
     build:
       context: .
       dockerfile: src/Services/Cart/GeekStore.Cart.WebAPI/Dockerfile
+
+  geekstore.website.gateway.webapi:
+    image: ${DOCKER_REGISTRY-}geekstorewebsitegatewaywebapi
+    build:
+      context: .
+      dockerfile: src/Gateways/GeekStore.Website.Gateway.WebAPI/Dockerfile
+
